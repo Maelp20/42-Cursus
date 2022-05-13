@@ -1,79 +1,54 @@
-#include <stdio.h>
-#include <stdlib.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/03 11:51:21 by mpignet           #+#    #+#             */
+/*   Updated: 2022/05/12 12:10:59 by mpignet          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int	ft_in_charset(char c, char *charset)
+#include "libft.h"
+
+static int	ft_in_set(char c, char const *set)
 {
 	int	i;
 
 	i = 0;
-	while (charset[i])
+	while (set[i])
 	{
-		if (c == charset[i])
+		if (c == set[i])
 			return (1);
 		i++;
 	}
 	return (0);
 }
 
-int	ft_len(char *str, char *charset)
-{
-	int	i;
-
-	i = 1;
-	while (str[i])
-	{
-		if (ft_in_charset(str[i], charset))
-			return (i);
-		i++;
-	}
-	return (i);
-}
-
-void	ft_splitnwrite(char *s1, char *charset)
-{
-	int		i;
-	int		j;
-	int		len;
-	char	*temp;
-
-	if (!ft_in_charset(*str, charset))
-	{
-		len = ft_len(str, charset);
-		temp = (char *)malloc(sizeof(char) * len + 1);
-		j = -1;
-		while (++j < len)
-		{
-			temp[j] = *str;
-			str++;
-		}
-		dest[i] = temp;
-	}
-	dest[i] = '\0';
-}
-
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	char	*dest;
-	int		len;
-    int     i;
-    int     j;
+	int		start;
+	int		end;
+	int		i;
 
-    i = 0;
-    j = 0;
-    while (ft_in_charset(s1[i], set))
-    {
-        i++;
-        j++;
-    }
-    len = 0;
-    while (!ft_in_charset(s1[i], set) && s1[i])
-    {
-        i++;
-        len ++;
-    }
-	dest = (char **) malloc(sizeof(char *) * (len + 1));
+	start = 0;
+	while (s1[start] && ft_in_set(s1[start], set))
+		start++;
+	end = ft_strlen(s1);
+	while (end > start && ft_in_set(s1[end - 1], set))
+		end--;
+	dest = (char *) malloc(sizeof(char) * (end - start + 1));
 	if (!dest)
 		return (0);
-	ft_splitnwrite(dest, str, charset, nbr);
+	i = 0;
+	while (start < end)
+	{
+		dest[i] = s1[start];
+		start++;
+		i++;
+	}
+	dest[i] = 0;
 	return (dest);
 }

@@ -1,24 +1,20 @@
-#include <stdlib.h>
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/03 12:13:46 by mpignet           #+#    #+#             */
+/*   Updated: 2022/05/12 12:09:17 by mpignet          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-int	ft_strlen(char const *str)
+static void	ft_join(char *dest, char const *s1, char const *s2)
 {
 	int	i;
-
-	i = 0;
-	while (*str != 0)
-	{	
-		i++;
-		str++;
-	}
-	return (i);
-}
-
-void	ft_join(char *dest, char const *s1, char const *s2)
-{
-	int	i;
-	int	j;
 
 	i = 0;
 	while (*s1)
@@ -39,7 +35,7 @@ void	ft_join(char *dest, char const *s1, char const *s2)
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	int		i;
-	char 	*dest;
+	char	*dest;
 	int		len;
 
 	len = ft_strlen(s1) + ft_strlen(s2);
@@ -55,12 +51,4 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	ft_join(dest, s1, s2);
 	dest[len] = '\0';
 	return (dest);
-}
-
-int	main ()
-{
-	char const s1[] = "Hello a  ";
-	char const s2[] = "World";
-	printf("Result : %s\n", ft_strjoin(s1, s2));
-	return 0;
 }

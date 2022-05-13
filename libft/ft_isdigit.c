@@ -1,15 +1,20 @@
-int ft_isdigit (int c)
-{
-    if (c >= '0' && c <= '9')
-        return (1);
-    return (0);
-}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/03 12:03:50 by mpignet           #+#    #+#             */
+/*   Updated: 2022/05/12 11:54:47 by mpignet          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <ctype.h>
-#include <stdio.h>
+#include "libft.h"
 
-int main ()
+int	ft_isdigit(int c)
 {
-    printf("%d\n", ft_isdigit('k'));
-    printf("%d\n", isdigit('k'));
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }

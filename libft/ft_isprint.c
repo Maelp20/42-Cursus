@@ -1,14 +1,20 @@
-int ft_isprint (int c)
-{
-    if ((c >= 33 && c <= 126))
-        return (1);
-    return (0);
-}
-/*#include <ctype.h>
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/03 12:04:22 by mpignet           #+#    #+#             */
+/*   Updated: 2022/05/12 11:56:15 by mpignet          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int main ()
+#include "libft.h"
+
+int	ft_isprint(int c)
 {
-    printf("%d\n", ft_isprint('!'));
-    printf("%d\n", isprint('!'));
-}*/
+	if ((c >= 32 && c <= 126))
+		return (1);
+	return (0);
+}

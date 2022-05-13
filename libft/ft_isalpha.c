@@ -1,15 +1,20 @@
-int ft_isalpha (int c)
-{
-    if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
-        return (1);
-    return (0);
-}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/03 12:02:44 by mpignet           #+#    #+#             */
+/*   Updated: 2022/05/12 11:53:15 by mpignet          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <ctype.h>
-#include <stdio.h>
+#include "libft.h"
 
-int main ()
+int	ft_isalpha(int c)
 {
-    printf("%d\n", ft_isalpha('a'));
-    printf("%d\n", isalpha('a'));
+	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
+		return (1);
+	return (0);
 }
