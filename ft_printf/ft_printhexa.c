@@ -1,42 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utility_printf.c                                :+:      :+:    :+:   */
+/*   ft_printhexa.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/12 15:47:49 by mpignet           #+#    #+#             */
-/*   Updated: 2022/05/16 18:20:11 by mpignet          ###   ########.fr       */
+/*   Created: 2022/05/16 15:46:30 by mpignet           #+#    #+#             */
+/*   Updated: 2022/05/16 18:11:39 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-int	ft_printchar(char c)
-{
-	write(1, &c, 1);
-	return (1);
-}
-
-int	ft_printstr(char *str)
+static int	ft_hexlen(unsigned int nbr)
 {
 	int	i;
 
 	i = 0;
-	if (!str)
+	if (nbr == 0)
+		return (1);
+	while (nbr != 0)
 	{
-		write (1, "(null)", 6);
-		return (6);
-	}
-	while (str[i])
-	{
-		write(1, &str[i], 1);
+		nbr /= 16;
 		i++;
 	}
 	return (i);
+}
+
+static void	ft_conv_print(unsigned int a, unsigned int size, char *base)
+{
+	if (a > size - 1)
+		ft_conv_print(a / size, size, base);
+	ft_putchar(base[a % size]);
+}
+
+int	ft_printhexa(unsigned int nbr, int format)
+{
+	char	*base;
+
+	if (format == 0)
+		base = "0123456789abcdef";
+	else
+		base = "0123456789ABCDEF";
+	ft_conv_print(nbr, 16, base);
+	return (ft_hexlen(nbr));
 }
