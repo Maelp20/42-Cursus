@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:19:10 by mpignet           #+#    #+#             */
-/*   Updated: 2022/05/16 18:44:12 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/05/20 16:07:22 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	ft_dispatch(const char c, va_list arg, size_t len)
 	else if (c == 's')
 		len += ft_printstr(va_arg(arg, char *));
 	else if (c == 'p')
-		len += ft_print_ptr(va_arg(arg, unsigned long));
+		len += ft_print_ptr(va_arg(arg, unsigned long long));
 	else if (c == 'd' || c == 'i')
 		len += ft_printnbr(va_arg(arg, int));
 	else if (c == 'u')
@@ -49,8 +49,10 @@ int	ft_printf(const char *entree, ...)
 	{
 		if (entree[i] == '%')
 		{
-			len = ft_dispatch(entree[i + 1], arg, len);
 			i++;
+			if (!entree[i])
+				break ;
+			len = ft_dispatch(entree[i], arg, len);
 		}
 		else
 		{
