@@ -6,124 +6,77 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:38:59 by mpignet           #+#    #+#             */
-/*   Updated: 2022/06/20 16:29:06 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/06/24 10:49:58 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_sa(t_list *a)
+void	ft_swap(t_list **lst)
+{
+	t_list	*tmp;
+
+	if (!*lst || !(*lst)->next)
+		return ;
+	tmp = (*lst)->next;
+	(*lst)->next = (*lst)->next->next;
+	tmp->next = *lst;
+	*lst = tmp;
+}
+
+void	ft_push(t_list **a, t_list **b, char id)
+{
+	t_list	*tmp;
+	
+	if (id == 'a')
+	{
+		if (!*b)
+			return ;
+	tmp = (*b)->next;
+	ft_lstadd_front(a, *b);
+	*b = tmp;
+	}
+	else if (id == 'b')
+	{
+		if (!*a)
+			return ;
+	tmp = (*a)->next;
+	ft_lstadd_front(b, *a);
+	*a = tmp;
+	}
+}
+
+void	ft_rotate(t_list **lst)
+{
+	t_list	*tmp;
+	t_list *tmp2;
+
+	tmp = (*lst)->next;
+	tmp2 = ft_lstlast(*lst);
+	(*lst)->next = NULL;
+	tmp2->next = *lst;
+	*lst = tmp;
+}
+
+void	ft_rrotate(t_list **lst)
 {
 	t_list *tmp;
-
-	tmp = a->content;
-	a->content = a->next->content;
-	a = a->next;
-	a->content = tmp;
-	write (1, "sa\n", 3);
-}
-
-void	ft_sb(t_list *b)
-{
-	t_list *tmp;
-
-	tmp = b->content;
-	b->content = b->next->content;
-	b = b->next;
-	b->content = tmp;
-	write (1, "sb\n", 3);
-}
-
-void	ft_ss(t_list *a, t_list *b)
-{
-	ft_sa(a);
-	ft_sb(b);
-	write (1, "ss\n", 3);
-}
-
-
-void	ft_pa(t_list **a, t_list *b)
-{
-	ft_lstadd_front(&a, b);
-	b->next = b;
-	write (1, "pb\n", 3);
-}
-
-// void	ft_pa(t_list *a, t_list *b)
-// {
-// 	t_list *tmp;
+	t_list *tmp2;
 	
-// 	if (!b)
-// 		return ;
-// 	tmp = a;
-// 	a->content = b->content;
-// 	b = b->next;
-// 	a->next = tmp;
-// 	write (1, "pa\n", 3);
-// }
-
-void	ft_pb(t_list *a, t_list **b)
-{
-	ft_lstadd_front(b, a);
-	a->next = a;
-	write (1, "pb\n", 3);
-}
-
-// void	ft_pb(t_list *a, t_list *b)
-// {
-// 	t_list *tmp;
-	
-// 	if (!a)
-// 		return ;
-// 	tmp = b;
-// 	b->content = a->content;
-// 	a = a->next;
-// 	b->next = tmp;
-// 	write (1, "pb\n", 3);
-// }
-
-void	ft_ra(t_list *a)
-{
-	t_list *first;
-
-	first = a;
-	first->next = NULL;
-	while (a->next)
-	{
-		a->content = a->next->content;
-		a = a->next;
-	}
-	a = first;
-	write (1, "ra\n", 3);
-}
-
-void	ft_rb(t_list *b)
-{
-	t_list *first;
-
-	first = b;
-	first->next = NULL;
-	while (b->next)
-	{
-		b->content = b->next->content;
-		b = b->next;
-	}
-	b = first;
-	write (1, "rb\n", 3);
-}
-
-void	ft_rr(t_list *a, t_list *b)
-{
-	ft_ra(a);
-	ft_rb(b);
-	write (1, "rr\n", 3);
+	tmp = *lst;
+	while ((*lst)->next->next)
+		*lst = (*lst)->next;
+	tmp2 = (*lst)->next;
+	(*lst)->next = NULL;
+	tmp2->next = tmp;
+	*lst = tmp2;
 }
 
 // TEST MAIN //
 
 // #include <stdio.h>
 
-// void printlist(t_list *lst)
+// void printlist(t_list *lst, char id)
 // {
 //     if (lst == NULL)
 //     {
@@ -134,7 +87,7 @@ void	ft_rr(t_list *a, t_list *b)
 
 // 	print = lst;
 
-// 	printf("a : \n");
+// 	printf("%c : \n", id);
 //     while (print != NULL)
 //     {
 //         printf("%d\n", print->content);
@@ -147,15 +100,19 @@ void	ft_rr(t_list *a, t_list *b)
 // {
 // 	t_list	*a;
 // 	t_list	*b;
-// 	t_list *number;
+// 	int	i;
+// 	int	j;
 	
-// 	number = ft_lstnew((void *)3);
-// 	a = ft_lstnew(number->content);
-// 	number->content = (void *)2;
-// 	ft_lstadd_front(&a, number);
+// 	i = -1;
+// 	a = 0;
+// 	b = 0;
+// 	while (++i < 7)
+// 		ft_lstadd_front(&a, ft_lstnew((void *)i));
+// 	j = 9;
+// 	while (++j < 17)
+// 		ft_lstadd_front(&b, ft_lstnew((void *)j));
 	
-// 	ft_sa(a); // OK
-// 	ft_ra(a); // PAS OK
-	
-// 	printlist(a);
+// 	ft_rrotate(&a);
+// 	printlist(a, 'a');
+// 	printlist(b, 'b');
 // }

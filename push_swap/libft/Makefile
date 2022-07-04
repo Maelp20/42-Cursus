@@ -6,7 +6,7 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/03 16:11:03 by mpignet           #+#    #+#              #
-#    Updated: 2022/05/12 12:25:44 by mpignet          ###   ########.fr        #
+#    Updated: 2022/06/24 14:56:11 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRCS	=    \
 								ft_memmove.c\
 								ft_putstr_fd.c\
 								ft_strjoin.c\
+								ft_strcmp.c\
 								ft_strncmp.c\
 								ft_tolower.c \
 								ft_isalnum.c \

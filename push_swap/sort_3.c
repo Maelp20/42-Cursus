@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   sort_3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/09 14:42:02 by mpignet           #+#    #+#             */
-/*   Updated: 2022/06/22 20:03:45 by mpignet          ###   ########.fr       */
+/*   Created: 2022/06/24 16:25:35 by mpignet           #+#    #+#             */
+/*   Updated: 2022/06/24 16:26:25 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-void	ft_lstadd_front(t_list **lst, t_list *new)
+void	sort_3(t_list *lst)
 {
-	if (!new)
-		return ;
-	new->next = *lst;
-	*lst = new;
+	
 }
