@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 16:39:46 by mpignet           #+#    #+#             */
-/*   Updated: 2022/06/24 17:27:49 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/04 12:52:18 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,12 @@ void	add_element(t_list **lst, char *str)
 	ft_lstadd_back(lst, ft_lstnew((int *)element));
 }
 
-// void	add_element(t_list **lst, char *str)
-// {
-// 	int	element;
-// 	t_list *new;
-
-// 	element = ft_atoi(str);
-// 	new = ft_lstnew((int *)element);
-// 	ft_lstadd_back(lst, new);
-// }
-
 // int	parse(t_list *lst, int ac, char **av)
 // {
 // 	int		i;
 // 	int		j;
 // 	char	**strs;
+// 	char	**tab;
 	
 // 	i = 0;
 // 	while (i < ac)

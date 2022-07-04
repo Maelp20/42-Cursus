@@ -6,13 +6,15 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:31:08 by mpignet           #+#    #+#             */
-/*   Updated: 2022/06/24 17:38:47 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/04 13:12:10 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 #include <stdio.h>
+
+// to do : check doubles
 
 static void printlist(t_list *lst)
 {
@@ -44,6 +46,8 @@ int	main(int ac, char **av)
 		write(1, "Error\n", 6);
 		exit(EXIT_FAILURE);
 	}
+	lst = lst->next;
+	sort_3(&lst);
 	printlist(lst);
 	return (0);
 }

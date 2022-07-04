@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 11:39:35 by mpignet           #+#    #+#             */
-/*   Updated: 2022/06/24 17:55:35 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/04 11:37:48 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static int	check_sizeint(char *str)
 {
 	char *dst;
 	int	diff;
-	// pour le check int max/min : faire atoi / itoa et strcmp sur la sortie et lentree
 	dst = ft_itoa(ft_atoi(str));
 	diff = ft_strcmp(str, dst);
 	if (diff != 0)
@@ -77,7 +76,6 @@ int	args_check(t_list *lst, int ac, char **av)
 {
 	int		i;
 	int		j;
-	char	**strs;
 	char	**stock;
 	
 	i = 1;
@@ -89,12 +87,16 @@ int	args_check(t_list *lst, int ac, char **av)
 	{
 		if (check_spaces(av[i]))
 		{
-			strs = ft_split(av[i], ' ');
-			j = -1;
-			while (strs[++j])
-			{
-				stock
-			}
+			j = split_add(lst, av[i]);
+			if(j == 1)
+				return (1);
+		}
+		else
+		{
+			if (check_integers(av[i]) || check_sizeint(av[i]))
+				return (1);
+			else
+				add_element(&lst, av[i]);
 		}
 		i++;
 	}
