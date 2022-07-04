@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:31:08 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/04 13:12:10 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/04 14:43:15 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ static void printlist(t_list *lst)
 	printf("a : \n");
     while (print->next != NULL)
     {
-        printf("%d\n", (int *)(print->content));
+        printf("%d\n", print->content);
         print = print->next;
     }
-    printf("%d\n", (int *)(print->content));
+    printf("%d\n", (print->content));
 }
 
 int	main(int ac, char **av)

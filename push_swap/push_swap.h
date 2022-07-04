@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:50:43 by mpignet           #+#    #+#             */
-/*   Updated: 2022/06/24 17:38:38 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/04 13:36:14 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ void	ft_swap(t_list **lst);
 void	ft_push(t_list **a, t_list **b, char id);
 void	ft_rotate(t_list **lst);
 void	ft_rrotate(t_list **lst);
+void	sort_3(t_list **lst);
 
 #endif

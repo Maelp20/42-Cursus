@@ -6,13 +6,13 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:57:12 by mpignet           #+#    #+#             */
-/*   Updated: 2022/05/12 12:00:00 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/04 14:38:54 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void*))
+void	ft_lstclear(t_list **lst, void (*del)(int))
 {
 	t_list	*temp;
 
