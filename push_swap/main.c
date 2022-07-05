@@ -6,17 +6,14 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:31:08 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/05 13:48:44 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/05 15:26:42 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
 #include <stdio.h>
 
-// to do : check doubles
-
-static void printlist(t_list *lst)
+static void printlist(t_list *lst, char id)
 {
     if (lst == NULL)
     {
@@ -27,30 +24,33 @@ static void printlist(t_list *lst)
 
 	print = lst;
 
-	printf("a : \n");
+	if (id == 'a')
+		printf("Stack a : \n");
+	if (id == 'b')
+		printf("Stack b : \n");
     while (print->next != NULL)
     {
         printf("%d\n", print->content);
         print = print->next;
     }
-    printf("%d\n", (print->content));
+    printf("%d\n\n", (print->content));
 }
 
 int	main(int ac, char **av)
 {
-	t_list	*lst;
-	t_list	*b;
+	t_list	*stack_a;
+	t_list	*stack_b;
 	
-	lst = (t_list *)malloc(sizeof(t_list));
-	b = (t_list *)malloc(sizeof(t_list));
-	if (args_check(lst, ac, av))
+	stack_a = NULL;
+	stack_b = NULL;
+	if (parse(&stack_a, ac, av))
 	{
 		write(1, "Error\n", 6);
 		exit(EXIT_FAILURE);
 	}
-	lst = lst->next;
-	sort_3(&lst);
-	printlist(lst);
+	sort_big(&stack_a, &stack_b);
+	printlist(stack_a, 'a');
+	printlist(stack_b, 'b');
 	return (0);
 }
 

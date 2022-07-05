@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:50:43 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/04 13:36:14 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/05 15:26:19 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,16 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-void	add_element(t_list **lst, char *str);
-int		args_check(t_list *lst, int ac, char **av);
-int		parse(t_list *lst, int ac, char **av);
+int		parse(t_list **lst, int ac, char **av);
+int		check_spaces(char *str);
+int		check_double(t_list **lst, int elem);
+int		check_sizeint(char *str);
+int		check_integers(char *str);
 void	ft_swap(t_list **lst);
 void	ft_push(t_list **a, t_list **b, char id);
 void	ft_rotate(t_list **lst);
 void	ft_rrotate(t_list **lst);
 void	sort_3(t_list **lst);
+void	sort_big(t_list **stack_a, t_list **stack_b);
 
 #endif

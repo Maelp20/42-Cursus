@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 16:25:35 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/05 14:05:16 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/05 14:56:05 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	find_median(t_list *lst)
 	int	*buff;
 	t_list	*tmp;
 
-	buff = (int)malloc(sizeof(int) * ft_lstsize(lst));
+	buff = (int *)malloc(sizeof(int) * ft_lstsize(lst));
 	i = 0;
 	tmp = lst;
 	while (tmp)
@@ -52,17 +52,24 @@ int	find_median(t_list *lst)
 	}
 	sort_int_tab(buff, i);
 	median = buff[i / 2];
+	printf ("MEDIAN = %d\n", median);
 	free(buff);
 	return (median);
 }
 
-void	sort_big(t_list **lst, t_list **b)
+void	sort_big(t_list **stack_a, t_list **stack_b)
 {
     t_list *move;
 	int		median;
 
-	median = find_median(&lst);
-	move = *lst;
+	median = find_median(*stack_a);
+	move = *stack_a;
 
-    
+    while(move)
+	{
+		if ((move->content) < median)
+			ft_push(&move, stack_b, 'b');
+		else
+			move = move->next;
+	}
 }
