@@ -6,11 +6,12 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 16:25:35 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/05 14:56:05 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/05 15:30:59 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
 void	sort_int_tab(int *tab, int size)
 {

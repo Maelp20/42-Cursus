@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 11:39:35 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/05 15:26:05 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/05 15:37:03 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	add_element(t_list **lst, char *str)
 	return (0);
 }
 
-static int	split_add(t_list *lst, char *str)
+static int	split_add(t_list **lst, char *str)
 {
 	char **strs;
 	int	j;
@@ -33,7 +33,7 @@ static int	split_add(t_list *lst, char *str)
 	while (strs[++j])
 	{
 		if (check_integers(strs[j]) || check_sizeint(strs[j]) 
-			|| add_element(&lst, strs[j]))
+			|| add_element(lst, strs[j]))
 			return (1);
 		free(strs[j]);
 	}
@@ -44,21 +44,14 @@ static int	split_add(t_list *lst, char *str)
 int	parse(t_list **lst, int ac, char **av)
 {
 	int		i;
-	int		j;
-	char	**stock;
 	
 	i = 1;
-	stock = malloc (sizeof (char *) * ac);
-	if (!stock)
-		return (1);
-	stock[ac - 1] = NULL;
 	while (i < ac)
 	{
 		if (check_spaces(av[i]))
 		{
-			j = split_add(*lst, av[i]);
-			if(j == 1)
-				return (1);
+			if(split_add(lst, av[i]))
+				return (1);	
 		}
 		else
 		{
