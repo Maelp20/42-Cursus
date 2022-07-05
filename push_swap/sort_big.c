@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   sort_3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/09 15:13:29 by mpignet           #+#    #+#             */
-/*   Updated: 2022/05/12 12:02:16 by mpignet          ###   ########.fr       */
+/*   Created: 2022/06/24 16:25:35 by mpignet           #+#    #+#             */
+/*   Updated: 2022/07/04 13:35:54 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-int	ft_lstsize(t_list *lst)
+void	sort_big(t_list **lst, t_list **b)
 {
-	int	nb;
-	t_list	*tmp;
+    int middle;
+    t_list *move;
 
-	if (!lst)
-		return (0);
-	nb = 0;
-	tmp = lst;
-	while (tmp)
-	{
-		tmp = tmp->next;
-		nb++;
-	}
-	return (nb);
+    middle = ft_lstsize(*lst) / 2;
+    
 }

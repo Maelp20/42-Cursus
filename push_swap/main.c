@@ -39,8 +39,10 @@ static void printlist(t_list *lst)
 int	main(int ac, char **av)
 {
 	t_list	*lst;
+	t_list	*b;
 	
 	lst = (t_list *)malloc(sizeof(t_list));
+	b = (t_list *)malloc(sizeof(t_list));
 	if (args_check(lst, ac, av))
 	{
 		write(1, "Error\n", 6);
