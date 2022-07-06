@@ -6,18 +6,18 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:31:08 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/05 15:31:39 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/06 09:55:07 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-static void printlist(t_list *lst, char id)
+void printlist(t_list *lst, char id)
 {
     if (lst == NULL)
     {
-        exit(EXIT_FAILURE);
+       return ;
     }
 
     t_list	*print;
@@ -26,8 +26,10 @@ static void printlist(t_list *lst, char id)
 
 	if (id == 'a')
 		printf("Stack a : \n");
-	if (id == 'b')
+	else if (id == 'b')
 		printf("Stack b : \n");
+	else
+		printf("Stack : \n");
     while (print->next != NULL)
     {
         printf("%d\n", print->content);
@@ -48,7 +50,8 @@ int	main(int ac, char **av)
 		write(1, "Error\n", 6);
 		exit(EXIT_FAILURE);
 	}
-	// sort_big(&stack_a, &stack_b);
+	printlist(stack_a, 'a');
+	sort_big(&stack_a, &stack_b);
 	printlist(stack_a, 'a');
 	printlist(stack_b, 'b');
 	return (0);

@@ -6,36 +6,52 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 16:25:35 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/05 15:30:59 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/06 10:18:32 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-void	sort_int_tab(int *tab, int size)
-{
-	int	a;
-	int	tmp;
+void printlist(t_list *lst, char id);
 
-	a = 1;
-	if (size != 0)
+static int sorted(int *tab, int size)
+{
+	int i;
+
+	i = 0;
+	while (i < size - 1)
 	{
-		while (a <= size)
+		if (tab[i] > tab[i + 1])
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+static void	sort_int_tab(int *tab, int size)
+{
+	int i;
+	int swap;
+	
+	swap = 0;
+	while (sorted(tab, size))
+	{
+		i = 0;
+		while (i < size - 1)
 		{
-			if (tab[a] < tab[a - 1])
+			if (tab[i] > tab[i + 1])
 			{
-				tmp = tab[a];
-				tab[a] = tab[a - 1];
-				tab[a - 1] = tmp;
-				a = 0;
+				swap = tab[i];
+				tab[i] = tab[i + 1];
+				tab[i + 1] = swap;
 			}
-			a++;
+			i++;
 		}
 	}
 }
 
-int	find_median(t_list *lst)
+static int	find_median(t_list *lst)
 {
 	int	median;
 	int	i;
@@ -65,12 +81,11 @@ void	sort_big(t_list **stack_a, t_list **stack_b)
 
 	median = find_median(*stack_a);
 	move = *stack_a;
-
+	printlist(move, 'm');
     while(move)
 	{
-		if ((move->content) < median)
+		if (move->content < median)
 			ft_push(&move, stack_b, 'b');
-		else
-			move = move->next;
+		move = move->next;
 	}
 }
