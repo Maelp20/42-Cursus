@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:31:08 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/06 09:55:07 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/06 13:08:33 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,11 @@ void printlist(t_list *lst, char id)
 		printf("Stack b : \n");
 	else
 		printf("Stack : \n");
-    while (print->next != NULL)
+    while (print)
     {
         printf("%d\n", print->content);
         print = print->next;
     }
-    printf("%d\n\n", (print->content));
 }
 
 int	main(int ac, char **av)
@@ -50,7 +49,7 @@ int	main(int ac, char **av)
 		write(1, "Error\n", 6);
 		exit(EXIT_FAILURE);
 	}
-	printlist(stack_a, 'a');
+	// printlist(stack_a, 'a');
 	sort_big(&stack_a, &stack_b);
 	printlist(stack_a, 'a');
 	printlist(stack_b, 'b');

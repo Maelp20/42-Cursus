@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 16:25:35 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/06 10:18:32 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/06 13:09:57 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,30 @@ static int	find_median(t_list *lst)
 void	sort_big(t_list **stack_a, t_list **stack_b)
 {
     t_list *move;
+	t_list	*head_chunk;
 	int		median;
+	int		size;
 
-	median = find_median(*stack_a);
-	move = *stack_a;
-	printlist(move, 'm');
-    while(move)
+	while (*stack_a)
 	{
-		if (move->content < median)
-			ft_push(&move, stack_b, 'b');
-		move = move->next;
+		median = find_median(*stack_a);
+		move = *stack_a;
+		size = ft_lstsize(*stack_a);
+    	while(size > 0)
+		{
+			if (move->content < median)
+				ft_push(stack_a, stack_b, 'b');
+			else
+				ft_rotate(stack_a);
+			move = *stack_a;
+			size--;
+		}
+		head_chunk = 
 	}
+	// repeter jusqu'a ce que stack_a soit vide ou reste 2 elements.
+	// si besoin mettre les 2 elements restants dans l'ordre.
+	// a chaque repetition de la fonction, traquer combien d'elements sont dans stack_b,
+	// pour les repartir par Chunck.
+	// ensuite, pour chaque Chunk de stack_b, repeter l'operation a l'inverse : 
+	// trouver median, push vers a les nombres qui sont au dessus de median.
 }

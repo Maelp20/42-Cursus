@@ -6,7 +6,7 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/03 16:11:03 by mpignet           #+#    #+#              #
-#    Updated: 2022/06/24 14:56:11 by mpignet          ###   ########.fr        #
+#    Updated: 2022/07/06 14:03:57 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,8 +46,6 @@ SRCS	=    \
 								ft_strlcat.c\
 								ft_strnstr.c\
 								ft_toupper.c \
-
-SRCS_B	=    \
                                 ft_lstnew.c\
 								ft_lstiter.c\
 								ft_lstlast.c\
@@ -58,10 +56,14 @@ SRCS_B	=    \
 								ft_lstdelone.c\
 								ft_lstclear.c\
 								ft_lstmap.c\
+								get_next_line_bonus.c\
+								get_next_line_utils_bonus.c\
 							
 OBJS	= ${SRCS:.c=.o}
 
-OBJS_B	= ${SRCS_B:.c=.o}
+MAKE = make -C ft_printf
+LIBPRINTFA = ft_printf/libftprintf.a
+LIBPRINTF = -L ft_printf/ -lft
 
 NAME	= libft.a
 
@@ -71,20 +73,17 @@ CFLAGS	= -Wall -Wextra -Werror
 
 RM	= rm -f
 
-$(NAME):	${OBJS}
-			ar rcs ${NAME} ${OBJS}
-
-bonus:		${OBJS_B}
-			ar rcs ${NAME} ${OBJS_B}
+$(NAME):	${OBJS} ${LIBPRINTFA}
+			${CC} ${CFLAGS} -o $@ ${OBJS} ${LIBPRINTF}
 
 all: 		$(NAME)
 
 clean:
-			${RM} ${OBJS} ${OBJS_B}
+			${RM} ${OBJS}
 
 fclean:		clean
 			${RM} ${NAME}
 
 re: 		fclean all
 
-.PHONY: all clean fclean re ${NAME}
+.PHONY: all clean fclean re

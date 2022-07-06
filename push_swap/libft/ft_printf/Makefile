@@ -5,35 +5,31 @@
 #                                                     +:+ +:+         +:+      #
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/05/03 16:11:03 by mpignet           #+#    #+#              #
-#    Updated: 2022/07/06 13:31:48 by mpignet          ###   ########.fr        #
+#    Created: 2022/05/16 18:01:15 by mpignet           #+#    #+#              #
+#    Updated: 2022/07/04 12:13:19 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS	=    \
-								main.c\
-								parsing.c\
-								instructions.c\
-								args_checks.c\
-								sort_3.c\
-								sort_big.c\
+						ft_printf.c\
+						ft_printhexa.c\
+						ft_printnbr_unsigned.c\
+						ft_utility_printf.c\
+						ft_printnbr.c\
+						ft_printptr.c 
 							
-OBJS = ${SRCS:.c=.o}
+OBJS	= ${SRCS:.c=.o}
 
-MAKE = make -C libft
-LIBA = libft/libft.a
-LIB = -L libft/ -lft
+NAME	= libftprintf.a
 
-NAME = push_swap
+CC	= gcc
 
-CC = gcc
+CFLAGS	= -Wall -Wextra -Werror
 
-CFLAGS = -Wall -Wextra -Werror
+RM	= rm -f
 
-RM = rm -f
-
-$(NAME):	${OBJS} ${LIBA}
-			${CC} ${CFLAGS} -o $@ ${OBJS} ${LIB}
+$(NAME):	${OBJS}
+			ar rcs ${NAME} ${OBJS}
 
 all: 		$(NAME)
 
