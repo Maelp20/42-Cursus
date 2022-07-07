@@ -6,7 +6,7 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/03 16:11:03 by mpignet           #+#    #+#              #
-#    Updated: 2022/07/06 14:03:57 by mpignet          ###   ########.fr        #
+#    Updated: 2022/07/07 14:04:59 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,6 @@ SRCS	=    \
 								ft_strlcat.c\
 								ft_strnstr.c\
 								ft_toupper.c \
-                                ft_lstnew.c\
 								ft_lstiter.c\
 								ft_lstlast.c\
 								ft_lstadd_back.c\
@@ -61,20 +60,20 @@ SRCS	=    \
 							
 OBJS	= ${SRCS:.c=.o}
 
-MAKE = make -C ft_printf
-LIBPRINTFA = ft_printf/libftprintf.a
-LIBPRINTF = -L ft_printf/ -lft
+# MAKE = make -C ft_printf
+# LIBPRINTFA = ft_printf/libftprintf.a
+# LIBPRINTF = -L ft_printf/ -lft
 
-NAME	= libft.a
+NAME = libft.a
 
-CC	= gcc
+CC = gcc
 
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
-RM	= rm -f
+RM = rm -f
 
-$(NAME):	${OBJS} ${LIBPRINTFA}
-			${CC} ${CFLAGS} -o $@ ${OBJS} ${LIBPRINTF}
+$(NAME):	${OBJS}
+			ar rcs ${NAME} ${OBJS}
 
 all: 		$(NAME)
 
