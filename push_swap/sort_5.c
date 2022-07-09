@@ -12,67 +12,38 @@
 
 #include "push_swap.h"
 
-t_list	*find_min(t_list *itera)
-{
-	int		tmp;
-	t_list	*min;
-
-	tmp = itera->content;
-	min = itera;
-	while (itera)
-	{
-		if (itera->content < tmp)
-		{
-			tmp = itera->content;
-			min = itera;
-		}
-		itera = itera->next;
-	}
-	return (min);	
-}
-
-t_list	*find_max(t_list *itera)
-{
-	int		tmp;
-	t_list	*max;
-
-	tmp = itera->content;
-	max = itera;
-	while (itera)
-	{
-		if (itera->content > tmp)
-		{
-			tmp = itera->content;
-			max = itera;
-		}
-		itera = itera->next;
-	}
-	return (max);	
-}
-
-void	sort_3(t_list **lst)
+void	sort_5(t_list **stack_a, t_list **stack_b)
 {
 	t_list	**itera;
 	t_list	*min;
 	t_list	*max;
+    int     cmp;
 
-	itera = lst;
+	itera = stack_a;
 	min = find_min(*itera);
 	max = find_max(*itera);
-	if ((*itera)->next == min && (*itera)->next->next == max)
-		ft_swap(lst);
-	if ((*itera)->next->next == min && (*itera)->next == max)
-		ft_rrotate(lst);
-	if (*itera == max && (*itera)->next == min)
-		ft_rotate(lst);
-	if (*itera == min && (*itera)->next == max)
-	{
-		ft_rrotate(lst);
-		ft_swap(lst);	
-	}
-	if (*itera == max && (*itera)->next->next == min)
-	{
-		ft_rotate(lst);
-		ft_swap(lst);	
-	}
+    ft_push(stack_a, stack_b, 'b');
+    ft_push(stack_a, stack_b, 'b');
+    sort_3(stack_a);
+    while (lst_sorted(*stack_a))
+    {
+        if (*stack_b == max || *stack_b == min)
+        {
+            ft_push(stack_a, stack_b, 'a');
+            if (*stack_b == max)
+                ft_rotate(stack_a);
+        }
+        else
+        {
+            cmp = -1;
+             while(*stack_b > *stack_a)
+             {
+                ft_rotate(stack_a);
+                cmp++;
+             }
+            ft_push(stack_a, stack_b, 'a');
+            while (--cmp > 0)
+                ft_rrotate(stack_a);
+        }
+    }
 }

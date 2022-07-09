@@ -27,6 +27,10 @@ void	ft_push(t_list **a, t_list **b, char id);
 void	ft_rotate(t_list **lst);
 void	ft_rrotate(t_list **lst);
 void	sort_3(t_list **lst);
+void	sort_5(t_list **stack_a, t_list **stack_b);
 void	sort_big(t_list **stack_a, t_list **stack_b);
+t_list	*find_min(t_list *itera);
+t_list	*find_max(t_list *itera);
+int     lst_sorted(t_list *lst);
 
 #endif
