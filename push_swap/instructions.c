@@ -22,6 +22,7 @@ void	ft_swap(t_list **lst)
 	(*lst)->next = (*lst)->next->next;
 	tmp->next = *lst;
 	*lst = tmp;
+	// write (1, "swap\n", 5);
 }
 
 void	ft_push(t_list **a, t_list **b, char id)
@@ -44,6 +45,7 @@ void	ft_push(t_list **a, t_list **b, char id)
 	ft_lstadd_front(b, *a);
 	*a = tmp;
 	}
+	// write (1, "push\n", 5);
 }
 
 void	ft_rotate(t_list **lst)
@@ -56,6 +58,7 @@ void	ft_rotate(t_list **lst)
 	(*lst)->next = NULL;
 	tmp2->next = *lst;
 	*lst = tmp;
+	// write (1, "rotate\n", 7);
 }
 
 void	ft_rrotate(t_list **lst)
@@ -70,6 +73,7 @@ void	ft_rrotate(t_list **lst)
 	(*lst)->next = NULL;
 	tmp2->next = tmp;
 	*lst = tmp2;
+	// write (1, "rrotate\n", 8);
 }
 
 // TEST MAIN //

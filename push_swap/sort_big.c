@@ -193,7 +193,7 @@ void	sort_b_to_a(t_list **stack_a, t_list **stack_b)
 	}
 	if (ft_lstsize(*stack_b) == 1)
 	{
-		exit ;
+		exit(EXIT_FAILURE) ;
 	}
 	if (!*stack_b)
 	{
@@ -209,7 +209,7 @@ void	sort_big(t_list **stack_a, t_list **stack_b)
 	printf ("SORT BIG\n");
 	
 	if (!lst_sorted(*stack_a))
-		exit ;
+		exit(EXIT_FAILURE) ;
 	chunk_size = push_to_b(stack_a, stack_b, 0);
 	if (ft_lstsize(*stack_a) == 3)
 	{

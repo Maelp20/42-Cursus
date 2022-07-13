@@ -17,7 +17,7 @@ void printlist(t_list *lst, char id)
 {
     if (lst == NULL)
     {
-       return ;
+       exit(EXIT_FAILURE) ;
     }
 
     t_list	*print;
@@ -50,7 +50,7 @@ int	main(int ac, char **av)
 		exit(EXIT_FAILURE);
 	}
 	// printlist(stack_a, 'a');
-	sort_5(&stack_a, &stack_b);
+	sort_big(&stack_a, &stack_b);
 	printlist(stack_a, 'a');
 	printlist(stack_b, 'b');
 	return (0);
