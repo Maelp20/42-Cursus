@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_3.c                                           :+:      :+:    :+:   */
+/*   sort_5.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 16:25:35 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/06 10:15:33 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/16 16:47:59 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,39 +16,39 @@
 void    choose_instructions(t_list **stack_a)
 {
     if ((*stack_a)->content > (*stack_a)->next->next->next->content)
-        ft_rotate(stack_a);
+        ft_rotate(stack_a, 'a');
     else if ((*stack_a)->content > (*stack_a)->next->next->content)
     {
-        ft_rrotate(stack_a);
-        ft_swap(stack_a);
-        ft_rotate(stack_a);
-        ft_rotate(stack_a);
+        ft_rrotate(stack_a, 'a');
+        ft_swap(stack_a, 'a');
+        ft_rotate(stack_a, 'a');
+        ft_rotate(stack_a, 'a');
     }
     else if ((*stack_a)->content > (*stack_a)->next->content)
-        ft_swap(stack_a);
+        ft_swap(stack_a, 'a');
 }
 
 void    second_instructions(t_list **stack_a)
 {
     if ((*stack_a)->content > (*stack_a)->next->next->next->next->content)
-        ft_rotate(stack_a);
+        ft_rotate(stack_a, 'a');
     else if ((*stack_a)->content > (*stack_a)->next->next->next->content)
     {
-        ft_rrotate(stack_a);
-        ft_swap(stack_a);
-        ft_rotate(stack_a);
-        ft_rotate(stack_a);
+        ft_rrotate(stack_a, 'a');
+        ft_swap(stack_a, 'a');
+        ft_rotate(stack_a, 'a');
+        ft_rotate(stack_a, 'a');
     }
     else if ((*stack_a)->content > (*stack_a)->next->next->content 
             && (*stack_a)->content < (*stack_a)->next->next->next->content)
     {
-        ft_swap(stack_a);
-        ft_rotate(stack_a);
-        ft_swap(stack_a);
-        ft_rrotate(stack_a);
+        ft_swap(stack_a, 'a');
+        ft_rotate(stack_a, 'a');
+        ft_swap(stack_a, 'a');
+        ft_rrotate(stack_a, 'a');
     }
     else if ((*stack_a)->content > (*stack_a)->next->content)
-        ft_swap(stack_a);
+        ft_swap(stack_a, 'a');
 }
 
 void	sort_5(t_list **stack_a, t_list **stack_b)
@@ -57,6 +57,7 @@ void	sort_5(t_list **stack_a, t_list **stack_b)
 	t_list	*min;
 	t_list	*max;
 
+	// ne fonctionne pas
     itera = stack_a;
     min = find_min(*itera);
     max = find_max(*itera);

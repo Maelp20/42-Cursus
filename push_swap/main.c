@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:31:08 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/07 16:03:16 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/16 16:42:56 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ int	main(int ac, char **av)
 	if (parse(&stack_a, ac, av))
 	{
 		write(1, "Error\n", 6);
-		exit(EXIT_FAILURE);
+		return (1);
 	}
 	// printlist(stack_a, 'a');
-	sort_big(&stack_a, &stack_b);
+	sort_big(&stack_a, &stack_b, 0);
 	printlist(stack_a, 'a');
 	printlist(stack_b, 'b');
 	return (0);
