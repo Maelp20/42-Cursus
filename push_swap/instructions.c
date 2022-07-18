@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:38:59 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/16 16:51:21 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/17 13:13:35 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,9 @@ void	ft_rrotate(t_list **lst, char id)
 	tmp2->next = tmp;
 	*lst = tmp2;
 	if (id == 'a')
-		write (1, "rra\n", 3);
+		write (1, "rra\n", 4);
 	else if (id == 'b')
-		write (1, "rrb\n", 3);
+		write (1, "rrb\n", 4);
 }
 
 // TEST MAIN //

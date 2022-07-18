@@ -6,14 +6,12 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 16:25:35 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/16 16:49:48 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/18 17:08:58 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
-
-void printlist(t_list *lst, char id);
 
 int	lst_sorted(t_list *lst)
 {
@@ -129,10 +127,9 @@ void	push_to_b(t_list **stack_a, t_list **stack_b, int track_id)
 	int		median;
 	int		size;
 
-	// printf ("PUSH TO B\n");
 	size = ft_lstsize(*stack_a);
 	median = find_median(*stack_a, 0);
-	while(size > 0)
+	while(size > 3)
 	{
 		if ((*stack_a)->content < median)
 		{
@@ -146,6 +143,38 @@ void	push_to_b(t_list **stack_a, t_list **stack_b, int track_id)
 	return ;
 }
 
+// ALTERNATE PUSH TO B :
+
+// void	push_to_b(t_list **stack_a, t_list **stack_b, int track_id)
+// {
+// 	int		median;
+// 	int		size;
+
+// 	// printf ("PUSH TO B\n");
+// 	size = ft_lstsize(*stack_a);
+// 	median = find_median(*stack_a, 0);
+// 	while(size > 3)
+// 	{
+// 		if ((*stack_a)->content < median)
+// 		{
+// 			(*stack_a)->chunk_id = track_id;
+// 			ft_push(stack_a, stack_b, 'b');
+// 		}
+// 		else
+// 		{
+// 			if (ft_lstlast(*stack_a)->content < median)
+// 			{
+// 				ft_rrotate(stack_a, 'a');
+// 				ft_push(stack_a, stack_b, 'b');
+// 			}
+// 			else
+// 				ft_rotate(stack_a, 'a');	
+// 		}
+// 		size--;
+// 	}
+// 	return ;
+// }
+
 void	push_to_a(t_list **stack_a, t_list **stack_b, int track_id)
 {
 	int		median;
@@ -155,6 +184,7 @@ void	push_to_a(t_list **stack_a, t_list **stack_b, int track_id)
 	// printf ("PUSH TO A\n");
 	chunk_size = track_chunk(stack_b, track_id);
 	// printf ("Chunk size = %d\n", chunk_size);
+	// printlist(*stack_b, 'b');
 	if (chunk_size == 0)
 		return ;
 	if (chunk_size == 1)
@@ -167,22 +197,26 @@ void	push_to_a(t_list **stack_a, t_list **stack_b, int track_id)
 				ft_push(stack_a, stack_b, 'a'));
 	}
 	median = find_median(*stack_b, chunk_size);
+	// printf ("MEDIAN = %d\n", median);
 	nb_rotate = 0;
-	while(--chunk_size >= 0)
+	while(chunk_size > 0)
 	{
 		if ((*stack_b)->content > median)
+		{
+			// printf("elem a push : %d\n", (*stack_b)->content);
 			ft_push(stack_a, stack_b, 'a');
+			if ((*stack_a)->content > (*stack_a)->next->content)
+				ft_swap(stack_a, 'a');	
+		}
 		else
 		{
 			ft_rotate(stack_b, 'b');
 			nb_rotate++;
 		}
+		chunk_size--;
 	}
 	while (--nb_rotate >= 0)
 		ft_rrotate(stack_b, 'b');
-	// if ((*stack_a)->content > (*stack_a)->next->content)
-	// 	ft_swap(stack_a);
-	push_to_a(stack_a, stack_b, track_id);
 	return ;
 }
 
@@ -191,8 +225,10 @@ void	sort_b_to_a(t_list **stack_a, t_list **stack_b, int track_id)
 	// printf ("SORT B TO A\n");
 	if (!*stack_b)
 		return ;
+	// printf ("track ID = %d\n", track_id);
 	push_to_a(stack_a, stack_b, track_id);
-	track_id--;
+	if (track_chunk(stack_b, track_id) == 0)
+		track_id--;
 	sort_b_to_a(stack_a, stack_b, track_id);
 }
 
@@ -233,4 +269,5 @@ void	sort_big(t_list **stack_a, t_list **stack_b, int track_id)
 	// dans la chunk.
 	// Si besoin swap ces elements, les push dans a
 	// passer a la chunk suivante
+	// A RAJOUTER : SI LA CHUNK EST TRIEE, LA REPUSH DIRECT
 }

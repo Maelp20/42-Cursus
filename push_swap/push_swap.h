@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:50:43 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/16 16:49:58 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/17 14:39:58 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,8 @@ void	sort_big(t_list **stack_a, t_list **stack_b, int track_id);
 t_list	*find_min(t_list *itera);
 t_list	*find_max(t_list *itera);
 int     lst_sorted(t_list *lst);
+
+void printlist(t_list *lst, char id);
+void printchunk(t_list *lst, char id, int chunk_id);
 
 #endif
