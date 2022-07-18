@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 16:25:35 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/18 17:08:58 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/18 17:31:48 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,6 +218,7 @@ void	push_to_a(t_list **stack_a, t_list **stack_b, int track_id)
 	while (--nb_rotate >= 0)
 		ft_rrotate(stack_b, 'b');
 	return ;
+	// push_to_a();
 }
 
 void	sort_b_to_a(t_list **stack_a, t_list **stack_b, int track_id)
@@ -269,5 +270,10 @@ void	sort_big(t_list **stack_a, t_list **stack_b, int track_id)
 	// dans la chunk.
 	// Si besoin swap ces elements, les push dans a
 	// passer a la chunk suivante
+	
+	// apres discussion Germain
 	// A RAJOUTER : SI LA CHUNK EST TRIEE, LA REPUSH DIRECT
+	// AUSSI : on ne trie pas la partie superieure a la mediane de la chunk 
+	// dans b avant de la push : il faut la rediviser elle meme et apppliquer encore
+	// la methode de la mediane, jusqua avoir 2 elements a swap si besoin puis push
 }
