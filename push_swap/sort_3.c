@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 16:25:35 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/16 16:49:30 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/21 13:00:54 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_list	*find_max(t_list *itera)
 		}
 		itera = itera->next;
 	}
-	return (max);	
+	return (max);
 }
 
 void	sort_3(t_list **lst, char id)

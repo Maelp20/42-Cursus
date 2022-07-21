@@ -6,7 +6,7 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/03 16:11:03 by mpignet           #+#    #+#              #
-#    Updated: 2022/07/06 13:31:48 by mpignet          ###   ########.fr        #
+#    Updated: 2022/07/21 16:40:14 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ SRCS	=    \
 								instructions.c\
 								args_checks.c\
 								sort_3.c\
-								sort_big.c\
+								insertion_sort.c\
+								utils.c\
 							
 OBJS = ${SRCS:.c=.o}
 
