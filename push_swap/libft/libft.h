@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 12:20:24 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/16 15:30:47 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/24 15:01:23 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@
 typedef struct s_list
 {
 	int	content;
-	int	chunk_id;
+	int	index;
+	int	pos;
+	int	target_pos;
+	int	cost_a;
+	int	cost_b;
 	struct s_list	*next;
 }	t_list;
 

@@ -6,7 +6,7 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/03 16:11:03 by mpignet           #+#    #+#              #
-#    Updated: 2022/07/21 16:40:14 by mpignet          ###   ########.fr        #
+#    Updated: 2022/07/24 16:23:26 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,9 @@ SRCS	=    \
 								sort_3.c\
 								insertion_sort.c\
 								utils.c\
+								get_index.c\
+								other_presort.c\
+								find_pos.c\
 							
 OBJS = ${SRCS:.c=.o}
 
@@ -29,7 +32,7 @@ NAME = push_swap
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror
 
 RM = rm -f
 

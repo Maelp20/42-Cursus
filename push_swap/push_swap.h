@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:50:43 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/21 12:58:34 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/24 16:59:04 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_list	*find_min(t_list *itera);
 t_list	*find_max(t_list *itera);
 int     lst_sorted(t_list *lst);
 int		find_median(t_list *lst, int chunk_size);
+void	sort_int_tab(int *tab, int size);
 
 void	sort_big(t_list **stack_a, t_list **stack_b, int track_id);
 void	push_to_a(t_list **stack_a, t_list **stack_b, int track_id);
@@ -45,5 +46,11 @@ void	insert_sort(t_list **stack_a, t_list  **stack_b);
 
 void printlist(t_list *lst, char id);
 void printchunk(t_list *lst, char id, int chunk_id);
+
+void	get_index(t_list **stack_a);
+void	find_positions(t_list **stack_a, t_list **stack_b);
+void	find_target_pos(t_list **stack_a, t_list **stack_b);
+void	get_cost_a(t_list **stack_a, t_list **stack_b);
+void	get_cost_b(t_list **stack_b);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:31:08 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/21 17:42:18 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/24 17:24:38 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,34 +32,39 @@ void printlist(t_list *lst, char id)
 		printf("Stack : \n");
     while (print)
     {
-        printf("%d ", print->content);
+        printf("content = %d /", print->content);
+		printf("index = %d /", print->index);
+		printf("pos = %d /", print->pos);
+		printf("target_pos = %d /", print->target_pos);
+		printf("cost_a = %d /", print->cost_a);
+		printf("cost_b = %d \n", print->cost_b);
         print = print->next;
     }
 }
 
-void printchunk(t_list *lst, char id, int chunk_id)
-{
-    if (lst == NULL)
-    {
-       exit(EXIT_FAILURE) ;
-    }
+// void printchunk(t_list *lst, char id, int chunk_id)
+// {
+//     if (lst == NULL)
+//     {
+//        exit(EXIT_FAILURE) ;
+//     }
 
-    t_list	*print;
+//     t_list	*print;
 
-	print = lst;
+// 	print = lst;
 
-	if (id == 'a')
-		printf("Stack a : \n");
-	else if (id == 'b')
-		printf("Stack b : \n");
-	else
-		printf("Stack : \n");
-    while (print && print->chunk_id == chunk_id)
-    {
-        printf("%d (%d) // ", print->content, print->chunk_id);
-        print = print->next;
-    }
-}
+// 	if (id == 'a')
+// 		printf("Stack a : \n");
+// 	else if (id == 'b')
+// 		printf("Stack b : \n");
+// 	else
+// 		printf("Stack : \n");
+//     while (print && print->chunk_id == chunk_id)
+//     {
+//         printf("%d (%d) // ", print->content, print->chunk_id);
+//         print = print->next;
+//     }
+// }
 
 int	main(int ac, char **av)
 {
@@ -73,8 +78,18 @@ int	main(int ac, char **av)
 		write(1, "Error\n", 6);
 		return (1);
 	}
-	// sort_big(&stack_a, &stack_b, 0);
+	get_index(&stack_a);
 	pre_sort(&stack_a, &stack_b);
+	// ft_push(&stack_a, &stack_b, 'b');
+	// ft_push(&stack_a, &stack_b, 'b');
+	// ft_push(&stack_a, &stack_b, 'b');
+	// ft_push(&stack_a, &stack_b, 'b');
+	// ft_push(&stack_a, &stack_b, 'b');
+	// ft_push(&stack_a, &stack_b, 'b');
+	find_positions(&stack_a, &stack_b);
+	find_target_pos(&stack_a, &stack_b);
+	get_cost_b(&stack_b);
+	get_cost_a(&stack_a, &stack_b);
 	printlist(stack_a, 'a');
 	printlist(stack_b, 'b');
 	return (0);

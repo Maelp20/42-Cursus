@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 12:54:48 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/21 12:58:12 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/24 15:26:23 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int tab_sorted(int *tab, int size)
 	return (1);
 }
 
-static void	sort_int_tab(int *tab, int size)
+void	sort_int_tab(int *tab, int size)
 {
 	int i;
 	int swap;
