@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 14:46:41 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/24 16:58:21 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/24 17:47:48 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	get_cost_a(t_list **stack_a, t_list **stack_b)
 			if (tmp->pos == (*stack_b)->target_pos)
 			{
 				if (cost > size / 2)
-					cost = size - cost;
+					cost = cost - size;
 				(*stack_b)->cost_a = cost;
 			}
 			tmp = tmp->next;
@@ -54,7 +54,7 @@ void	get_cost_b(t_list **stack_b)
 		if ((*stack_b)->pos <= size / 2)
 			(*stack_b)->cost_b = (*stack_b)->pos;
 		else
-			(*stack_b)->cost_b = size - (*stack_b)->pos;
+			(*stack_b)->cost_b = (*stack_b)->pos - size;
 		*stack_b = (*stack_b)->next;
 	}
 	*stack_b = tmp;

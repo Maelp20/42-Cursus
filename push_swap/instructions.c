@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:38:59 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/17 13:13:35 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/24 18:43:06 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void	ft_rotate(t_list **lst, char id)
 		write (1, "ra\n", 3);
 	else if (id == 'b')
 		write (1, "rb\n", 3);
+	else if (id == 'd')
+		write (1, "rr\n", 3);
 }
 
 void	ft_rrotate(t_list **lst, char id)
@@ -84,6 +86,22 @@ void	ft_rrotate(t_list **lst, char id)
 		write (1, "rra\n", 4);
 	else if (id == 'b')
 		write (1, "rrb\n", 4);
+	else if (id == 'd')
+		write (1, "rrr\n", 4);
+}
+
+void	ft_double(t_list **stack_a, t_list **stack_b, int id)
+{
+	if (id == 0)
+	{
+		ft_rotate(stack_a, 'd');
+		ft_rotate(stack_b, 'd');
+	}
+	else if (id == 1)
+	{
+		ft_rrotate(stack_a, 'd');
+		ft_rrotate(stack_b, 'd');
+	}
 }
 
 // TEST MAIN //

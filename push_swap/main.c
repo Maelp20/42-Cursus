@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:31:08 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/24 17:24:38 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/24 17:57:00 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,30 +42,6 @@ void printlist(t_list *lst, char id)
     }
 }
 
-// void printchunk(t_list *lst, char id, int chunk_id)
-// {
-//     if (lst == NULL)
-//     {
-//        exit(EXIT_FAILURE) ;
-//     }
-
-//     t_list	*print;
-
-// 	print = lst;
-
-// 	if (id == 'a')
-// 		printf("Stack a : \n");
-// 	else if (id == 'b')
-// 		printf("Stack b : \n");
-// 	else
-// 		printf("Stack : \n");
-//     while (print && print->chunk_id == chunk_id)
-//     {
-//         printf("%d (%d) // ", print->content, print->chunk_id);
-//         print = print->next;
-//     }
-// }
-
 int	main(int ac, char **av)
 {
 	t_list	*stack_a;
@@ -90,34 +66,8 @@ int	main(int ac, char **av)
 	find_target_pos(&stack_a, &stack_b);
 	get_cost_b(&stack_b);
 	get_cost_a(&stack_a, &stack_b);
+	sort_big(&stack_a, &stack_b);
 	printlist(stack_a, 'a');
 	printlist(stack_b, 'b');
 	return (0);
 }
-
-// int main(int ac, char **av)
-// {
-//     t_list *lsta;
-//     t_list *lstb;
-
-//     int i;
-//     i = 0;
-//     int *n;
-//     n = malloc(sizeof(n) * ac);
-
-//     lsta = NULL;
-//     while (av[i + 1])
-//     {
-//         n[i] = ft_atoi(av[i + 1]);
-//         ft_lstadd_back(&lsta, ft_lstnew(&n[i]));
-//         i++;
-//     }
-
-//     sa(lsta);
-//     t_list *tmp = lsta;
-//     while (tmp)
-//     {
-//         printf("%d\n", *(int *)(tmp->content));
-//         tmp = tmp->next;
-//     }    
-// }
