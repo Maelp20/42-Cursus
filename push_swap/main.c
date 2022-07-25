@@ -62,10 +62,10 @@ int	main(int ac, char **av)
 	// ft_push(&stack_a, &stack_b, 'b');
 	// ft_push(&stack_a, &stack_b, 'b');
 	// ft_push(&stack_a, &stack_b, 'b');
-	find_positions(&stack_a, &stack_b);
-	find_target_pos(&stack_a, &stack_b);
-	get_cost_b(&stack_b);
-	get_cost_a(&stack_a, &stack_b);
+	// find_positions(&stack_a, &stack_b);
+	// find_target_pos(&stack_a, &stack_b);
+	// get_cost_b(&stack_b);
+	// get_cost_a(&stack_a, &stack_b);
 	sort_big(&stack_a, &stack_b);
 	printlist(stack_a, 'a');
 	printlist(stack_b, 'b');

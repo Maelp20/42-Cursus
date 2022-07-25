@@ -54,6 +54,6 @@ void	find_target_pos(t_list **stack_a, t_list **stack_b);
 void	get_cost_a(t_list **stack_a, t_list **stack_b);
 void	get_cost_b(t_list **stack_b);
 void	sort_big(t_list **stack_a, t_list **stack_b);
-void	ft_double(t_list **stack_a, t_list **stack_b, char id);
+void	ft_double(t_list **stack_a, t_list **stack_b, int id);
 
 #endif
