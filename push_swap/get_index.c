@@ -85,7 +85,7 @@ void	get_index(t_list **stack_a)
 	while (*stack_a)
 	{
 		i = 0;
-		while (i <= size)
+		while (i < size)
 		{
 			if ((*stack_a)->content == buff[i])
 				(*stack_a)->index = i + 1;
