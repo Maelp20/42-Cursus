@@ -54,10 +54,24 @@ int	main(int ac, char **av)
 		write(1, "Error\n", 6);
 		return (1);
 	}
-	get_index(&stack_a);
-	pre_sort(&stack_a, &stack_b);
-	sort_big(&stack_a, &stack_b);
-	finish_sorting(&stack_a);
+	if (ft_lstsize(stack_a) < 2)
+		return (0);
+	else if (ft_lstsize(stack_a) == 2)
+		if (!lst_sorted(stack_a))
+			ft_swap(&stack_a, 'a');
+	else if (ft_lstsize(stack_a) == 3)
+		if (!lst_sorted(stack_a))
+			sort_3(&stack_a, 'a');
+	else if (ft_lstsize(stack_a) > 3)
+	{
+		get_index(&stack_a);
+		if (ft_lstsize(stack_a) <= 5)
+			pre_sort5(&stack_a, &stack_b);
+		else
+			pre_sort(&stack_a, &stack_b);
+		sort_big(&stack_a, &stack_b);
+		finish_sorting(&stack_a);
+	}
 	// printlist(stack_a, 'a');
 	// printlist(stack_b, 'b');
 	return (0);

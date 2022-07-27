@@ -15,7 +15,6 @@
 
 int	cheapest_to_move(t_list **stack_b)
 {
-	// printf("cheapest to move\n");
 	int cost_min;
 	int	cost_a;
 	int	cost_b;
@@ -29,7 +28,6 @@ int	cheapest_to_move(t_list **stack_b)
 	cost_min = 2147483647;
 	while (tmp)
 	{
-		// printf("first while\n");
 		cost_a  = tmp->cost_a;
 		cost_b  = tmp->cost_b;
 		if (cost_a < 0)
@@ -42,7 +40,6 @@ int	cheapest_to_move(t_list **stack_b)
 	}
 	while (tmp2)
 	{
-		// printf("second while\n");
 		cost_a  = tmp2->cost_a;
 		cost_b  = tmp2->cost_b;
 		if (cost_a < 0)
@@ -53,13 +50,11 @@ int	cheapest_to_move(t_list **stack_b)
 			break ;
 		tmp2 = tmp2->next;
 	}
-	// printf("index to move : %d\n", tmp2->index);
 	return (tmp2->index);
 }
 
 void	do_move(t_list **stack_a, t_list **stack_b, int cost_a, int cost_b)
 {
-	// printf("do move\n");
 	if (cost_a < 0)
 	{
 		cost_a = -cost_a;
@@ -115,7 +110,6 @@ void	do_move(t_list **stack_a, t_list **stack_b, int cost_a, int cost_b)
 				cost_b--;
 			}
 		}
-		// printf("cost a : %d\n", cost_a);
 		while (cost_a > 0)
 		{
 			ft_rotate(stack_a, 'a');
@@ -132,7 +126,7 @@ void	finish_sorting(t_list **stack_a)
 	tmp = *stack_a;
 	while (tmp->index != 1)
 		tmp = tmp->next;
-	if (tmp->pos < ft_lstsize(*stack_a) / 2)
+	if (tmp->pos <= ft_lstsize(*stack_a) / 2)
 		while (!lst_sorted(*stack_a))
 			ft_rotate(stack_a, 'a');
 	else
@@ -142,17 +136,11 @@ void	finish_sorting(t_list **stack_a)
 
 void	sort_big(t_list **stack_a, t_list **stack_b)
 {
-	// printf("sort big\n");
 	t_list *tmp;
 	int		index_cheapest;
 
 	if (!*stack_b)
 		return ;
-	if (ft_lstsize(*stack_b) == 2)
-	{
-		if (!lst_sorted(*stack_b))
-			ft_swap(stack_b, 'b');
-	}
 	find_positions(stack_a, stack_b);
 	find_target_pos(stack_a, stack_b);
 	get_cost_b(stack_b);
@@ -165,10 +153,6 @@ void	sort_big(t_list **stack_a, t_list **stack_b)
 			break ;
 		tmp = tmp->next;
 	}
-	// printf("cost a : %d\n", tmp->cost_a);
-	// printf("cost b : %d\n", tmp->cost_b);
 	do_move(stack_a, stack_b, tmp->cost_a, tmp->cost_b);
-	// printlist(*stack_a, 'a');
-	// printlist(*stack_b, 'b');
 	sort_big(stack_a, stack_b);
 }
