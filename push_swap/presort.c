@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   other_presort.c                                    :+:      :+:    :+:   */
+/*   presort.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 12:57:31 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/24 15:34:58 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/28 14:53:36 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	presort_in_b(t_list **stack_a, t_list **stack_b)
 
 	size = ft_lstsize(*stack_a);
 	median = find_median(*stack_a, 0);
-	while(size > 3)
+	while (size > 3)
 	{
 		if ((*stack_a)->content < median)
 			ft_push(stack_a, stack_b, 'b');

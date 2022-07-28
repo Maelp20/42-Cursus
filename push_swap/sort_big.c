@@ -6,20 +6,17 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 17:55:21 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/24 18:44:38 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/28 16:20:37 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 int	cheapest_to_move(t_list **stack_b)
 {
-	int cost_min;
-	int	cost_a;
-	int	cost_b;
-	t_list *tmp;
-	t_list *tmp2;
+	int		cost_min;
+	t_list	*tmp;
+	t_list	*tmp2;
 
 	if (ft_lstsize(*stack_b) == 1)
 		return ((*stack_b)->index);
@@ -28,100 +25,22 @@ int	cheapest_to_move(t_list **stack_b)
 	cost_min = 2147483647;
 	while (tmp)
 	{
-		cost_a  = tmp->cost_a;
-		cost_b  = tmp->cost_b;
-		if (cost_a < 0)
-			cost_a = - cost_a;
-		if (cost_b < 0)
-			cost_b = - cost_b;
-		if ((cost_a + cost_b) < cost_min)
-			cost_min = cost_a + cost_b;
+		if ((nb_abs(tmp->cost_a) + nb_abs(tmp->cost_b)) < cost_min)
+			cost_min = nb_abs(tmp->cost_a) + nb_abs(tmp->cost_b);
 		tmp = tmp->next;
 	}
 	while (tmp2)
 	{
-		cost_a  = tmp2->cost_a;
-		cost_b  = tmp2->cost_b;
-		if (cost_a < 0)
-			cost_a = - cost_a;
-		if (cost_b < 0)
-			cost_b = - cost_b;
-		if ((cost_a + cost_b) == cost_min)
+		if ((nb_abs(tmp2->cost_a) + nb_abs(tmp2->cost_b)) == cost_min)
 			break ;
 		tmp2 = tmp2->next;
 	}
 	return (tmp2->index);
 }
 
-void	do_move(t_list **stack_a, t_list **stack_b, int cost_a, int cost_b)
-{
-	if (cost_a < 0)
-	{
-		cost_a = -cost_a;
-		if (cost_b < 0)
-		{
-			cost_b = -cost_b;
-			while (cost_a > 0 && cost_b > 0)
-			{
-				ft_double(stack_a, stack_b, 1);
-				cost_a--;
-				cost_b--;
-			}
-			while (cost_b > 0)
-			{
-				ft_rrotate(stack_b, 'b');
-				cost_b--;
-			}
-		}
-		else
-			while (cost_b > 0)
-			{
-				ft_rotate(stack_b, 'b');
-				cost_b--;
-			}
-		while (cost_a > 0)
-		{
-			ft_rrotate(stack_a, 'a');
-			cost_a--;
-		}
-	}
-	else
-	{
-		if (cost_b < 0)
-		{
-			cost_b = -cost_b;
-			while (cost_b > 0)
-			{
-				ft_rrotate(stack_b, 'b');
-				cost_b--;
-			}
-		}
-		else
-		{
-			while (cost_a > 0 && cost_b > 0)
-			{
-				ft_double(stack_a, stack_b, 0);
-				cost_a--;
-				cost_b--;
-			}
-			while (cost_b > 0)
-			{
-				ft_rotate(stack_b, 'b');
-				cost_b--;
-			}
-		}
-		while (cost_a > 0)
-		{
-			ft_rotate(stack_a, 'a');
-			cost_a--;
-		}
-	}
-	ft_push(stack_a, stack_b, 'a');
-}
-
 void	finish_sorting(t_list **stack_a)
 {
-	t_list *tmp;
+	t_list	*tmp;
 
 	tmp = *stack_a;
 	while (tmp->index != 1)
@@ -136,7 +55,7 @@ void	finish_sorting(t_list **stack_a)
 
 void	sort_big(t_list **stack_a, t_list **stack_b)
 {
-	t_list *tmp;
+	t_list	*tmp;
 	int		index_cheapest;
 
 	if (!*stack_b)

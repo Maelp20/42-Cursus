@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:31:08 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/24 17:57:00 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/28 14:31:51 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,16 @@ int	main(int ac, char **av)
 	if (ft_lstsize(stack_a) < 2)
 		return (0);
 	else if (ft_lstsize(stack_a) == 2)
+	{
 		if (!lst_sorted(stack_a))
-			ft_swap(&stack_a, 'a');
+			ft_swap(&stack_a, 'a');	
+	}
 	else if (ft_lstsize(stack_a) == 3)
+	{
 		if (!lst_sorted(stack_a))
-			sort_3(&stack_a, 'a');
-	else if (ft_lstsize(stack_a) > 3)
+			sort_3(&stack_a, 'a');		
+	}
+	else
 	{
 		get_index(&stack_a);
 		if (ft_lstsize(stack_a) <= 5)

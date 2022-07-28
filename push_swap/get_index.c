@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 14:46:41 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/24 17:47:48 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/28 14:55:39 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	find_index(t_list **stack_a, int *buff, int size)
 {
-	t_list *tmp;
+	t_list	*tmp;
 	int		i;
 
 	tmp = *stack_a;
@@ -27,15 +27,16 @@ static void	find_index(t_list **stack_a, int *buff, int size)
 				(*stack_a)->index = i + 1;
 			i++;
 		}
-		*stack_a = (*stack_a)->next;	
+		*stack_a = (*stack_a)->next;
 	}
 	*stack_a = tmp;
 }
+
 void	get_index(t_list **stack_a)
 {
-	int	i;
-	int	size;
-	int	*buff;
+	int		i;
+	int		size;
+	int		*buff;
 	t_list	*tmp;
 
 	i = 0;

@@ -6,15 +6,22 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 12:54:48 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/24 15:26:23 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/28 15:03:43 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int tab_sorted(int *tab, int size)
+int	nb_abs(int nb)
 {
-	int i;
+	if (nb < 0)
+		return (nb * -1);
+	return (nb);
+}
+
+static int	tab_sorted(int *tab, int size)
+{
+	int	i;
 
 	i = 0;
 	while (i < size - 1)
@@ -28,9 +35,9 @@ static int tab_sorted(int *tab, int size)
 
 void	sort_int_tab(int *tab, int size)
 {
-	int i;
-	int swap;
-	
+	int	i;
+	int	swap;
+
 	swap = 0;
 	while (!tab_sorted(tab, size))
 	{
@@ -51,7 +58,7 @@ void	sort_int_tab(int *tab, int size)
 int	lst_sorted(t_list *lst)
 {
 	t_list	*tmp;
-	
+
 	tmp = lst;
 	while (tmp->next)
 	{
@@ -64,10 +71,10 @@ int	lst_sorted(t_list *lst)
 
 int	find_median(t_list *lst, int chunk_size)
 {
-	int	median;
-	int	i;
-	int	size;
-	int	*buff;
+	int		median;
+	int		i;
+	int		size;
+	int		*buff;
 	t_list	*tmp;
 
 	i = 0;

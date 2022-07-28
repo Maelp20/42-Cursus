@@ -6,7 +6,7 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/03 16:11:03 by mpignet           #+#    #+#              #
-#    Updated: 2022/07/24 17:55:32 by mpignet          ###   ########.fr        #
+#    Updated: 2022/07/28 15:23:17 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS	=    \
 								find_positions.c\
 								sort_big.c\
 								get_cost.c\
+								do_moves.c\
 							
 OBJS = ${SRCS:.c=.o}
 

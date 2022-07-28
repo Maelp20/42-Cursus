@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 16:25:35 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/21 13:00:54 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/28 14:54:45 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_list	*find_min(t_list *itera)
 		}
 		itera = itera->next;
 	}
-	return (min);	
+	return (min);
 }
 
 t_list	*find_max(t_list *itera)
@@ -68,11 +68,11 @@ void	sort_3(t_list **lst, char id)
 	if (*itera == min && (*itera)->next == max)
 	{
 		ft_rrotate(lst, id);
-		ft_swap(lst, id);	
+		ft_swap(lst, id);
 	}
 	if (*itera == max && (*itera)->next->next == min)
 	{
 		ft_rotate(lst, id);
-		ft_swap(lst, id);	
+		ft_swap(lst, id);
 	}
 }

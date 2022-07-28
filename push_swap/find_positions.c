@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_pos.c                                         :+:      :+:    :+:   */
+/*   find_positions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 15:41:18 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/24 17:23:19 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/28 14:57:13 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		max_index(t_list **stack)
+int	max_index(t_list **stack)
 {
-	t_list *tmp;
-	int	max_index;
+	t_list	*tmp;
+	int		max_index;
 
 	tmp = *stack;
 	max_index = 0;
-	while(tmp)
+	while (tmp)
 	{
 		if (tmp->index > max_index)
 			max_index = tmp->index;
@@ -28,15 +28,15 @@ int		max_index(t_list **stack)
 	return (max_index);
 }
 
-int		min_pos(t_list **stack)
+int	min_pos(t_list **stack)
 {
-	t_list *tmp;
-	int	min_index;
-	int	min_pos;
+	t_list	*tmp;
+	int		min_index;
+	int		min_pos;
 
 	tmp = *stack;
 	min_index = 2147483647;
-	while(tmp)
+	while (tmp)
 	{
 		if (tmp->index < min_index)
 		{
@@ -50,8 +50,8 @@ int		min_pos(t_list **stack)
 
 void	find_target_pos(t_list **stack_a, t_list **stack_b)
 {
-	t_list *tmp;
-	t_list *tmp2;
+	t_list	*tmp;
+	t_list	*tmp2;
 	int		next_index;
 
 	tmp2 = *stack_b;

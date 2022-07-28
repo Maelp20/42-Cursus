@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 11:39:35 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/05 15:37:03 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/28 14:51:51 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ static int	add_element(t_list **lst, char *str)
 
 static int	split_add(t_list **lst, char *str)
 {
-	char **strs;
-	int	j;
-	
+	char	**strs;
+	int		j;
+
 	strs = ft_split(str, ' ');
 	j = -1;
 	while (strs[++j])
 	{
-		if (check_integers(strs[j]) || check_sizeint(strs[j]) 
+		if (check_integers(strs[j]) || check_sizeint(strs[j])
 			|| add_element(lst, strs[j]))
 			return (1);
 		free(strs[j]);
@@ -44,18 +44,18 @@ static int	split_add(t_list **lst, char *str)
 int	parse(t_list **lst, int ac, char **av)
 {
 	int		i;
-	
+
 	i = 1;
 	while (i < ac)
 	{
 		if (check_spaces(av[i]))
 		{
-			if(split_add(lst, av[i]))
-				return (1);	
+			if (split_add(lst, av[i]))
+				return (1);
 		}
 		else
 		{
-			if (check_integers(av[i]) || check_sizeint(av[i]) 
+			if (check_integers(av[i]) || check_sizeint(av[i])
 				|| add_element(lst, av[i]))
 				return (1);
 		}
