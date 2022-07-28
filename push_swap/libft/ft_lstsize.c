@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:13:29 by mpignet           #+#    #+#             */
-/*   Updated: 2022/05/12 12:02:16 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/28 16:40:04 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_lstsize(t_list *lst)
 {
-	int	nb;
+	int		nb;
 	t_list	*tmp;
 
 	if (!lst)

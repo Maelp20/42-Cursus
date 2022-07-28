@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 15:41:18 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/28 14:57:13 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/28 16:31:59 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,16 @@ int	min_pos(t_list **stack)
 	return (min_pos);
 }
 
+static int	write_target_pos(t_list **stack_b, t_list *tmp, int next_index)
+{
+	if (tmp->index < next_index)
+	{
+		next_index = tmp->index;
+		(*stack_b)->target_pos = tmp->pos;
+	}
+	return (next_index);
+}
+
 void	find_target_pos(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*tmp;
@@ -62,13 +72,7 @@ void	find_target_pos(t_list **stack_a, t_list **stack_b)
 		while (tmp)
 		{
 			if ((*stack_b)->index < tmp->index)
-			{
-				if (tmp->index < next_index)
-				{
-					next_index = tmp->index;
-					(*stack_b)->target_pos = tmp->pos;
-				}
-			}
+				next_index = write_target_pos(stack_b, tmp, next_index);
 			else if ((*stack_b)->index > max_index(stack_a))
 				(*stack_b)->target_pos = min_pos(stack_a);
 			tmp = tmp->next;

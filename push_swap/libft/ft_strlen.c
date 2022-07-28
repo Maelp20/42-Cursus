@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 12:14:33 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/06 13:42:15 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/07/28 16:40:17 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ size_t	ft_strlen(const char *s)
 
 	i = 0;
 	if (!s)
-		return(0);
+		return (0);
 	while (s[i])
 		i++;
 	return (i);
