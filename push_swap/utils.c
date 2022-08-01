@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 12:54:48 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/28 15:03:43 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/08/01 17:22:27 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,13 @@ int	find_median(t_list *lst, int chunk_size)
 	else
 		size = ft_lstsize(lst);
 	buff = (int *)malloc(sizeof(int) * size);
-	while (size > 0)
+	if (!buff)
+		exit(EXIT_FAILURE);
+	while (i < size)
 	{
 		buff[i] = tmp->content;
 		tmp = tmp ->next;
 		i++;
-		size --;
 	}
 	sort_int_tab(buff, i);
 	median = buff[i / 2];

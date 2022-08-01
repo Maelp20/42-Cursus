@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:31:08 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/28 16:41:55 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/08/01 17:16:06 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,30 @@ void printlist(t_list *lst, char id)
 }
 */
 
-static void	begin(t_list *stack_a, t_list *stack_b)
+static void	begin(t_list **stack_a, t_list **stack_b)
 {
-	get_index(&stack_a);
-	if (ft_lstsize(stack_a) <= 5)
-		pre_sort5(&stack_a, &stack_b);
+	get_index(stack_a);
+	if (ft_lstsize(*stack_a) <= 5)
+		pre_sort5(stack_a, stack_b);
 	else
-		pre_sort(&stack_a, &stack_b);
-	sort_big(&stack_a, &stack_b);
-	finish_sorting(&stack_a);
+		pre_sort(stack_a, stack_b);
+	sort_big(stack_a, stack_b);
+	finish_sorting(stack_a);
+}
+
+static void	clear_list(t_list **lst)
+{
+	t_list	*temp;
+
+	if (!lst)
+		return ;
+	temp = *lst;
+	while (*lst)
+	{
+		*lst = (*lst)->next;
+		free(temp);
+		temp = *lst;
+	}
 }
 
 int	main(int ac, char **av)
@@ -62,7 +77,8 @@ int	main(int ac, char **av)
 	stack_b = NULL;
 	if (parse(&stack_a, ac, av))
 	{
-		write(1, "Error\n", 6);
+		clear_list(&stack_a);
+		write(2, "Error\n", 6);
 		return (1);
 	}
 	if (ft_lstsize(stack_a) < 2)
@@ -74,6 +90,7 @@ int	main(int ac, char **av)
 		while (!lst_sorted(stack_a))
 			sort_3(&stack_a, 'a');
 	else
-		begin(stack_a, stack_b);
+		begin(&stack_a, &stack_b);
+	clear_list(&stack_a);
 	return (0);
 }

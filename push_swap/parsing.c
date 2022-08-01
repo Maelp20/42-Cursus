@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 11:39:35 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/28 14:51:51 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/08/01 17:39:25 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,20 @@ static int	split_add(t_list **lst, char *str)
 {
 	char	**strs;
 	int		j;
+	int		err;
 
 	strs = ft_split(str, ' ');
 	j = -1;
+	err = 0;
 	while (strs[++j])
 	{
 		if (check_integers(strs[j]) || check_sizeint(strs[j])
 			|| add_element(lst, strs[j]))
-			return (1);
+			err = 1;
 		free(strs[j]);
 	}
 	free(strs);
-	return (0);
+	return (err);
 }
 
 int	parse(t_list **lst, int ac, char **av)

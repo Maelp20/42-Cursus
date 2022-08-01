@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 14:46:41 by mpignet           #+#    #+#             */
-/*   Updated: 2022/07/28 14:55:39 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/08/01 17:24:44 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,13 @@ void	get_index(t_list **stack_a)
 	tmp = *stack_a;
 	size = ft_lstsize(*stack_a);
 	buff = (int *)malloc(sizeof(int) * size);
-	while (size > 0)
+	if (!buff)
+		return ;
+	while (i < size)
 	{
 		buff[i] = tmp->content;
 		tmp = tmp->next;
 		i++;
-		size --;
 	}
 	sort_int_tab(buff, i);
 	find_index(stack_a, buff, i);
