@@ -1,5 +1,0 @@
-create list for stack a
-create list for stack b
-check args and send error msg if necessary
-add args to list a
-call the instructions to sort a with the help of b
