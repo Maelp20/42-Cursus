@@ -6,40 +6,61 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/23 13:06:22 by mpignet           #+#    #+#              #
-#    Updated: 2022/08/02 16:51:48 by mpignet          ###   ########.fr        #
+#    Updated: 2022/08/05 19:04:09 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+# /* ~~~~~~ SOURCES ~~~~~~ */
+SRCS_DIR = ./srcs/
 SRCS	= \
-			gnl/get_next_line_bonus.c\
-			gnl/get_next_line_utils_bonus.c\
 			main.c\
 			so_long.c\
+			parsing.c\
+			hooks.c\
 
-OBJS	= ${SRCS:.c=.o}
+OBJS	= ${addprefix ${SRCS_DIR}, ${SRCS:.c=.o}}
 
-NAME	= so_long
+# /* ~~~~~~~ INCLUDING LIBFT ~~~~~~~ */
+LIBFT_DIR = lib/libft
+LIBFT = ${LIBFT_DIR}/libft.a
+
+# /* ~~~~~~~ INCLUDING PRINTF ~~~~~~~ */
+PRINTF_DIR = lib/ft_printf
+PRINTF = ${PRINTF_DIR}/libftprintf.a
+
+# /* ~~~~~~~ INCLUDING MINILIBX ~~~~~~~ */
+MLX_DIR = lib/minilibx-linux
+MLX = ${MLX_DIR}/libmlx.a
+
+# /* ~~~~~~~ COMPILING INFO ~~~~~~~ */
 
 CC		= gcc
-
 CFLAGS	= -g -Wall -Wextra
-
+MFLAGS	= -ldl -lmlx -L${MLX_DIR} -lm -lXext -lX11 -Imlx ${MLX}
+LFLAGS	= -L ${LIBFT_DIR} -lft
+NAME	= so_long
 RM		= rm -f
 
-MINILIB = "./minilibx-linux/"
 
-LIBFLAGS = -lmlx -lXext -lX11 -lXrender -lm
+all:		${NAME}
 
-$(NAME):	${OBJS}
-				${CC} ${CFLAGS} -o ${NAME} ${OBJS} -L${MINILIB} ${LIBFLAGS}
+${NAME}:	${OBJS}
+			@make -C ${LIBFT_DIR} --no-print-directory
+			@make -C ${PRINTF_DIR} --no-print-directory
+			@make -C ${MLX_DIR} --no-print-directory
+			@${CC} ${CFLAGS} ${OBJS} ${PRINTF} ${LFLAGS} ${MFLAGS} -o ${NAME}
 			
-all:		$(NAME)
-
 clean:
 			${RM} ${OBJS}
+			@make clean -C lib/libft --no-print-directory
+			@make clean -C lib/ft_printf --no-print-directory
 
-fclean:		clean
-				${RM} ${NAME}
+fclean:		
+			${RM} ${OBJS}
+			${RM} ${NAME}
+			@make fclean -C lib/libft --no-print-directory
+			@make fclean -C lib/ft_printf --no-print-directory
+			@make clean -C lib/minilibx-linux --no-print-directory
 
 re:			fclean all
 

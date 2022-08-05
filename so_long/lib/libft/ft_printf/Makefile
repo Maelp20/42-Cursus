@@ -5,40 +5,31 @@
 #                                                     +:+ +:+         +:+      #
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/05/03 16:11:03 by mpignet           #+#    #+#              #
-#    Updated: 2022/08/05 16:56:12 by mpignet          ###   ########.fr        #
+#    Created: 2022/05/16 18:01:15 by mpignet           #+#    #+#              #
+#    Updated: 2022/07/04 12:13:19 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS	=    \
-								main.c\
-								parsing.c\
-								instructions.c\
-								args_checks.c\
-								sort_3.c\
-								utils.c\
-								get_index.c\
-								presort.c\
-								find_positions.c\
-								sort_big.c\
-								get_cost.c\
-								do_moves.c\
+						ft_printf.c\
+						ft_printhexa.c\
+						ft_printnbr_unsigned.c\
+						ft_utility_printf.c\
+						ft_printnbr.c\
+						ft_printptr.c 
 							
-OBJS = ${SRCS:.c=.o}
+OBJS	= ${SRCS:.c=.o}
 
-LIBA = libft/libft.a
-LIB = -L libft/ -lft	
+NAME	= libftprintf.a
 
-NAME = push_swap
+CC	= gcc
 
-CC = gcc
+CFLAGS	= -Wall -Wextra -Werror
 
-CFLAGS = -g -Wall -Wextra -Werror
+RM	= rm -f
 
-RM = rm -f
-
-$(NAME):	${OBJS} ${LIBA}
-			${CC} ${CFLAGS} -o $@ ${OBJS} ${LIB}
+$(NAME):	${OBJS}
+			ar rcs ${NAME} ${OBJS}
 
 all: 		$(NAME)
 
