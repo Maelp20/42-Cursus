@@ -6,7 +6,7 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/23 13:06:22 by mpignet           #+#    #+#              #
-#    Updated: 2022/08/05 19:04:09 by mpignet          ###   ########.fr        #
+#    Updated: 2022/08/07 18:04:32 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,22 +14,22 @@
 SRCS_DIR = ./srcs/
 SRCS	= \
 			main.c\
-			so_long.c\
-			parsing.c\
+			init.c\
+			put_elements.c\
 			hooks.c\
 
 OBJS	= ${addprefix ${SRCS_DIR}, ${SRCS:.c=.o}}
 
 # /* ~~~~~~~ INCLUDING LIBFT ~~~~~~~ */
-LIBFT_DIR = lib/libft
+LIBFT_DIR = ./lib/libft
 LIBFT = ${LIBFT_DIR}/libft.a
 
 # /* ~~~~~~~ INCLUDING PRINTF ~~~~~~~ */
-PRINTF_DIR = lib/ft_printf
+PRINTF_DIR = ./lib/ft_printf
 PRINTF = ${PRINTF_DIR}/libftprintf.a
 
 # /* ~~~~~~~ INCLUDING MINILIBX ~~~~~~~ */
-MLX_DIR = lib/minilibx-linux
+MLX_DIR = ./lib/minilibx-linux
 MLX = ${MLX_DIR}/libmlx.a
 
 # /* ~~~~~~~ COMPILING INFO ~~~~~~~ */

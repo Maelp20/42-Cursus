@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 16:28:36 by mpignet           #+#    #+#             */
-/*   Updated: 2022/08/05 18:59:24 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/08/07 18:13:30 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 # include <math.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+
+# define PATH_COLL "./assets/15_burger.xpm"
+# define PATH_WALL "./assets/Apple.xpm"
 
 # include <stdio.h>
 
@@ -45,8 +48,8 @@ typedef struct s_data {
 }			t_data;
 
 char	*get_next_line(int fd);
-void	get_map_size(t_data *data);
-void	put_window(t_data *data, int width, int height);
 void	hooks(t_data *data);
+void	init_img(t_data *data);
+void	put_elements(t_data *data);
 
 # endif
