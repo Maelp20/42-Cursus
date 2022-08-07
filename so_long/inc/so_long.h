@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 16:28:36 by mpignet           #+#    #+#             */
-/*   Updated: 2022/08/07 18:13:30 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/08/07 19:39:35 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 
-# define PATH_COLL "./assets/15_burger.xpm"
+# define PATH_BG "./assets/Brick.xpm"
+# define PATH_COLL "./assets/Burger.xpm"
 # define PATH_WALL "./assets/Apple.xpm"
+# define PATH_EXIT "./assets/Hospital.xpm"
 
 # include <stdio.h>
 
