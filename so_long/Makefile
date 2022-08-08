@@ -6,7 +6,7 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/23 13:06:22 by mpignet           #+#    #+#              #
-#    Updated: 2022/08/08 16:42:56 by mpignet          ###   ########.fr        #
+#    Updated: 2022/08/08 17:18:23 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,6 @@ MFLAGS	= -ldl -lmlx -L${MLX_DIR} -lm -lXext -lX11 -Imlx ${MLX}
 LFLAGS	= -L ${LIBFT_DIR} -lft
 NAME	= so_long
 RM		= rm -f
-
 
 all:		${NAME}
 
