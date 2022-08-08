@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 12:58:51 by mpignet           #+#    #+#             */
-/*   Updated: 2022/08/07 18:40:01 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/08/08 16:40:24 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,44 +19,34 @@ void	put_window(t_data *data, int width, int height)
 		free(data->win_ptr);
 }
 
-int	get_height(t_data *data)
+void	init_block(t_data *data)
 {
-	int	i;
-	
-	i = 0;
-	while (data->map[i])
-		i++;
-	return (i);
+	data->mlx_ptr = NULL ;
+	data->win_ptr = NULL ;
+	data->background = NULL ;
+	data->wall = NULL ;
+	data->coll = NULL ;
+	data->exit = NULL ;
+	data->player = NULL ;
+	data->win_width = 0;
+	data->win_height = 0;
+	data->counter = 0;
+	data->nbr_coll = 0;
+	data->pos_x = 0;
+	data->pos_y = 0;
 }
 
-void	get_map_info(t_data *data, char *path)
-{
-	int		fd;
-	char	*buff;
-	int		i;
-	
-	fd = open(path, O_RDONLY);
-	if (fd == -1)
-		return (ft_putstr_fd("Error\nTrying to open an invalid file\n", 2));
-	buff = malloc(sizeof(char) * 100000);
-	i = read(fd, buff, 100000);
-	if (i == -1)
-		return (ft_putstr_fd("Error\nTrying to read an invalid file\n", 2));
-	buff[i] = '\0';
-	data->map = ft_split(buff, '\n');
-	printf("len = %d\n", ft_strlen(data->map[0]));
-	data->win_width = ft_strlen(data->map[0]) * 32;
-	data->win_height = get_height(data) * 32;
-}
-
-int	main(void)
+int	main(int ac, char **av)
 {
 	t_data data;
 
+	if (ac != 2)
+		return (ft_putstr_fd("Error\nWrong number of arguments\n", 2), 1);
+	init_block(&data);
 	data.mlx_ptr = mlx_init();
 	if (data.mlx_ptr == NULL)
 		return (1);
-	get_map_info(&data, "./maps/map1.ber");
+	parsing(&data, av[1]);
 	put_window(&data, data.win_width, data.win_height);
 	init_img(&data);
 	put_elements(&data);

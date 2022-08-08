@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 16:28:36 by mpignet           #+#    #+#             */
-/*   Updated: 2022/08/07 19:39:35 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/08/08 16:42:36 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define PATH_COLL "./assets/Burger.xpm"
 # define PATH_WALL "./assets/Apple.xpm"
 # define PATH_EXIT "./assets/Hospital.xpm"
+# define PATH_PLAYER "./assets/HotDog.xpm"
 
 # include <stdio.h>
 
@@ -50,8 +51,14 @@ typedef struct s_data {
 }			t_data;
 
 char	*get_next_line(int fd);
+void	parsing(t_data *data, char *path);
 void	hooks(t_data *data);
 void	init_img(t_data *data);
 void	put_elements(t_data *data);
+
+void	move_up(t_data *data, int x, int y);
+void	move_down(t_data *data, int x, int y);
+void	move_left(t_data *data, int x, int y);
+void	move_right(t_data *data, int x, int y);
 
 # endif

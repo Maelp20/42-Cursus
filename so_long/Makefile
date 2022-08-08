@@ -6,7 +6,7 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/23 13:06:22 by mpignet           #+#    #+#              #
-#    Updated: 2022/08/07 18:04:32 by mpignet          ###   ########.fr        #
+#    Updated: 2022/08/08 16:42:56 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,10 @@
 SRCS_DIR = ./srcs/
 SRCS	= \
 			main.c\
-			init.c\
 			put_elements.c\
+			move.c\
 			hooks.c\
+			parsing.c\
 
 OBJS	= ${addprefix ${SRCS_DIR}, ${SRCS:.c=.o}}
 
@@ -35,7 +36,7 @@ MLX = ${MLX_DIR}/libmlx.a
 # /* ~~~~~~~ COMPILING INFO ~~~~~~~ */
 
 CC		= gcc
-CFLAGS	= -g -Wall -Wextra
+CFLAGS	= -g -Wall -Wextra -Werror
 MFLAGS	= -ldl -lmlx -L${MLX_DIR} -lm -lXext -lX11 -Imlx ${MLX}
 LFLAGS	= -L ${LIBFT_DIR} -lft
 NAME	= so_long
