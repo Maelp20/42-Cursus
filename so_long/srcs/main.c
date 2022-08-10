@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 12:58:51 by mpignet           #+#    #+#             */
-/*   Updated: 2022/08/08 16:40:24 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/08/10 16:10:26 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	init_block(t_data *data)
 	data->coll = NULL ;
 	data->exit = NULL ;
 	data->player = NULL ;
+	data->play_left = NULL ;
 	data->win_width = 0;
 	data->win_height = 0;
 	data->counter = 0;

@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 18:38:00 by mpignet           #+#    #+#             */
-/*   Updated: 2022/08/08 16:33:36 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/08/10 16:41:31 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	find_player(t_data *data, int *x, int *y)
 		*y = 0;
 		while (data->map[*x][*y])
 		{
-			if (data->map[*x][*y] == 'P')
+			if (data->map[*x][*y] == 'P' || data->map[*x][*y] == 'L')
 				return ;
 			(*y)++;
 		}
@@ -36,20 +36,17 @@ int	handle_keypress(int keysym, t_data *data)
 {
 	int	x;
 	int	y;
+	int	tmp;
 
 	x = 0;
 	y = 0;
+	tmp = data->counter;
 	find_player(data, &x, &y);
 	if (keysym == XK_Escape)
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	else if (keysym == XK_w)
-		move_up(data, x, y);
-	else if (keysym == XK_s)
-		move_down(data, x, y);
-	else if (keysym == XK_a)
-		move_left(data, x, y);
-	else if (keysym == XK_d)
-		move_right(data, x, y);
+	else if (keysym == XK_w || keysym == XK_s 
+			|| keysym == XK_a || keysym == XK_d)
+		move(data, x, y, keysym, tmp);
 	return (0);
 }
 
