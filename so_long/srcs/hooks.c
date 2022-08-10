@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 18:38:00 by mpignet           #+#    #+#             */
-/*   Updated: 2022/08/10 16:41:31 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/08/10 16:44:48 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,8 @@ int	handle_keypress(int keysym, t_data *data)
 	return (0);
 }
 
-// int	handle_keyrelease(int keysym)
-// {
-// 	return (0);
-// }
-
 void	hooks(t_data *data)
 {
 	mlx_loop_hook(data->mlx_ptr, &handle_no_event, data);
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keypress, data);
-	// mlx_hook(data->win_ptr, KeyRelease, KeyReleaseMask, &handle_keyrelease, data);
 }

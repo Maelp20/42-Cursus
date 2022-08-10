@@ -6,7 +6,7 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/23 13:06:22 by mpignet           #+#    #+#              #
-#    Updated: 2022/08/08 17:18:23 by mpignet          ###   ########.fr        #
+#    Updated: 2022/08/10 17:45:53 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRCS	= \
 			move.c\
 			hooks.c\
 			parsing.c\
+			check_map.c\
 
 OBJS	= ${addprefix ${SRCS_DIR}, ${SRCS:.c=.o}}
 

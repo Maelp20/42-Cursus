@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 12:58:51 by mpignet           #+#    #+#             */
-/*   Updated: 2022/08/10 16:10:26 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/08/10 17:42:25 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ int	main(int ac, char **av)
 	data.mlx_ptr = mlx_init();
 	if (data.mlx_ptr == NULL)
 		return (1);
-	parsing(&data, av[1]);
+	if (parsing(&data, av[1]))
+		return (free(data.mlx_ptr), 1);
 	put_window(&data, data.win_width, data.win_height);
 	init_img(&data);
 	put_elements(&data);
