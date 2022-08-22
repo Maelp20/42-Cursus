@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 16:28:36 by mpignet           #+#    #+#             */
-/*   Updated: 2022/08/10 17:40:38 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/08/22 17:08:43 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@
 # include <stdio.h>
 
 typedef struct s_data {
-	
 	void	*mlx_ptr;
 	void	*win_ptr;
 	void	*background;
@@ -48,8 +47,6 @@ typedef struct s_data {
 	int		win_height;
 	int		counter;
 	int		nbr_coll;
-	int		pos_x;
-	int		pos_y;
 }			t_data;
 
 char	*get_next_line(int fd);
@@ -57,15 +54,17 @@ int		parsing(t_data *data, char *path);
 void	hooks(t_data *data);
 void	init_img(t_data *data);
 void	put_elements(t_data *data);
+int		close_window(t_data *data);
 
-int		check_square (t_data *data);
+int		check_square(t_data *data);
 int		check_exit(t_data *data);
 int		check_walls(t_data *data);
 
-void	move(t_data *data, int x, int y, int keysym, int tmp);
+void	find_player(t_data *data, int *x, int *y);
+void	move(t_data *data, int keysym);
 void	move_up(t_data *data, int x, int y);
 void	move_down(t_data *data, int x, int y);
 void	move_left(t_data *data, int x, int y);
 void	move_right(t_data *data, int x, int y);
 
-# endif
+#endif

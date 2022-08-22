@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 17:39:04 by mpignet           #+#    #+#             */
-/*   Updated: 2022/08/10 17:58:52 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/08/22 17:07:47 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static int	check_walls_line(t_data *data, int i)
 int	check_walls(t_data *data)
 {
 	int	i;
-	int j;
-	
+	int	j;
+
 	i = 0;
 	j = 0;
 	while (data->map[i + 1])
@@ -54,9 +54,9 @@ int	check_walls(t_data *data)
 int	check_exit(t_data *data)
 {
 	int	i;
-	int j;
+	int	j;
 	int	exit;
-	
+
 	i = 0;
 	exit = 0;
 	while (data->map[i])
@@ -75,9 +75,9 @@ int	check_exit(t_data *data)
 	return (0);
 }
 
-int	check_square (t_data *data)
+int	check_square(t_data *data)
 {
-	int	i;
+	int		i;
 	size_t	len;
 
 	i = 1;

@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:38:46 by mpignet           #+#    #+#             */
-/*   Updated: 2022/08/10 18:00:13 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/08/22 17:10:16 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	get_height(t_data *data)
 {
 	int	i;
-	
+
 	i = 0;
 	while (data->map[i])
 		i++;
@@ -25,10 +25,10 @@ int	get_height(t_data *data)
 int	get_nb_coll(t_data *data)
 {
 	int	i;
-	int j;
+	int	j;
 	int	nb;
 	int	player;
-	
+
 	i = 0;
 	nb = 0;
 	player = 0;
@@ -55,7 +55,7 @@ int	parsing(t_data *data, char *path)
 	int		fd;
 	char	*buff;
 	int		i;
-	
+
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		return (ft_putstr_fd("Error\nTrying to open an invalid file\n", 2), 1);

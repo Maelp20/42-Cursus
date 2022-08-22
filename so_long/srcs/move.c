@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 12:25:22 by mpignet           #+#    #+#             */
-/*   Updated: 2022/08/10 16:42:21 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/08/22 17:05:49 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	move_up(t_data *data, int x, int y)
 		data->map[x - 1][y] = data->map[x][y];
 		data->map[x][y] = '0';
 		data->counter++;
-		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+		close_window(data);
 	}
 	if (data->win_ptr != NULL)
 		put_elements(data);
@@ -58,7 +58,7 @@ void	move_down(t_data *data, int x, int y)
 		data->map[x + 1][y] = data->map[x][y];
 		data->map[x][y] = '0';
 		data->counter++;
-		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+		close_window(data);
 	}
 	if (data->win_ptr != NULL)
 		put_elements(data);
@@ -84,7 +84,7 @@ void	move_left(t_data *data, int x, int y)
 		data->map[x][y] = '0';
 		data->map[x][y - 1] = 'L';
 		data->counter++;
-		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+		close_window(data);
 	}
 	if (data->win_ptr != NULL)
 		put_elements(data);
@@ -110,14 +110,22 @@ void	move_right(t_data *data, int x, int y)
 		data->map[x][y] = '0';
 		data->map[x][y + 1] = 'P';
 		data->counter++;
-		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+		close_window(data);
 	}
 	if (data->win_ptr != NULL)
 		put_elements(data);
 }
 
-void	move(t_data *data, int x, int y, int keysym, int tmp)
+void	move(t_data *data, int keysym)
 {
+	int	x;
+	int	y;
+	int	tmp;
+
+	x = 0;
+	y = 0;
+	tmp = data->counter;
+	find_player(data, &x, &y);
 	if (keysym == XK_w)
 		move_up(data, x, y);
 	else if (keysym == XK_s)

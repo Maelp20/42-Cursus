@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 16:28:31 by mpignet           #+#    #+#             */
-/*   Updated: 2022/08/10 18:08:26 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/08/22 17:11:55 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	init_img(t_data *data)
 {
 	int	n;
-	
+
 	data->background = mlx_xpm_file_to_image(data->mlx_ptr, PATH_BG, &n, &n);
 	data->wall = mlx_xpm_file_to_image(data->mlx_ptr, PATH_WALL, &n, &n);
 	data->coll = mlx_xpm_file_to_image(data->mlx_ptr, PATH_COLL, &n, &n);
@@ -40,19 +40,6 @@ void	put_img(t_data *data, char type, int x, int y)
 	else if (type == 'L')
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->play_left, x, y);
 }
-
-// void	put_scoreboard(t_data *data)
-// {
-// 	int	j;
-	
-// 	j = 0;
-// 	while (j < (int)ft_strlen(data->map[0]))
-// 	{
-// 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->background, j * 32, 0);
-// 		j++;
-// 	}
-// 	j = 0;
-// }
 
 void	put_elements(t_data *data)
 {
