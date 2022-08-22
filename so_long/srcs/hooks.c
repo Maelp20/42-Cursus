@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 18:38:00 by mpignet           #+#    #+#             */
-/*   Updated: 2022/08/22 17:07:58 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/08/22 19:00:19 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	handle_no_event(void)
 
 int	close_window(t_data *data)
 {
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	data->win_ptr = 0;
+	mlx_destroy_window(data->mlx, data->win);
+	data->win = 0;
 	return (0);
 }
 
@@ -51,9 +51,9 @@ int	handle_keypress(int keysym, t_data *data)
 
 void	hooks(t_data *data)
 {
-	if (data->win_ptr == NULL)
+	if (data->win == NULL)
 		return ;
-	mlx_loop_hook(data->mlx_ptr, &handle_no_event, data);
-	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keypress, data);
-	mlx_hook(data->win_ptr, ClientMessage, NoEventMask, &close_window, data);
+	mlx_loop_hook(data->mlx, &handle_no_event, data);
+	mlx_hook(data->win, KeyPress, KeyPressMask, &handle_keypress, data);
+	mlx_hook(data->win, ClientMessage, NoEventMask, &close_window, data);
 }

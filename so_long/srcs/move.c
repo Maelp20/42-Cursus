@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 12:25:22 by mpignet           #+#    #+#             */
-/*   Updated: 2022/08/22 17:05:49 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/08/22 19:02:26 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	move_up(t_data *data, int x, int y)
 		data->counter++;
 		close_window(data);
 	}
-	if (data->win_ptr != NULL)
+	if (data->win != NULL)
 		put_elements(data);
 }
 
@@ -60,7 +60,7 @@ void	move_down(t_data *data, int x, int y)
 		data->counter++;
 		close_window(data);
 	}
-	if (data->win_ptr != NULL)
+	if (data->win != NULL)
 		put_elements(data);
 }
 
@@ -86,7 +86,7 @@ void	move_left(t_data *data, int x, int y)
 		data->counter++;
 		close_window(data);
 	}
-	if (data->win_ptr != NULL)
+	if (data->win != NULL)
 		put_elements(data);
 }
 
@@ -112,7 +112,7 @@ void	move_right(t_data *data, int x, int y)
 		data->counter++;
 		close_window(data);
 	}
-	if (data->win_ptr != NULL)
+	if (data->win != NULL)
 		put_elements(data);
 }
 
