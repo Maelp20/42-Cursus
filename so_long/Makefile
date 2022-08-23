@@ -6,7 +6,7 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/23 13:06:22 by mpignet           #+#    #+#              #
-#    Updated: 2022/08/10 17:45:53 by mpignet          ###   ########.fr        #
+#    Updated: 2022/08/23 15:23:21 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,18 @@ SRCS	= \
 			parsing.c\
 			check_map.c\
 
+SRCS_B_DIR = ./srcs/bonus/
+SRCS_B	= \
+			main_bonus.c\
+			put_elements_bonus.c\
+			move_bonus.c\
+			hooks_bonus.c\
+			parsing_bonus.c\
+			check_map_bonus.c\
+			display_score_bonus.c\
+			
 OBJS	= ${addprefix ${SRCS_DIR}, ${SRCS:.c=.o}}
+OBJS_B	= ${addprefix ${SRCS_B_DIR}, ${SRCS_B:.c=.o}}
 
 # /* ~~~~~~~ INCLUDING LIBFT ~~~~~~~ */
 LIBFT_DIR = ./lib/libft
@@ -50,14 +61,20 @@ ${NAME}:	${OBJS}
 			@make -C ${PRINTF_DIR} --no-print-directory
 			@make -C ${MLX_DIR} --no-print-directory
 			@${CC} ${CFLAGS} ${OBJS} ${PRINTF} ${LFLAGS} ${MFLAGS} -o ${NAME}
-			
+
+bonus:		${OBJS_B}
+			@make -C ${LIBFT_DIR} --no-print-directory
+			@make -C ${PRINTF_DIR} --no-print-directory
+			@make -C ${MLX_DIR} --no-print-directory
+			@${CC} ${CFLAGS} ${OBJS_B} ${PRINTF} ${LFLAGS} ${MFLAGS} -o ${NAME}
+		
 clean:
-			${RM} ${OBJS}
+			${RM} ${OBJS} ${OBJS_B}
 			@make clean -C lib/libft --no-print-directory
 			@make clean -C lib/ft_printf --no-print-directory
 
 fclean:		
-			${RM} ${OBJS}
+			${RM} ${OBJS} ${OBJS_B}
 			${RM} ${NAME}
 			@make fclean -C lib/libft --no-print-directory
 			@make fclean -C lib/ft_printf --no-print-directory
