@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 16:28:36 by mpignet           #+#    #+#             */
-/*   Updated: 2022/08/22 18:59:29 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/08/25 20:34:16 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,14 @@ typedef struct s_data {
 char	*get_next_line(int fd);
 int		parsing(t_data *data, char *path);
 void	hooks(t_data *data);
-void	init_img(t_data *data);
+int		init_img(t_data *data);
 void	put_elements(t_data *data);
 int		close_window(t_data *data);
 
 int		check_square(t_data *data);
 int		check_exit(t_data *data);
 int		check_walls(t_data *data);
+int		check_empty_lines(char *buff, int len);
 
 void	find_player(t_data *data, int *x, int *y);
 void	move(t_data *data, int keysym);

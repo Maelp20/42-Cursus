@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 16:28:31 by mpignet           #+#    #+#             */
-/*   Updated: 2022/08/23 15:39:29 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/08/25 14:51:33 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	put_window(t_data *data, int width, int height)
 		free(data->win);
 }
 
-void	init_img(t_data *data)
+int	init_img(t_data *data)
 {
 	int	n;
 
@@ -30,11 +30,14 @@ void	init_img(t_data *data)
 	data->player = mlx_xpm_file_to_image(data->mlx, PATH_PLAYER, &n, &n);
 	data->play_left = mlx_xpm_file_to_image(data->mlx, PATH_PLAY_LEFT, &n, &n);
 	data->enemy = mlx_xpm_file_to_image(data->mlx, PATH_ENEMY, &n, &n);
-	if (data->wall == NULL || data->coll == NULL)
-		ft_putstr_fd("Error\nFailed to load an image\n", 2);
+	if (data->wall == NULL || data->coll == NULL || data->exit == NULL
+		|| data->player == NULL || data->play_left == NULL
+		|| data->enemy == NULL)
+		return (ft_putstr_fd("Error\nFailed to load an image\n", 2), 1);
+	return (0);
 }
 
-void	init_nbr(t_data *data)
+int	init_nbr(t_data *data)
 {
 	int	n;
 
@@ -48,6 +51,11 @@ void	init_nbr(t_data *data)
 	data->nbr.seven = mlx_xpm_file_to_image(data->mlx, PATH_SEVEN, &n, &n);
 	data->nbr.eight = mlx_xpm_file_to_image(data->mlx, PATH_EIGHT, &n, &n);
 	data->nbr.nine = mlx_xpm_file_to_image(data->mlx, PATH_NINE, &n, &n);
+	if (!data->nbr.zero || !data->nbr.one || !data->nbr.two || !data->nbr.three
+		|| !data->nbr.four || !data->nbr.five || !data->nbr.six
+		|| !data->nbr.seven || !data->nbr.eight || !data->nbr.nine)
+		return (ft_putstr_fd("Error\nFailed to load an image\n", 2), 1);
+	return (0);
 }
 
 void	put_img(t_data *data, char type, int x, int y)

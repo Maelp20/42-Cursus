@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 16:28:36 by mpignet           #+#    #+#             */
-/*   Updated: 2022/08/23 15:39:51 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/08/25 14:06:07 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ typedef struct s_data {
 char	*get_next_line(int fd);
 int		parsing(t_data *data, char *path);
 void	hooks(t_data *data);
-void	init_img(t_data *data);
-void	init_nbr(t_data *data);
+int		init_img(t_data *data);
+int		init_nbr(t_data *data);
 void	put_elements(t_data *data);
 void	put_window(t_data *data, int width, int height);
 void	put_background(t_data *data, int j);

@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 12:58:51 by mpignet           #+#    #+#             */
-/*   Updated: 2022/08/22 19:00:45 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/08/25 20:15:38 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	init_block(t_data *data)
 	data->exit = NULL ;
 	data->player = NULL ;
 	data->play_left = NULL ;
+	data->map = NULL;
 	data->win_width = 0;
 	data->win_height = 0;
 	data->counter = 0;
@@ -80,6 +81,8 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		return (ft_putstr_fd("Error\nWrong number of arguments\n", 2), 1);
+	if (ft_strcmp((av[1] + ft_strlen(av[1]) - 4), ".ber"))
+		return (ft_putstr_fd("Error\nInvalid name file\n", 2), 1);
 	init_block(&data);
 	data.mlx = mlx_init();
 	if (data.mlx == NULL)
@@ -87,7 +90,8 @@ int	main(int ac, char **av)
 	if (parsing(&data, av[1]))
 		return (destroy_all(&data), 1);
 	put_window(&data, data.win_width, data.win_height);
-	init_img(&data);
+	if (init_img(&data))
+		return (destroy_all(&data), 1);
 	put_elements(&data);
 	hooks(&data);
 	mlx_loop(data.mlx);

@@ -6,12 +6,11 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/23 13:06:22 by mpignet           #+#    #+#              #
-#    Updated: 2022/08/23 15:23:21 by mpignet          ###   ########.fr        #
+#    Updated: 2022/08/25 19:03:07 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # /* ~~~~~~ SOURCES ~~~~~~ */
-SRCS_DIR = ./srcs/
 SRCS	= \
 			main.c\
 			put_elements.c\
@@ -20,7 +19,6 @@ SRCS	= \
 			parsing.c\
 			check_map.c\
 
-SRCS_B_DIR = ./srcs/bonus/
 SRCS_B	= \
 			main_bonus.c\
 			put_elements_bonus.c\
@@ -29,10 +27,14 @@ SRCS_B	= \
 			parsing_bonus.c\
 			check_map_bonus.c\
 			display_score_bonus.c\
-			
-OBJS	= ${addprefix ${SRCS_DIR}, ${SRCS:.c=.o}}
-OBJS_B	= ${addprefix ${SRCS_B_DIR}, ${SRCS_B:.c=.o}}
 
+SRCDIR		= srcs/
+SRCDIR_B	= srcs/bonus/
+OBJDIR 		= objs
+OBJS		= ${addprefix ${OBJDIR}/, ${SRCS:.c=.o}}
+OBJS_B		= ${addprefix ${OBJDIR}/, ${SRCS_B:.c=.o}}
+INC			= inc/so_long.h
+INC_B		= inc/so_long_bonus.h
 # /* ~~~~~~~ INCLUDING LIBFT ~~~~~~~ */
 LIBFT_DIR = ./lib/libft
 LIBFT = ${LIBFT_DIR}/libft.a
@@ -43,7 +45,7 @@ PRINTF = ${PRINTF_DIR}/libftprintf.a
 
 # /* ~~~~~~~ INCLUDING MINILIBX ~~~~~~~ */
 MLX_DIR = ./lib/minilibx-linux
-MLX = ${MLX_DIR}/libmlx.a
+MLX	= ${MLX_DIR}/libmlx.a
 
 # /* ~~~~~~~ COMPILING INFO ~~~~~~~ */
 
@@ -52,29 +54,40 @@ CFLAGS	= -g -Wall -Wextra -Werror
 MFLAGS	= -ldl -lmlx -L${MLX_DIR} -lm -lXext -lX11 -Imlx ${MLX}
 LFLAGS	= -L ${LIBFT_DIR} -lft
 NAME	= so_long
-RM		= rm -f
+RM		= rm -fd
 
 all:		${NAME}
 
-${NAME}:	${OBJS}
+${OBJDIR}/%.o : ${SRCDIR}%.c ${INC}
+				mkdir -p ${OBJDIR}
+				${CC} ${CFLAGS} -c $< -o $@
+
+${OBJDIR}/%.o : ${SRCDIR_B}%.c ${INC_B}
+				mkdir -p ${OBJDIR}
+				${CC} ${CFLAGS} -c $< -o $@
+
+${LIBFT} :
 			@make -C ${LIBFT_DIR} --no-print-directory
+			
+${PRINTF} :
 			@make -C ${PRINTF_DIR} --no-print-directory
+			
+${MLX} :	
 			@make -C ${MLX_DIR} --no-print-directory
+
+${NAME}:	${OBJS} ${LIBFT} ${PRINTF} ${MLX}
 			@${CC} ${CFLAGS} ${OBJS} ${PRINTF} ${LFLAGS} ${MFLAGS} -o ${NAME}
 
-bonus:		${OBJS_B}
-			@make -C ${LIBFT_DIR} --no-print-directory
-			@make -C ${PRINTF_DIR} --no-print-directory
-			@make -C ${MLX_DIR} --no-print-directory
-			@${CC} ${CFLAGS} ${OBJS_B} ${PRINTF} ${LFLAGS} ${MFLAGS} -o ${NAME}
-		
+bonus:		${OBJS_B} ${LIBFT} ${PRINTF} ${MLX}
+			@${CC} ${CFLAGS} ${OBJS_B} ${PRINTF} ${LFLAGS} ${MFLAGS} -o ${NAME} 
+
 clean:
-			${RM} ${OBJS} ${OBJS_B}
+			${RM} ${OBJS} ${OBJS_B} ${OBJDIR}
 			@make clean -C lib/libft --no-print-directory
 			@make clean -C lib/ft_printf --no-print-directory
 
 fclean:		
-			${RM} ${OBJS} ${OBJS_B}
+			${RM} ${OBJS} ${OBJS_B} ${OBJDIR}
 			${RM} ${NAME}
 			@make fclean -C lib/libft --no-print-directory
 			@make fclean -C lib/ft_printf --no-print-directory
