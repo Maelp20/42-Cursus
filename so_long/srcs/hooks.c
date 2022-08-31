@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 18:38:00 by mpignet           #+#    #+#             */
-/*   Updated: 2022/08/31 15:18:46 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/08/31 15:52:51 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	handle_no_event(void)
 	return (0);
 }
 
-static int	close_window(t_data *data)
+int	close_window(t_data *data)
 {
 	mlx_destroy_window(data->mlx, data->win);
 	data->win = 0;
