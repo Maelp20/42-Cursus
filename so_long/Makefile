@@ -6,7 +6,7 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/23 13:06:22 by mpignet           #+#    #+#              #
-#    Updated: 2022/08/31 15:38:35 by mpignet          ###   ########.fr        #
+#    Updated: 2022/08/31 16:06:11 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,6 +96,7 @@ fclean:
 			@make fclean -C lib/ft_printf --no-print-directory
 			@make clean -C lib/minilibx-linux --no-print-directory
 
-re:			fclean all
+re:			fclean
+			make all
 
 .PHONY: 	all clean fclean re

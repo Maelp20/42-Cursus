@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 12:58:51 by mpignet           #+#    #+#             */
-/*   Updated: 2022/08/31 15:27:21 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/08/31 16:06:46 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	main(int ac, char **av)
 	init_block(&data);
 	data.mlx = mlx_init();
 	if (data.mlx == NULL)
-		return (1);
+		return (ft_putstr_fd("Error\nMlx init failed\n", 2), 1);
 	if (parsing(&data, av[1]))
 		return (destroy_all(&data), 1);
 	put_window(&data, data.win_width, data.win_height);
