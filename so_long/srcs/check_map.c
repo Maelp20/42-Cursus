@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 17:39:04 by mpignet           #+#    #+#             */
-/*   Updated: 2022/08/25 20:35:33 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/08/31 14:55:51 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,15 +94,14 @@ int	check_square(t_data *data)
 	return (0);
 }
 
-int	check_empty_lines(char *buff, int len)
+int	check_empty_lines(char *line)
 {
 	int	i;
 
 	i = 1;
-	buff[len] = '\0';
-	while (buff[i])
+	while (line[i])
 	{
-		if (buff[i] == '\n' && buff[i - 1] == '\n')
+		if (line[i] == '\n' && line[i - 1] == '\n')
 			return (ft_putstr_fd("Error\nEmpty line in file\n", 2), 1);
 		i++;
 	}

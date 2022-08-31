@@ -6,13 +6,13 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 12:58:51 by mpignet           #+#    #+#             */
-/*   Updated: 2022/08/25 20:15:38 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/08/31 15:20:02 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-void	clear_array(t_data *data)
+static void	clear_array(t_data *data)
 {
 	int	i;
 
@@ -26,7 +26,7 @@ void	clear_array(t_data *data)
 	return ;
 }
 
-void	destroy_all(t_data *data)
+static void	destroy_all(t_data *data)
 {
 	if (data->background != NULL)
 		mlx_destroy_image(data->mlx, data->background);
@@ -51,14 +51,14 @@ void	destroy_all(t_data *data)
 	}
 }
 
-void	put_window(t_data *data, int width, int height)
+static void	put_window(t_data *data, int width, int height)
 {
 	data->win = mlx_new_window(data->mlx, width, height, "So long !");
 	if (data->win == NULL)
 		free(data->win);
 }
 
-void	init_block(t_data *data)
+static void	init_block(t_data *data)
 {
 	data->mlx = NULL ;
 	data->win = NULL ;

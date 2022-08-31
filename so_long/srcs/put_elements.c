@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 16:28:31 by mpignet           #+#    #+#             */
-/*   Updated: 2022/08/25 16:02:00 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/08/31 15:20:45 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	init_img(t_data *data)
 	return (0);
 }
 
-void	put_img(t_data *data, char type, int x, int y)
+static void	put_img(t_data *data, char type, int x, int y)
 {
 	if (type == '0')
 		mlx_put_image_to_window(data->mlx, data->win, data->background, x, y);

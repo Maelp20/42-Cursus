@@ -6,13 +6,13 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 12:25:22 by mpignet           #+#    #+#             */
-/*   Updated: 2022/08/22 19:02:26 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/08/31 15:20:30 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-void	move_up(t_data *data, int x, int y)
+static void	move_up(t_data *data, int x, int y)
 {
 	if (data->map[x - 1][y] == '0')
 	{
@@ -38,7 +38,7 @@ void	move_up(t_data *data, int x, int y)
 		put_elements(data);
 }
 
-void	move_down(t_data *data, int x, int y)
+static void	move_down(t_data *data, int x, int y)
 {
 	if (data->map[x + 1][y] == '0')
 	{
@@ -64,7 +64,7 @@ void	move_down(t_data *data, int x, int y)
 		put_elements(data);
 }
 
-void	move_left(t_data *data, int x, int y)
+static void	move_left(t_data *data, int x, int y)
 {
 	if (data->map[x][y - 1] == '0')
 	{
@@ -90,7 +90,7 @@ void	move_left(t_data *data, int x, int y)
 		put_elements(data);
 }
 
-void	move_right(t_data *data, int x, int y)
+static void	move_right(t_data *data, int x, int y)
 {
 	if (data->map[x][y + 1] == '0')
 	{

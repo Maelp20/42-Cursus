@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:38:46 by mpignet           #+#    #+#             */
-/*   Updated: 2022/08/25 20:34:29 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/08/31 15:08:59 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,57 +50,21 @@ static int	get_nb_coll(t_data *data)
 	return (nb);
 }
 
-static int	handle_read_err(int read)
-{
-	if (read == -1)
-		return (ft_putstr_fd("Error\nTrying to read an invalid file\n", 2), 1);
-	else if (read < 9)
-		return (ft_putstr_fd("Error\nMap is too small\n", 2), 1);
-	return (0);
-}
-
-static int	check_size(t_data *data)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (data->map[i])
-	{
-		j = 0;
-		while (data->map[i][j])
-		{
-			if (j > 79)
-				return (ft_putstr_fd("Error\nMap is too large\n", 2), 1);
-			j++;
-		}
-		i++;
-	}
-	if (i > 42)
-		return (ft_putstr_fd("Error\nMap is too long\n", 2), 1);
-	return (0);
-}
-
 int	parsing(t_data *data, char *path)
 {
-	int		fd;
-	char	*buff;
-	int		i;
+	int		len;
 
-	fd = open(path, O_RDONLY);
-	if (fd == -1)
-		return (ft_putstr_fd("Error\nTrying to open an invalid file\n", 2), 1);
-	buff = malloc(sizeof(char) * 100000);
-	if (!buff)
+	len = get_map_length(path);
+	if (len == -1)
 		return (1);
-	i = read(fd, buff, 100000);
-	if (handle_read_err(i) == 1 || check_empty_lines(buff, i) == 1)
-		return (free(buff), 1);
-	buff[i] = '\0';
-	data->map = ft_split(buff, '\n');
-	free(buff);
-	if (check_square(data) || check_exit(data) || check_walls(data)
-		|| check_size(data))
+	else if (len == 0)
+		return (ft_putstr_fd("Error\nMap is empty\n", 2), 1);
+	data->map = malloc(sizeof(char *) * (len + 1));
+	if (!data->map)
+		return (1);
+	if (init_map(data, path, 0))
+		return (1);
+	if (check_square(data) || check_exit(data) || check_walls(data))
 		return (1);
 	data->win_width = ft_strlen(data->map[0]) * 32;
 	data->win_height = get_height(data) * 32;

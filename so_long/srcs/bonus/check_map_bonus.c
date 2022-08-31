@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 17:39:04 by mpignet           #+#    #+#             */
-/*   Updated: 2022/08/25 15:19:09 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/08/31 15:39:09 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,20 @@ int	check_square(t_data *data)
 	{
 		if (len != ft_strlen(data->map[i]))
 			return (ft_putstr_fd("Error\nMap is not a rectangle\n", 2), 1);
+		i++;
+	}
+	return (0);
+}
+
+int	check_empty_lines(char *line)
+{
+	int	i;
+
+	i = 1;
+	while (line[i])
+	{
+		if (line[i] == '\n' && line[i - 1] == '\n')
+			return (ft_putstr_fd("Error\nEmpty line in file\n", 2), 1);
 		i++;
 	}
 	return (0);

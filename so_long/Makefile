@@ -6,7 +6,7 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/23 13:06:22 by mpignet           #+#    #+#              #
-#    Updated: 2022/08/25 19:03:07 by mpignet          ###   ########.fr        #
+#    Updated: 2022/08/31 15:38:35 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRCS	= \
 			hooks.c\
 			parsing.c\
 			check_map.c\
+			utils.c\
 
 SRCS_B	= \
 			main_bonus.c\
@@ -27,6 +28,7 @@ SRCS_B	= \
 			parsing_bonus.c\
 			check_map_bonus.c\
 			display_score_bonus.c\
+			utils_bonus.c\
 
 SRCDIR		= srcs/
 SRCDIR_B	= srcs/bonus/
@@ -35,6 +37,7 @@ OBJS		= ${addprefix ${OBJDIR}/, ${SRCS:.c=.o}}
 OBJS_B		= ${addprefix ${OBJDIR}/, ${SRCS_B:.c=.o}}
 INC			= inc/so_long.h
 INC_B		= inc/so_long_bonus.h
+
 # /* ~~~~~~~ INCLUDING LIBFT ~~~~~~~ */
 LIBFT_DIR = ./lib/libft
 LIBFT = ${LIBFT_DIR}/libft.a
