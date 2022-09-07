@@ -6,10 +6,11 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/03 16:11:03 by mpignet           #+#    #+#              #
-#    Updated: 2022/05/12 12:25:44 by mpignet          ###   ########.fr        #
+#    Updated: 2022/09/07 14:38:19 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+# /* ~~~~~~ SOURCES ~~~~~~ */
 SRCS	=    \
                                 ft_isalpha.c\
 								ft_memchr.c\
@@ -44,46 +45,53 @@ SRCS	=    \
 								ft_split.c\
 								ft_strlcat.c\
 								ft_strnstr.c\
-								ft_toupper.c \
-
-SRCS_B	=    \
+								ft_toupper.c\
                                 ft_lstnew.c\
 								ft_lstiter.c\
 								ft_lstlast.c\
 								ft_lstadd_back.c\
-								ft_lstnew.c\
 								ft_lstadd_front.c\
 								ft_lstsize.c\
 								ft_lstdelone.c\
 								ft_lstclear.c\
 								ft_lstmap.c\
-							
-OBJS	= ${SRCS:.c=.o}
+								get_next_line.c\
+								get_next_line_utils.c\
+								ft_printf.c\
+								ft_printhexa.c\
+								ft_printnbr_unsigned.c\
+								ft_printnbr.c\
+								ft_printptr.c\
+								ft_utility_printf.c\
 
-OBJS_B	= ${SRCS_B:.c=.o}
+SRCDIR		= srcs/
+OBJDIR 		= objs
+OBJS		= ${addprefix ${OBJDIR}/, ${SRCS:.c=.o}}
+INC			= inc/libft.h
 
+# /* ~~~~~~~ COMPILING INFO ~~~~~~~ */
+CC		= gcc
+CFLAGS	= -g -Wall -Wextra -Werror
 NAME	= libft.a
+RM		= rm -fd
 
-CC	= gcc
+all:		${NAME}
 
-CFLAGS	= -Wall -Wextra -Werror
+${OBJDIR}/%.o : ${SRCDIR}%.c ${INC}
+				mkdir -p ${OBJDIR}
+				${CC} ${CFLAGS} -c $< -o $@
 
-RM	= rm -f
-
-$(NAME):	${OBJS}
+${NAME}:	${OBJS}
 			ar rcs ${NAME} ${OBJS}
 
-bonus:		${OBJS_B}
-			ar rcs ${NAME} ${OBJS_B}
-
-all: 		$(NAME)
-
 clean:
-			${RM} ${OBJS} ${OBJS_B}
+			${RM} ${OBJS} ${OBJDIR}
 
-fclean:		clean
+fclean:		
+			${RM} ${OBJS} ${OBJDIR}
 			${RM} ${NAME}
 
-re: 		fclean all
+re:			fclean
+			make all
 
-.PHONY: all clean fclean re ${NAME}
+.PHONY: 	all clean fclean re
