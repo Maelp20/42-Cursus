@@ -6,13 +6,14 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/06 15:45:58 by mpignet           #+#    #+#              #
-#    Updated: 2022/09/07 16:44:47 by mpignet          ###   ########.fr        #
+#    Updated: 2022/09/12 17:40:05 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # /* ~~~~~~ SOURCES ~~~~~~ */
 SRCS	= \
 			main.c\
+			utils.c\
 
 SRCS_B	= \
 
@@ -48,22 +49,22 @@ ${OBJDIR}/%.o : ${SRCDIR_B}%.c ${INC_B}
 				${CC} ${CFLAGS} -c $< -o $@
 
 ${LIBFT} :
-			@make -C ${LIBFT_DIR} --no-print-directory
+			make -C ${LIBFT_DIR} --no-print-directory
 
 ${NAME}:	${OBJS} ${LIBFT}
-			@${CC} ${CFLAGS} ${OBJS} ${LFLAGS} -o ${NAME}
+			${CC} ${CFLAGS} ${OBJS} ${LFLAGS} -o ${NAME}
 
 bonus:		${OBJS_B} ${LIBFT}
-			@${CC} ${CFLAGS} ${OBJS_B} ${LFLAGS} -o ${NAME} 
+			${CC} ${CFLAGS} ${OBJS_B} ${LFLAGS} -o ${NAME} 
 
 clean:
 			${RM} ${OBJS} ${OBJS_B} ${OBJDIR}
-			@make clean -C ${LIBFT_DIR} --no-print-directory
+			make clean -C ${LIBFT_DIR} --no-print-directory
 
 fclean:		
 			${RM} ${OBJS} ${OBJS_B} ${OBJDIR}
 			${RM} ${NAME}
-			@make fclean -C ${LIBFT_DIR} --no-print-directory
+			make fclean -C ${LIBFT_DIR} --no-print-directory
 
 re:			fclean
 			make all

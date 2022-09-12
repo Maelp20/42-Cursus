@@ -6,41 +6,42 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:31:08 by mpignet           #+#    #+#             */
-/*   Updated: 2022/08/01 17:16:06 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/09/07 14:49:44 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-/*
-void printlist(t_list *lst, char id)
-{
-    if (lst == NULL)
-    {
-       exit(EXIT_FAILURE) ;
-    }
+#include <stdio.h>
 
-    t_list	*print;
+// void printlist(t_list *lst, char id)
+// {
+//     if (lst == NULL)
+//     {
+//        exit(EXIT_FAILURE) ;
+//     }
 
-	print = lst;
+//     t_list	*print;
 
-	if (id == 'a')
-		IMPRIMER("Stack a : \n");
-	else if (id == 'b')
-		IMPRIMER("Stack b : \n");
-	else
-		IMPRIMER("Stack : \n");
-    while (print)
-    {
-        IMPRIMER("content = %d /", print->content);
-		IMPRIMER("index = %d /", print->index);
-		IMPRIMER("pos = %d /", print->pos);
-		IMPRIMER("target_pos = %d /", print->target_pos);
-		IMPRIMER("cost_a = %d /", print->cost_a);
-		IMPRIMER("cost_b = %d \n", print->cost_b);
-        print = print->next;
-    }
-}
-*/
+// 	print = lst;
+
+// 	if (id == 'a')
+// 		IMPRIMER("Stack a : \n");
+// 	else if (id == 'b')
+// 		IMPRIMER("Stack b : \n");
+// 	else
+// 		IMPRIMER("Stack : \n");
+//     while (print)
+//     {
+//         IMPRIMER("content = %d /", print->content);
+// 		IMPRIMER("index = %d /", print->index);
+// 		IMPRIMER("pos = %d /", print->pos);
+// 		IMPRIMER("target_pos = %d /", print->target_pos);
+// 		IMPRIMER("cost_a = %d /", print->cost_a);
+// 		IMPRIMER("cost_b = %d \n", print->cost_b);
+//         print = print->next;
+//     }
+// }
+
 
 static void	begin(t_list **stack_a, t_list **stack_b)
 {
@@ -91,6 +92,7 @@ int	main(int ac, char **av)
 			sort_3(&stack_a, 'a');
 	else
 		begin(&stack_a, &stack_b);
+	printlist(stack_a, 'a');
 	clear_list(&stack_a);
 	return (0);
 }
