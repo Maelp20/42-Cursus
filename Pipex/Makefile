@@ -1,0 +1,71 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/09/06 15:45:58 by mpignet           #+#    #+#              #
+#    Updated: 2022/09/07 16:44:47 by mpignet          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+# /* ~~~~~~ SOURCES ~~~~~~ */
+SRCS	= \
+			main.c\
+
+SRCS_B	= \
+
+SRCDIR		= srcs/
+SRCDIR_B	= srcs/bonus/
+OBJDIR 		= objs
+OBJS		= ${addprefix ${OBJDIR}/, ${SRCS:.c=.o}}
+OBJS_B		= ${addprefix ${OBJDIR}/, ${SRCS_B:.c=.o}}
+INC			= inc/pipex.h
+INC_B		= inc/pipex_bonus.h
+
+# /* ~~~~~~~ INCLUDING LIBFT ~~~~~~~ */
+LIBFT_DIR = ./libft
+LIBFT = ${LIBFT_DIR}/libft.a
+
+
+# /* ~~~~~~~ COMPILING INFO ~~~~~~~ */
+
+CC		= gcc
+CFLAGS	= -g -Wall -Wextra -Werror
+LFLAGS	= -L ${LIBFT_DIR} -lft
+NAME	= pipex
+RM		= rm -fd
+
+all:		${NAME}
+
+${OBJDIR}/%.o : ${SRCDIR}%.c ${INC}
+				mkdir -p ${OBJDIR}
+				${CC} ${CFLAGS} -c $< -o $@
+
+${OBJDIR}/%.o : ${SRCDIR_B}%.c ${INC_B}
+				mkdir -p ${OBJDIR}
+				${CC} ${CFLAGS} -c $< -o $@
+
+${LIBFT} :
+			@make -C ${LIBFT_DIR} --no-print-directory
+
+${NAME}:	${OBJS} ${LIBFT}
+			@${CC} ${CFLAGS} ${OBJS} ${LFLAGS} -o ${NAME}
+
+bonus:		${OBJS_B} ${LIBFT}
+			@${CC} ${CFLAGS} ${OBJS_B} ${LFLAGS} -o ${NAME} 
+
+clean:
+			${RM} ${OBJS} ${OBJS_B} ${OBJDIR}
+			@make clean -C ${LIBFT_DIR} --no-print-directory
+
+fclean:		
+			${RM} ${OBJS} ${OBJS_B} ${OBJDIR}
+			${RM} ${NAME}
+			@make fclean -C ${LIBFT_DIR} --no-print-directory
+
+re:			fclean
+			make all
+
+.PHONY: 	all clean fclean re
