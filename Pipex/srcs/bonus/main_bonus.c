@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:42:39 by mpignet           #+#    #+#             */
-/*   Updated: 2022/09/12 18:09:03 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/09/12 18:08:37 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/pipex.h"
+#include "../../inc/pipex_bonus.h"
 
 static char	*ft_get_path_line(char **envp)
 {
@@ -83,7 +83,7 @@ int	main(int ac, char **av, char **envp)
 {
 	t_data	data;
 
-	if (ac != 5)
+	if (ac < 5)
 		return (ft_putstr_fd("Wrong number of arguments\n", 2), 1);
 	if (ft_opens(&data, av))
 		return (ft_putstr_fd("Failed opening a file\n", 2), 1);

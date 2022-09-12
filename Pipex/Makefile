@@ -6,7 +6,7 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/06 15:45:58 by mpignet           #+#    #+#              #
-#    Updated: 2022/09/12 17:40:05 by mpignet          ###   ########.fr        #
+#    Updated: 2022/09/12 18:01:15 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,8 @@ SRCS	= \
 			utils.c\
 
 SRCS_B	= \
+			main_bonus.c\
+			utils_bonus.c\
 
 SRCDIR		= srcs/
 SRCDIR_B	= srcs/bonus/
@@ -70,3 +72,5 @@ re:			fclean
 			make all
 
 .PHONY: 	all clean fclean re
+
+.SILENT:
