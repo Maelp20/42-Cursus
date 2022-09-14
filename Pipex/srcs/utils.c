@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:19:08 by mpignet           #+#    #+#             */
-/*   Updated: 2022/09/12 17:50:20 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/09/14 16:44:42 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,31 @@ void	ft_close_n_wait(t_data *data)
 	close(data->fd_file2);
 	waitpid(data->pid1, &status, 0);
 	waitpid(data->pid2, &status, 0);
+}
+
+void	ft_free_array(char **tab)
+{
+	size_t	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}
+
+void	ft_free_close(t_data *data)
+{
+	if (data->options)
+		ft_free_array(data->options);
+	if (data->envp)
+		ft_free_array(data->envp);
+	if (data->cmd_path)
+		free(data->cmd_path);
+	close(data->pipefd[0]);
+	close(data->pipefd[1]);
+	close(data->fd_file1);
+	close(data->fd_file2);
 }

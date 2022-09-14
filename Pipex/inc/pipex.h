@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:42:55 by mpignet           #+#    #+#             */
-/*   Updated: 2022/09/12 17:50:39 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/09/13 17:09:43 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ typedef struct s_data
 
 int		ft_opens(t_data *data, char **av);
 void	ft_close_n_wait(t_data *data);
+void	ft_free_close(t_data *data);
 
 #endif
