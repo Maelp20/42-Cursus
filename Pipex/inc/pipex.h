@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:42:55 by mpignet           #+#    #+#             */
-/*   Updated: 2022/09/14 17:28:26 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/09/15 16:55:48 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_data
 
 	char	**options;
 	char	**envp;
+	char	**paths;
 	char	*cmd_path;
 }			t_data;
 
@@ -37,5 +38,7 @@ void	ft_wait(t_data *data);
 void	ft_free_array(char **tab);
 void	ft_free_close(t_data *data);
 void	init_data(t_data *data);
+int		check_absolute_path(char *cmd);
+void	add_slash(t_data *data);
 
 #endif

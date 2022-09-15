@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:19:08 by mpignet           #+#    #+#             */
-/*   Updated: 2022/09/14 17:28:15 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/09/15 14:28:59 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,11 @@ void	init_data(t_data *data)
 	data->fd_file1 = 0;
 	data->fd_file2 = 0;
 	data->pipefd[2] = 0;
-
 	data->pid1 = 0;
 	data->pid2 = 0;
-
 	data->options = NULL;
 	data->envp = NULL;
+	data->paths = NULL;
 	data->cmd_path = NULL;
 }
 
