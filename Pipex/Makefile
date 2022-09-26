@@ -6,7 +6,7 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/06 15:45:58 by mpignet           #+#    #+#              #
-#    Updated: 2022/09/15 17:15:18 by mpignet          ###   ########.fr        #
+#    Updated: 2022/09/26 13:57:31 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,6 @@
 SRCS	= \
 			main.c\
 			utils.c\
-			utils_2.c\
 
 SRCS_B	= \
 			main_bonus.c\
@@ -37,7 +36,7 @@ LIBFT = ${LIBFT_DIR}/libft.a
 # /* ~~~~~~~ COMPILING INFO ~~~~~~~ */
 
 CC		= gcc
-CFLAGS	= -g -Wall -Wextra
+CFLAGS	= -g -Wall -Wextra -Werror
 LFLAGS	= -L ${LIBFT_DIR} -lft
 NAME	= pipex
 RM		= rm -fd
@@ -52,7 +51,7 @@ ${OBJDIR}/%.o : ${SRCDIR_B}%.c ${INC_B}
 				mkdir -p ${OBJDIR}
 				${CC} ${CFLAGS} -c $< -o $@
 
-${LIBFT} :
+${LIBFT} :	
 			make -C ${LIBFT_DIR} --no-print-directory
 
 ${NAME}:	${OBJS} ${LIBFT}
