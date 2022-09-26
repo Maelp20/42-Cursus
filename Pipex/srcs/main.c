@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:42:39 by mpignet           #+#    #+#             */
-/*   Updated: 2022/09/26 13:56:47 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/09/26 14:07:13 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static int	ft_exec_cmd(int in, int out, t_data *data, char *cmd)
 		return (perror("Malloc"), ft_free_close(data), 1);
 	if (ft_strchr(data->options[0], '/'))
 	{
-		if (execve(data->options[0], data->options, data->envp))
+		if (execve(data->options[0], data->options, data->envp) == -1)
 			return (perror("Execve"), ft_free_close(data), 1);
 		ft_free_close(data);
 		return (0);
@@ -122,5 +122,5 @@ int	main(int ac, char **av, char **envp)
 	else if (data.pid2 == 0)
 		if (ft_exec_cmd(data.pipefd[0], data.fd_file2, &data, av[3]))
 			return (ft_free_close(&data), 1);
-	return (ft_free_close(&data), ft_wait(&data), 0);
+	return (ft_wait(&data), ft_free_close(&data), 0);
 }

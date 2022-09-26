@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 12:04:54 by mpignet           #+#    #+#             */
-/*   Updated: 2022/05/20 16:24:41 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/09/14 16:01:46 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ char	*ft_readnfill(int fd, char *save)
 
 char	*get_next_line(int fd)
 {
-	static char	*save;
+	static char	save[BUFFER_SIZE + 1];
 	char		*line;
 
 	if ((fd < 0 || fd >= FOPEN_MAX) || BUFFER_SIZE < 1)
