@@ -6,14 +6,19 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:19:08 by mpignet           #+#    #+#             */
-/*   Updated: 2022/09/26 13:58:08 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/09/26 17:15:01 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/pipex.h"
 
-void	init_data(t_data *data, char **av)
+void	init_data(t_data *data, int ac, char **av)
 {
+	if (ac != 5)
+	{
+		ft_putstr_fd("Wrong number of arguments\n", 2);
+		exit (1);
+	}
 	data->fd_file1 = 0;
 	data->fd_file2 = 0;
 	data->pipefd[0] = 0;

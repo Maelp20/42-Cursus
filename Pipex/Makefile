@@ -6,7 +6,7 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/06 15:45:58 by mpignet           #+#    #+#              #
-#    Updated: 2022/09/26 13:57:31 by mpignet          ###   ########.fr        #
+#    Updated: 2022/09/26 15:37:31 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,6 @@ SRCS	= \
 SRCS_B	= \
 			main_bonus.c\
 			utils_bonus.c\
-			utils_2_bonus.c\
 
 SRCDIR		= srcs/
 SRCDIR_B	= srcs/bonus/
@@ -54,7 +53,7 @@ ${OBJDIR}/%.o : ${SRCDIR_B}%.c ${INC_B}
 ${LIBFT} :	
 			make -C ${LIBFT_DIR} --no-print-directory
 
-${NAME}:	${OBJS} ${LIBFT}
+${NAME}:	${OBJS}	${LIBFT}
 			${CC} ${CFLAGS} ${OBJS} ${LFLAGS} -o ${NAME}
 
 bonus:		${OBJS_B} ${LIBFT}
