@@ -6,25 +6,46 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:19:08 by mpignet           #+#    #+#             */
-/*   Updated: 2022/09/26 17:17:09 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/09/27 17:56:57 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/pipex_bonus.h"
 
+static int	init_pipefd(t_data *data, int ac, char **av)
+{
+	int	i;
+
+	i = 0;
+	data->pipefd = malloc (sizeof(int *) * (ac - 1));
+	if (!data->pipefd)
+		return (ft_free_int_array(data->pipefd, 0), 1);
+	while(i < (ac - 2))
+	{
+		data->pipefd[i] = malloc (sizeof(int) * 2);
+		if (!data->pipefd[i])
+			return (ft_free_int_array(data->pipefd, i), 1);
+		data->pipefd[i][0] = 0;
+		data->pipefd[i][1] = 0;
+		i++;
+	}
+	data->pipefd[i] = NULL;
+	return (0);
+}
+
 void	init_data(t_data *data, int ac, char **av)
 {
-	if (ac != 5)
+	if (ac < 5)
 	{
-		ft_putstr_fd("Wrong number of arguments\n", 2);
+		ft_putstr_fd("Not enough arguments\n", 2);
 		exit (1);
 	}
 	data->fd_file1 = 0;
 	data->fd_file2 = 0;
-	data->pipefd[0] = 0;
-	data->pipefd[1] = 0;
-	data->pid1 = 0;
-	data->pid2 = 0;
+	data->child = 0;
+	data->nb_cmds = 0;
+	init_pipefd(data->pipefd, ac , av);
+	data->pid = 0;
 	data->options = NULL;
 	data->envp = NULL;
 	data->paths = NULL;
@@ -41,11 +62,10 @@ void	ft_wait(t_data *data)
 {
 	int	status;
 
-	waitpid(data->pid1, &status, 0);
-	waitpid(data->pid2, &status, 0);
+	waitpid(data->pid, &status, 0);
 }
 
-void	ft_free_array(char **tab)
+void	ft_free_array(void **tab)
 {
 	size_t	i;
 
@@ -60,14 +80,19 @@ void	ft_free_array(char **tab)
 
 void	ft_free_close(t_data *data)
 {
+	int	i;
+
+	i = 0;
 	if (data->options)
 		ft_free_array(data->options);
 	if (data->cmd_path)
 		free(data->cmd_path);
-	if (data->pipefd[0] > -1)
-		close(data->pipefd[0]);
-	if (data->pipefd[1] > -1)
-		close(data->pipefd[1]);
+	while (i < data->nb_cmds)
+	{	
+		if (data->pipefd[i] > -1)
+			close(data->pipefd[i]);
+		i++;
+	}
 	if (data->fd_file1 > -1)
 		close(data->fd_file1);
 	if (data->fd_file2 > -1)

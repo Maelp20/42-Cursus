@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:42:55 by mpignet           #+#    #+#             */
-/*   Updated: 2022/09/26 17:16:17 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/09/27 17:55:35 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@ typedef struct s_data
 {
 	int		fd_file1;
 	int		fd_file2;
-	int		pipefd[2];	
+	int		child;
+	int		*nb_cmds;
+	int		**pipefd;
 
-	pid_t	pid1;
-	pid_t	pid2;
+	pid_t	pid;
 
 	char	**options;
 	char	**envp;
@@ -35,9 +36,10 @@ typedef struct s_data
 }			t_data;
 
 void	ft_wait(t_data *data);
-void	ft_free_array(char **tab);
+void	ft_free_array(void **tab);
 void	ft_free_close(t_data *data);
 void	init_data(t_data *data, int ac, char **av);
 int		add_slash(t_data *data);
+char	*ft_get_path(t_data *data);
 
 #endif

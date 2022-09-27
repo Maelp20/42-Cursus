@@ -6,70 +6,11 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:42:39 by mpignet           #+#    #+#             */
-/*   Updated: 2022/09/26 17:16:34 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/09/27 18:08:39 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/pipex_bonus.h"
-
-static char	*ft_get_path_line(char **envp)
-{
-	char	*path_line;
-	int		i;
-
-	i = 0;
-	while (envp[i])
-	{
-		path_line = ft_strnstr(envp[i], "PATH=", 5);
-		if (path_line)
-		{
-			path_line = ft_substr(envp[i], 5, ft_strlen(envp[i]));
-			if (!path_line)
-				return (perror("Malloc"), NULL);
-			break ;
-		}
-		i++;
-	}
-	return (path_line);
-}
-
-static char	*ft_check_access(char *cmd, char **paths)
-{
-	char	*cmd_path;
-	int		i;
-
-	i = 0;
-	while (paths[i])
-	{
-		cmd_path = ft_strjoin(paths[i], cmd);
-		if (!cmd_path)
-			return (perror("Malloc"), NULL);
-		if (access(cmd_path, F_OK | X_OK) == 0)
-			return (cmd_path);
-		free(cmd_path);
-		i++;
-	}
-	return (ft_putstr_fd("Access: command not found", 2), NULL);
-}
-
-static char	*ft_get_path(t_data *data)
-{
-	char	*path_line;
-	char	*cmd_path;
-
-	path_line = ft_get_path_line(data->envp);
-	if (!path_line)
-		return (NULL);
-	data->paths = ft_split(path_line, ':');
-	if (!data->paths)
-		return (free(path_line), NULL);
-	if (add_slash(data))
-		return (free(path_line), ft_free_array(data->paths), NULL);
-	cmd_path = ft_check_access(data->options[0], data->paths);
-	if (!cmd_path)
-		return (free(path_line), ft_free_array(data->paths), NULL);
-	return (free(path_line), ft_free_array(data->paths), cmd_path);
-}
 
 static int	ft_exec_cmd(int in, int out, t_data *data, char *cmd)
 {
@@ -98,6 +39,17 @@ static int	ft_exec_cmd(int in, int out, t_data *data, char *cmd)
 	return (perror("Execve"), ft_free_close(data), 1);
 }
 
+int	child(t_data *data, char **av)
+{
+	if (data->child == 0)
+		ft_exec_cmd(data->fd_file1, data->pipefd[1][1], &data, av[data->child + 2]);
+	else if (data->child == data->nb_cmds)
+		ft_exec_cmd(data->pipefd[2 * data->child - 2], data->fd_file2, &data, av[data->child + 2]);
+	else
+		ft_exec_cmd(data->pipefd[2 * data->child - 2], data->pipefd[2 * data->child + 1], &data, av[data.child + 2]);
+	ft_free_close(&data);
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	t_data	data;
@@ -106,22 +58,16 @@ int	main(int ac, char **av, char **envp)
 	if (pipe(data.pipefd) == -1)
 		return (perror("Pipe"), ft_free_close(&data), 1);
 	data.envp = envp;
-	data.pid1 = fork();
-	if (data.pid1 == -1)
-		return (perror("Fork"), ft_free_close(&data), 1);
-	else if (data.pid1 == 0)
+	data.nb_cmds = ac - 3;
+	while (data.child < data.nb_cmds)
 	{
-		if (data.fd_file1 > 0)
-			ft_exec_cmd(data.fd_file1, data.pipefd[1], &data, av[2]);
-	}
-	else
-	{
-		data.pid2 = fork();
-		if (data.pid2 == -1)
-			return (perror("Fork"), 1);
-		else if (data.pid2 == 0)
-			if (data.fd_file2 > 0)
-				ft_exec_cmd(data.pipefd[0], data.fd_file2, &data, av[3]);
-		return (ft_free_close(&data), ft_wait(&data), 0);
+		data.pid = fork();
+		if (data.pid == -1)
+			return (perror("Fork"), ft_free_close(&data), 1);
+		else if (data.pid == 0)
+			child(&data, av);
+		else
+			data.child++;
+			return (ft_free_close(&data), ft_wait(&data), 0);
 	}
 }
