@@ -6,7 +6,7 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/06 15:45:58 by mpignet           #+#    #+#              #
-#    Updated: 2022/09/27 13:37:20 by mpignet          ###   ########.fr        #
+#    Updated: 2022/09/28 15:26:02 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS_B	= \
 			main_bonus.c\
 			utils_bonus.c\
 			utils_2_bonus.c\
+			init_bonus.c\
 
 SRCDIR		= srcs/
 SRCDIR_B	= srcs/bonus/
