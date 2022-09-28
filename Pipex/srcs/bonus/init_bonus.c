@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:24:37 by mpignet           #+#    #+#             */
-/*   Updated: 2022/09/28 16:54:50 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/09/28 18:53:35 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ static int	init_pipefd(t_data *d, int ac)
 		d->pipefd[i] = malloc (sizeof(int) * 2);
 		if (!d->pipefd[i])
 			return (perror("Malloc"), ft_free_array((void **)d->pipefd), 1);
-		d->pipefd[i][0] = 0;
-		d->pipefd[i][1] = 0;
 		i++;
 	}
 	d->pipefd[i] = NULL;

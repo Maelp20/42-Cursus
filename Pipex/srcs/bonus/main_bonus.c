@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:42:39 by mpignet           #+#    #+#             */
-/*   Updated: 2022/09/28 17:03:34 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/09/28 19:23:00 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,13 @@ static int	ft_exec_cmd(int in, int out, t_data *d, char *cmd)
 		return (perror("1st dup2"), ft_close_pipes(d), ft_free_close(d), 1);
 	if (dup2(out, STDOUT_FILENO) == -1)
 		return (perror("2nd dup2"), ft_close_pipes(d), ft_free_close(d), 1);
-	ft_close_fds(d);
+	// ft_close_fds(d);
+	// if (d->child != 0)
+	// 	close(d->pipefd[d->child -1][0]);
+	// if (d->child != d->nb_cmds - 1)
+	// 	close(d->pipefd[d->child][1]);
+	// close(d->fd_file1);
+	// close(d->fd_file2);
 	d->options = ft_split(cmd, ' ');
 	if (!d->options)
 		return (perror("Malloc"), ft_close_pipes(d), ft_free_close(d), 1);
@@ -47,14 +53,14 @@ void	child(t_data *d, char **av)
 		// close(d->pipefd[0][0]);
 		ft_exec_cmd(d->fd_file1, d->pipefd[0][1], d, av[d->child + 2]);
 	}
-	else if (d->child == d->nb_cmds)
+	else if (d->child == d->nb_cmds - 1)
 	{
 		// while (++i < d->child)
 		// {
 		// 	close(d->pipefd[i][0]);
 		// 	close(d->pipefd[i][1]);
 		// }
-		close(d->pipefd[d->child][1]);
+		// close(d->pipefd[d->child][1]);
 		ft_exec_cmd(d->pipefd[d->child - 1][0], d->fd_file2, d,
 					 av[d->child + 2]);	
 	}
@@ -81,7 +87,7 @@ int	main(int ac, char **av, char **envp)
 		return (1);
 	d.envp = envp;
 	d.nb_cmds = ac - 3;
-	while (d.child < d.nb_cmds - 1)
+	while (d.child < d.nb_cmds)
 	{
 		ft_printf("Child in main : %d\n", d.child);
 		d.pids[d.child] = fork();
