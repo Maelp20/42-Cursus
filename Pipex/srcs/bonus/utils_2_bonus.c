@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 13:23:17 by mpignet           #+#    #+#             */
-/*   Updated: 2022/09/27 17:55:00 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/09/28 12:29:37 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,34 +52,21 @@ static char	*ft_check_access(char *cmd, char **paths)
 	return (ft_putstr_fd("Access: command not found", 2), NULL);
 }
 
-char	*ft_get_path(t_data *data)
+char	*ft_get_path(t_data *d)
 {
 	char	*path_line;
 	char	*cmd_path;
 
-	path_line = ft_get_path_line(data->envp);
+	path_line = ft_get_path_line(d->envp);
 	if (!path_line)
 		return (NULL);
-	data->paths = ft_split(path_line, ':');
-	if (!data->paths)
+	d->paths = ft_split(path_line, ':');
+	if (!d->paths)
 		return (free(path_line), NULL);
-	if (add_slash(data))
-		return (free(path_line), ft_free_array(data->paths), NULL);
-	cmd_path = ft_check_access(data->options[0], data->paths);
+	if (add_slash(d))
+		return (free(path_line), ft_free_array((void **)d->paths), NULL);
+	cmd_path = ft_check_access(d->options[0], d->paths);
 	if (!cmd_path)
-		return (free(path_line), ft_free_array(data->paths), NULL);
-	return (free(path_line), ft_free_array(data->paths), cmd_path);
-}
-
-void	ft_free_int_array(int **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
+		return (free(path_line), ft_free_array((void **)d->paths), NULL);
+	return (free(path_line), ft_free_array((void **)d->paths), cmd_path);
 }
