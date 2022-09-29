@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 13:23:17 by mpignet           #+#    #+#             */
-/*   Updated: 2022/09/29 17:39:33 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/09/29 17:50:10 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static char	*ft_check_access(char *cmd, char **paths)
 		free(cmd_path);
 		i++;
 	}
-	return (ft_putstr_fd("access: command not found", 2), NULL);
+	return (perror("access"), NULL);
 }
 
 char	*ft_get_path(t_data *d)
@@ -73,11 +73,17 @@ char	*ft_get_path(t_data *d)
 
 void	exit_error(char *err, t_data *d)
 {
+	if (!err)
+	{
+		ft_free_close(d);
+		free(d->pids);
+		exit(5);
+	}
 	ft_free_close(d);
 	free(d->pids);
+	perror(err);
 	if (!err)
 		exit(5);
-	perror(err);
 	if (ft_strncmp(err, "dup2", 5))
 		exit(1);
 	else if (ft_strncmp(err, "malloc", 7))
