@@ -6,34 +6,35 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:24:37 by mpignet           #+#    #+#             */
-/*   Updated: 2022/09/28 18:53:35 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/09/29 14:34:53 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/pipex_bonus.h"
 
-static int	init_pipefd(t_data *d, int ac)
+static int	init_pipefd(t_data *d)
 {
 	int	i;
 
 	i = 0;
-	d->pipefd = malloc (sizeof(int *) * (ac - 1));
+	d->pipefd = malloc (sizeof(int *) * (d->nb_cmds));
 	if (!d->pipefd)
 		return (perror("Malloc"), 1);
-	while(i < (ac - 2))
+	while(i < (d->nb_cmds - 1))
 	{
 		d->pipefd[i] = malloc (sizeof(int) * 2);
 		if (!d->pipefd[i])
 			return (perror("Malloc"), ft_free_array((void **)d->pipefd), 1);
+		pipe(d->pipefd[i]);
 		i++;
 	}
 	d->pipefd[i] = NULL;
 	return (0);
 }
 
-static int	init_pids(t_data *d, int ac)
+static int	init_pids(t_data *d)
 {
-	d->pids = malloc (sizeof(int) * (ac - 3));
+	d->pids = malloc (sizeof(int) * (d->nb_cmds));
 	if (!d->pids)
 		return(perror("Malloc"), 1);
 	return (0);
@@ -61,10 +62,10 @@ int	init_data(t_data *d, int ac, char **av)
 	d->fd_file1 = 0;
 	d->fd_file2 = 0;
 	d->child = 0;
-	d->nb_cmds = 0;
-	if(init_pids(d, ac))
+	d->nb_cmds = ac - 3;
+	if(init_pids(d))
 		return (1);
-	if (init_pipefd(d, ac))
+	if (init_pipefd(d))
 		return (free(d->pids), 2);
 	d->options = NULL;
 	d->envp = NULL;

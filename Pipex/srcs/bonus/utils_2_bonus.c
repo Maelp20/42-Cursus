@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 13:23:17 by mpignet           #+#    #+#             */
-/*   Updated: 2022/09/28 12:29:37 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/09/29 15:31:08 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char	*ft_get_path_line(char **envp)
 		{
 			path_line = ft_substr(envp[i], 5, ft_strlen(envp[i]));
 			if (!path_line)
-				return (perror("Malloc"), NULL);
+				return (perror("malloc"), NULL);
 			break ;
 		}
 		i++;
@@ -43,13 +43,13 @@ static char	*ft_check_access(char *cmd, char **paths)
 	{
 		cmd_path = ft_strjoin(paths[i], cmd);
 		if (!cmd_path)
-			return (perror("Malloc"), NULL);
+			return (perror("malloc"), NULL);
 		if (access(cmd_path, F_OK | X_OK) == 0)
 			return (cmd_path);
 		free(cmd_path);
 		i++;
 	}
-	return (ft_putstr_fd("Access: command not found", 2), NULL);
+	return (ft_putstr_fd("access: command not found", 2), NULL);
 }
 
 char	*ft_get_path(t_data *d)
@@ -69,4 +69,19 @@ char	*ft_get_path(t_data *d)
 	if (!cmd_path)
 		return (free(path_line), ft_free_array((void **)d->paths), NULL);
 	return (free(path_line), ft_free_array((void **)d->paths), cmd_path);
+}
+
+void	exit_error(char *err)
+{
+	if (err)
+		perror(err);
+	if (ft_strncmp(err, "dup2", 5))
+		exit(1);
+	else if (ft_strncmp(err, "malloc", 7))
+		exit(2);
+	else if (ft_strncmp(err, "access", 7))
+		exit(3);
+	else if (ft_strncmp(err, "execve", 7))
+		exit(4);
+	exit(5);
 }
