@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 13:23:17 by mpignet           #+#    #+#             */
-/*   Updated: 2022/09/29 15:31:08 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/09/29 17:39:33 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,13 @@ char	*ft_get_path(t_data *d)
 	return (free(path_line), ft_free_array((void **)d->paths), cmd_path);
 }
 
-void	exit_error(char *err)
+void	exit_error(char *err, t_data *d)
 {
-	if (err)
-		perror(err);
+	ft_free_close(d);
+	free(d->pids);
+	if (!err)
+		exit(5);
+	perror(err);
 	if (ft_strncmp(err, "dup2", 5))
 		exit(1);
 	else if (ft_strncmp(err, "malloc", 7))
@@ -82,6 +85,5 @@ void	exit_error(char *err)
 	else if (ft_strncmp(err, "access", 7))
 		exit(3);
 	else if (ft_strncmp(err, "execve", 7))
-		exit(4);
-	exit(5);
+		exit(4);		
 }

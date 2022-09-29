@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:42:55 by mpignet           #+#    #+#             */
-/*   Updated: 2022/09/29 15:21:29 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/09/29 17:14:46 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ int		add_slash(t_data *d);
 char	*ft_get_path(t_data *d);
 void	ft_close_pipes(t_data *d);
 void	ft_close_fds(t_data *d);
-void	exit_error(char *err);
+void	exit_error(char *err, t_data *d);
 
 #endif

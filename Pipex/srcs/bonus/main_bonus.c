@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:42:39 by mpignet           #+#    #+#             */
-/*   Updated: 2022/09/29 16:13:48 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/09/29 17:31:06 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,46 +15,43 @@
 static void	ft_exec_cmd(int in, int out, t_data *d, char *cmd)
 {
 	if (dup2(in, STDIN_FILENO) == -1)
-		exit_error("dup2");
+	{
+		ft_close_fds(d);
+		exit_error("dup2", d);
+	}
 	if (dup2(out, STDOUT_FILENO) == -1)
-		exit_error("dup2");
+	{
+		ft_close_fds(d);
+		exit_error("dup2", d);
+	}
 	ft_close_fds(d);
 	d->options = ft_split(cmd, ' ');
 	if (!d->options)
-		exit_error("malloc");
+		exit_error("malloc", d);
 	if (ft_strchr(d->options[0], '/'))
 	{
 		if (access(d->options[0], F_OK | X_OK) != 0)
-			exit_error("access");
+			exit_error("access", d);
 		execve(d->options[0], d->options, d->envp);
-		exit_error("execve");
+		exit_error("execve", d);
 	}
 	d->cmd_path = ft_get_path(d);
 	if (!d->cmd_path)
-		exit_error(NULL);
+		exit_error(NULL, d);
 	execve(d->cmd_path, d->options, d->envp);
-	exit_error("execve");
+	exit_error("execve", d);
 }
 
 void	child(t_data *d, char **av)
 {
 	if (d->child == 0)
-	{
-		// ft_putstr_fd("exec type 1\n", 2);
 		ft_exec_cmd(d->fd_file1, d->pipefd[0][1], d, av[d->child + 2]);
-	}
 	else if (d->child == d->nb_cmds - 1)
-	{
-		// ft_putstr_fd("exec type 2\n", 2);
 		ft_exec_cmd(d->pipefd[d->child - 1][0], d->fd_file2, d,
 					 av[d->child + 2]);
-	}
 	else
-	{
-		// ft_putstr_fd("exec type 3\n", 2);
 		ft_exec_cmd(d->pipefd[d->child - 1][0],
 					d->pipefd[d->child][1], d, av[d->child + 2]);		
-	}
 }
 
 int	main(int ac, char **av, char **envp)
@@ -69,7 +66,10 @@ int	main(int ac, char **av, char **envp)
 	{
 		d.pids[d.child] = fork();
 		if (d.pids[d.child] == -1)
-			return (perror("Fork"), ft_free_close(&d), 2);
+		{
+			ft_close_fds(&d);
+			exit_error("Fork", &d);
+		}
 		else if (d.pids[d.child] == 0)
 			child(&d, av);	
 		d.child++;
