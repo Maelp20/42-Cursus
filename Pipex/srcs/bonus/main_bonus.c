@@ -6,13 +6,13 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:42:39 by mpignet           #+#    #+#             */
-/*   Updated: 2022/09/29 17:46:40 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/10/10 18:52:30 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/pipex_bonus.h"
 
-static void	ft_exec_cmd(int in, int out, t_data *d, char *cmd)
+static void	redirect_fds(int in, int out, t_data *d)
 {
 	if (dup2(in, STDIN_FILENO) == -1)
 	{
@@ -24,7 +24,12 @@ static void	ft_exec_cmd(int in, int out, t_data *d, char *cmd)
 		ft_close_fds(d);
 		exit_error("dup2", d);
 	}
-	ft_close_fds(d);
+	ft_close_fds(d);	
+}
+
+static void	ft_exec_cmd(int in, int out, t_data *d, char *cmd)
+{
+	redirect_fds(in, out, d);
 	d->options = ft_split(cmd, ' ');
 	if (!d->options)
 		exit_error("malloc", d);
@@ -42,23 +47,36 @@ static void	ft_exec_cmd(int in, int out, t_data *d, char *cmd)
 	exit_error("execve", d);
 }
 
-void	child(t_data *d, char **av)
+static void	child(t_data *d, char **av)
 {
-	if (d->child == 0)
-		ft_exec_cmd(d->fd_file1, d->pipefd[0][1], d, av[d->child + 2]);
-	else if (d->child == d->nb_cmds - 1)
-		ft_exec_cmd(d->pipefd[d->child - 1][0], d->fd_file2, d,
-					 av[d->child + 2]);
+	if (d->heredoc)
+	{
+		if (d->child == 0)
+			ft_exec_cmd(d->fd_file1, d->pipefd[0][1], d, av[d->child + 3]);
+		else if (d->child == d->nb_cmds - 1)
+			ft_exec_cmd(d->pipefd[d->child - 1][0], d->fd_file2, d,
+				av[d->child + 3]);
+		else
+			ft_exec_cmd(d->pipefd[d->child - 1][0],
+				d->pipefd[d->child][1], d, av[d->child + 3]);
+	}
 	else
-		ft_exec_cmd(d->pipefd[d->child - 1][0],
-					d->pipefd[d->child][1], d, av[d->child + 2]);		
+	{
+		if (d->child == 0)
+			ft_exec_cmd(d->fd_file1, d->pipefd[0][1], d, av[d->child + 2]);
+		else if (d->child == d->nb_cmds - 1)
+			ft_exec_cmd(d->pipefd[d->child - 1][0], d->fd_file2, d,
+				av[d->child + 2]);
+		else
+			ft_exec_cmd(d->pipefd[d->child - 1][0],
+				d->pipefd[d->child][1], d, av[d->child + 2]);
+	}
 }
 
 int	main(int ac, char **av, char **envp)
 {
 	t_data	d;
-	if (ac < 5)
-		return (ft_putstr_fd("Not enough arguments\n", 2), 1);
+
 	if (init_data(&d, ac, av))
 		return (1);
 	d.envp = envp;
@@ -71,7 +89,7 @@ int	main(int ac, char **av, char **envp)
 			exit_error("Fork", &d);
 		}
 		else if (d.pids[d.child] == 0)
-			child(&d, av);	
+			child(&d, av);
 		d.child++;
 	}
 	ft_close_pipes(&d);
