@@ -6,106 +6,65 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:35:32 by mpignet           #+#    #+#             */
-/*   Updated: 2022/09/06 16:59:37 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/10/11 16:16:08 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/libft.h"
 
-char	*ft_get_line(char *save)
+char	*clear_line_from_stash(char *stash, char *buffer)
 {
-	char	*str;
-	int		i;
+	size_t	i;
+	size_t	j;
+	char	*temp;
 
 	i = 0;
-	if (!save[i])
+	if (!stash)
 		return (NULL);
-	while (save[i] && save[i] != '\n')
+	while (stash[i] && stash[i] != '\n')
 		i++;
-	str = (char *)ft_calloc_spec(sizeof(char), (i + 2));
-	if (!str)
+	if (stash[i] == '\n')
+		i++;
+	temp = malloc(sizeof(char) * (i + 1));
+	if (!temp)
 		return (NULL);
-	i = 0;
-	while (save[i] && save[i] != '\n')
-	{
-		str[i] = save[i];
-		i++;
-	}
-	if (save[i] == '\n')
-	{
-		str[i] = '\n';
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
-}
-
-char	*ft_new_save(char *save)
-{
-	char	*str;
-	int		i;
-	int		j;
-
-	i = 0;
-	while (save[i] && save[i] != '\n')
-		i++;
-	if (!save[i])
-	{
-		free(save);
-		return (NULL);
-	}
-	str = (char *)ft_calloc_spec(sizeof(char), (ft_strlen(save) - i + 1));
-	if (!str)
-		return (NULL);
-	i++;
+	j = -1;
+	while (++j < i && stash[j])
+		temp[j] = stash[j];
+	temp[j] = '\0';
 	j = 0;
-	while (save[i])
-		str[j++] = save[i++];
-	str[j] = '\0';
-	free(save);
-	return (str);
-}
-
-char	*ft_readnfill(int fd, char *save)
-{
-	char	*buff;
-	int		ret;
-
-	buff = (char *)ft_calloc_spec(sizeof(char), (BUFFER_SIZE + 1));
-	if (!buff)
-		return (NULL);
-	ret = 1;
-	while (ret && !(ft_strchr_spec(save, '\n')))
-	{
-		ret = read(fd, buff, BUFFER_SIZE);
-		if (ret == -1)
-		{
-			free(buff);
-			return (NULL);
-		}
-		if (ret)
-		{
-			buff[ret] = '\0';
-			save = ft_strjoin_spec(save, buff);
-		}
-	}
-	free(buff);
-	return (save);
+	while (stash[i] && buffer[j])
+		buffer[j++] = stash[i++];
+	buffer[j] = '\0';
+	return (temp);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*save[4096];
-	char		*line;
+	char			*stash;
+	static char		buffer[BUFFER_SIZE + 1];
+	ssize_t			readed;
+	char			*line_to_return;
 
-	if ((fd < 0 || fd >= 4096) || BUFFER_SIZE < 1)
+	readed = 1;
+	if (BUFFER_SIZE < 1 || fd < 0 || fd > 1024)
 		return (NULL);
-	save[fd] = ft_readnfill(fd, save[fd]);
-	if (!save[fd])
-		return (NULL);
-	line = ft_get_line(save[fd]);
-	save[fd] = ft_new_save(save[fd]);
-	return (line);
+	stash = NULL;
+	stash = ft_strjoin1(stash, buffer);
+	while (readed && !ft_new_line(stash))
+	{
+		if (!stash)
+			return (NULL);
+		readed = read(fd, buffer, BUFFER_SIZE);
+		if (readed == -1)
+			return (free(stash), NULL);
+		buffer[readed] = '\0';
+		if (!readed && !stash[0])
+			return (free(stash), NULL);
+		stash = ft_strjoin1(stash, buffer);
+	}
+	line_to_return = clear_line_from_stash (stash, buffer);
+	return (free (stash), line_to_return);
 }
 
 // #include <stdio.h>

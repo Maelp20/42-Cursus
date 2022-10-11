@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:42:39 by mpignet           #+#    #+#             */
-/*   Updated: 2022/09/26 17:14:51 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/10/11 16:42:12 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static char	*ft_check_access(char *cmd, char **paths)
 		free(cmd_path);
 		i++;
 	}
-	return (ft_putstr_fd("Access: command not found", 2), NULL);
+	return (ft_putstr_fd("Access: command not found\n", 2), NULL);
 }
 
 static char	*ft_get_path(t_data *data)
@@ -73,27 +73,27 @@ static char	*ft_get_path(t_data *data)
 
 static int	ft_exec_cmd(int in, int out, t_data *data, char *cmd)
 {
-	if (dup2(in, STDIN_FILENO) == -1)
-		return (perror("dup2"), ft_free_close(data), 1);
-	if (dup2(out, STDOUT_FILENO) == -1)
-		return (perror("dup2"), ft_free_close(data), 1);
-	if (data->pipefd[0] > -1)
-		close(data->pipefd[0]);
-	if (data->pipefd[1] > -1)
-		close(data->pipefd[1]);
+	redirect_fds(in, out, data);
 	data->options = ft_split(cmd, ' ');
 	if (!data->options)
 		return (perror("Malloc"), ft_free_close(data), 1);
 	if (ft_strchr(data->options[0], '/'))
 	{
 		if (access(data->options[0], F_OK | X_OK) != 0)
-			return (perror("Access"), ft_free_close(data), 1);
+		{
+			perror("Access");
+			ft_free_close(data);
+			exit (1);
+		}
 		execve(data->options[0], data->options, data->envp);
 		return (perror("Execve"), ft_free_close(data), 1);
 	}
 	data->cmd_path = ft_get_path(data);
 	if (!data->cmd_path)
-		return (ft_free_close(data), 1);
+	{
+		ft_free_close(data);
+		exit(1);
+	}
 	execve(data->cmd_path, data->options, data->envp);
 	return (perror("Execve"), ft_free_close(data), 1);
 }
@@ -110,18 +110,14 @@ int	main(int ac, char **av, char **envp)
 	if (data.pid1 == -1)
 		return (perror("Fork"), ft_free_close(&data), 1);
 	else if (data.pid1 == 0)
-	{
-		if (data.fd_file1 > 0)
-			ft_exec_cmd(data.fd_file1, data.pipefd[1], &data, av[2]);
-	}
+		ft_exec_cmd(data.fd_file1, data.pipefd[1], &data, av[2]);
 	else
 	{
 		data.pid2 = fork();
 		if (data.pid2 == -1)
 			return (perror("Fork"), 1);
 		else if (data.pid2 == 0)
-			if (data.fd_file2 > 0)
-				ft_exec_cmd(data.pipefd[0], data.fd_file2, &data, av[3]);
+			ft_exec_cmd(data.pipefd[0], data.fd_file2, &data, av[3]);
 		return (ft_free_close(&data), ft_wait(&data), 0);
 	}
 }

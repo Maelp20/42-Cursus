@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:42:39 by mpignet           #+#    #+#             */
-/*   Updated: 2022/10/10 18:52:30 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/10/11 16:37:18 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	redirect_fds(int in, int out, t_data *d)
 		ft_close_fds(d);
 		exit_error("dup2", d);
 	}
-	ft_close_fds(d);	
+	ft_close_fds(d);
 }
 
 static void	ft_exec_cmd(int in, int out, t_data *d, char *cmd)
@@ -79,6 +79,8 @@ int	main(int ac, char **av, char **envp)
 
 	if (init_data(&d, ac, av))
 		return (1);
+	if (is_heredoc(av))
+		ft_create_infile(&d, av);
 	d.envp = envp;
 	while (d.child < d.nb_cmds)
 	{

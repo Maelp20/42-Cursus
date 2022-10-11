@@ -6,63 +6,66 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:38:54 by mpignet           #+#    #+#             */
-/*   Updated: 2022/09/06 16:59:32 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/10/11 16:09:29 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/libft.h"
 
-void	*ft_calloc_spec(size_t count, size_t size)
-{
-	void	*ptr;
-
-	ptr = (void *)malloc(count * size);
-	if (!ptr)
-		return (0);
-	ft_bzero(ptr, count);
-	return (ptr);
-}
-
-char	*ft_strchr_spec(char *s, int c)
+size_t	ft_strlen1(const char *s)
 {
 	size_t	i;
 
 	i = 0;
-	if (!s)
-		return (0);
-	while (s[i])
+	if (s)
 	{
-		if (s[i] == (char)c)
-			return ((char *)s + i);
-		i++;
+		while (s[i])
+			i++;
+		return (i);
 	}
-	return (NULL);
+	return (0);
 }
 
-char	*ft_strjoin_spec(char *s1, char *s2)
+int	ft_new_line(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str)
+	{
+		while (str[i])
+		{
+			if (str[i] == '\n')
+				return (1);
+			i++;
+		}
+	}
+	return (0);
+}
+
+char	*ft_strjoin1(char *s1, char *s2)
 {
 	char	*dest;
-	int		len;
 	int		i;
+	int		j;
 
+	i = -1;
+	j = 0;
 	if (!s1)
 	{
-		s1 = (char *)ft_calloc(sizeof(char), 1);
-		s1[0] = '\0';
+		s1 = ft_calloc(sizeof(char), 1);
+		if (!s1)
+			return (NULL);
 	}
-	if (!s1 || !s2)
-		return (NULL);
-	len = ft_strlen(s1) + ft_strlen(s2);
-	dest = (char *)ft_calloc(sizeof(char), (len + 1));
+	if (!s2)
+		return (free(s1), NULL);
+	dest = malloc(sizeof(char) * (ft_strlen1(s1) + ft_strlen1(s2)) + 1);
 	if (!dest)
-		return (NULL);
-	i = -1;
-	if (s1)
-		while (s1[++i])
-			dest[i] = s1[i];
-	while (*s2)
-		dest[i++] = *s2++;
-	dest[len] = '\0';
-	free(s1);
-	return (dest);
+		return (free(s1), NULL);
+	while (s1[++i])
+		dest[i] = s1[i];
+	while (s2[j])
+		dest[i++] = s2[j++];
+	dest[i] = '\0';
+	return (free(s1), dest);
 }

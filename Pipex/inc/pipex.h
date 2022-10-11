@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:42:55 by mpignet           #+#    #+#             */
-/*   Updated: 2022/10/10 16:42:07 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/10/11 16:41:30 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,7 @@ void	ft_free_array(char **tab);
 void	ft_free_close(t_data *data);
 void	init_data(t_data *data, int ac, char **av);
 int		add_slash(t_data *data);
+void	ft_close_fds(t_data *data);
+void	redirect_fds(int in, int out, t_data *data);
 
 #endif

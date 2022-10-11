@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 12:20:24 by mpignet           #+#    #+#             */
-/*   Updated: 2022/09/26 13:59:51 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/10/11 16:13:02 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,12 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 t_list	*ft_lstnew(void *content);
 int		ft_lstsize(t_list *lst);
 
-char	*ft_strchr_spec(char *s, int c);
-char	*ft_strjoin_spec(char *s1, char *s2);
+int		ft_new_line(char *str);
+size_t	ft_strlen1(const char *s);
+char	*ft_free(char *str);
+char	*ft_strjoin1(char *s1, char *s2);
 char	*get_next_line(int fd);
-char	*ft_readnfill(int fd, char *save);
-char	*ft_new_save(char *save);
-char	*ft_get_line(char *save);
-void	*ft_calloc_spec(size_t count, size_t size);
+char	*clear_line_from_stash(char *stash, char *buffer);
 
 int		ft_printf(const char *entree, ...);
 void	ft_putchar(char c);

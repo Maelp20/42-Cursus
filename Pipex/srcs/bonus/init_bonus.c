@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:24:37 by mpignet           #+#    #+#             */
-/*   Updated: 2022/10/10 20:28:14 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/10/11 16:37:12 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,13 @@ static void	ft_open_files(t_data *d, int ac, char **av)
 
 int	init_data(t_data *d, int ac, char **av)
 {
-	if (is_heredoc(d, av))
+	if (is_heredoc(av))
 		d->heredoc = 1;
 	else
 	{
 		d->heredoc = 0;
 		d->fd_file1 = 0;
-		d->fd_file2 = 0;	
+		d->fd_file2 = 0;
 	}
 	if (ac < (5 + d->heredoc))
 		return (ft_putstr_fd("Pipex: Not enough arguments\n", 2), 1);

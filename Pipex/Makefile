@@ -6,20 +6,21 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/06 15:45:58 by mpignet           #+#    #+#              #
-#    Updated: 2022/10/10 17:07:46 by mpignet          ###   ########.fr        #
+#    Updated: 2022/10/11 11:01:47 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # /* ~~~~~~ SOURCES ~~~~~~ */
 SRCS	= \
 			main.c\
+			init.c\
 			utils.c\
 
 SRCS_B	= \
 			main_bonus.c\
+			init_bonus.c\
 			utils_bonus.c\
 			utils_2_bonus.c\
-			init_bonus.c\
 			heredoc_bonus.c\
 
 SRCDIR		= srcs/

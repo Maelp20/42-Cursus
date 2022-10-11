@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 13:23:17 by mpignet           #+#    #+#             */
-/*   Updated: 2022/10/10 19:34:28 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/10/11 16:31:53 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,6 @@ void	exit_error(char *err, t_data *d)
 	ft_free_close(d);
 	free(d->pids);
 	perror(err);
-	if (!err)
-		exit(6);
 	if (!ft_strncmp(err, "dup2", 5))
 		exit(1);
 	else if (!ft_strncmp(err, "malloc", 7))
@@ -92,6 +90,6 @@ void	exit_error(char *err, t_data *d)
 		exit(3);
 	else if (!ft_strncmp(err, "execve", 7))
 		exit(4);
-	else if (!ft_strncmp(err, "here_doc", 9))
+	else if (!ft_strncmp(err, "heredoc", 9))
 		exit (5);
 }
