@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:42:39 by mpignet           #+#    #+#             */
-/*   Updated: 2022/10/11 16:37:18 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/10/11 18:58:13 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,6 @@ int	main(int ac, char **av, char **envp)
 
 	if (init_data(&d, ac, av))
 		return (1);
-	if (is_heredoc(av))
-		ft_create_infile(&d, av);
 	d.envp = envp;
 	while (d.child < d.nb_cmds)
 	{
@@ -97,5 +95,7 @@ int	main(int ac, char **av, char **envp)
 	ft_close_pipes(&d);
 	ft_free_close(&d);
 	ft_wait(&d);
+	if (d.heredoc)
+		unlink(".heredoc.tmp");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:24:37 by mpignet           #+#    #+#             */
-/*   Updated: 2022/10/11 16:37:12 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/10/11 18:47:58 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	ft_open_files(t_data *d, int ac, char **av)
 	{
 		d->fd_file1 = open(".heredoc.tmp", O_RDONLY);
 		if (d->fd_file1 < 0)
-			perror("infile");
+			perror("infileLALA");
 		d->fd_file2 = open(av[ac - 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
 		if (d->fd_file2 < 0)
 			perror("outfile");
@@ -101,6 +101,8 @@ int	init_data(t_data *d, int ac, char **av)
 	d->envp = NULL;
 	d->paths = NULL;
 	d->cmd_path = NULL;
+	if (d->heredoc)
+		ft_create_infile(d, av);
 	ft_open_files(d, ac, av);
 	return (0);
 }
