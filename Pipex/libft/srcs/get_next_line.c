@@ -5,104 +5,104 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/20 15:35:32 by mpignet           #+#    #+#             */
-/*   Updated: 2022/10/11 16:16:08 by mpignet          ###   ########.fr       */
+/*   Created: 2022/10/12 12:59:03 by mpignet           #+#    #+#             */
+/*   Updated: 2022/10/15 18:29:41 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/libft.h"
 
-char	*clear_line_from_stash(char *stash, char *buffer)
+char	*fill_line_prep_save(char *buff, char *save)
 {
 	size_t	i;
 	size_t	j;
-	char	*temp;
+	char	*line;
 
 	i = 0;
-	if (!stash)
+	if (!buff)
 		return (NULL);
-	while (stash[i] && stash[i] != '\n')
+	while (buff[i] && buff[i] != '\n')
 		i++;
-	if (stash[i] == '\n')
+	if (buff[i] == '\n')
 		i++;
-	temp = malloc(sizeof(char) * (i + 1));
-	if (!temp)
+	line = malloc (sizeof(char) * (i + 1));
+	if (!line)
 		return (NULL);
 	j = -1;
-	while (++j < i && stash[j])
-		temp[j] = stash[j];
-	temp[j] = '\0';
+	while (++j < i && buff[j])
+		line[j] = buff[j];
+	line[j] = '\0';
 	j = 0;
-	while (stash[i] && buffer[j])
-		buffer[j++] = stash[i++];
-	buffer[j] = '\0';
-	return (temp);
+	while (buff[i] && save[j])
+		save[j++] = buff[i++];
+	save[j] = '\0';
+	return (line);
 }
 
 char	*get_next_line(int fd)
 {
-	char			*stash;
-	static char		buffer[BUFFER_SIZE + 1];
-	ssize_t			readed;
-	char			*line_to_return;
+	static char	save[BUFFER_SIZE + 1];
+	char		*buff;
+	char		*line;
+	ssize_t		ret;
 
-	readed = 1;
+	ret = 1;
 	if (BUFFER_SIZE < 1 || fd < 0 || fd > 1024)
 		return (NULL);
-	stash = NULL;
-	stash = ft_strjoin1(stash, buffer);
-	while (readed && !ft_new_line(stash))
+	buff = NULL;
+	buff = ft_strjoin_spec(buff, save);
+	while (ret && !ft_strchr_spec(buff, '\n'))
 	{
-		if (!stash)
+		if (!buff)
 			return (NULL);
-		readed = read(fd, buffer, BUFFER_SIZE);
-		if (readed == -1)
-			return (free(stash), NULL);
-		buffer[readed] = '\0';
-		if (!readed && !stash[0])
-			return (free(stash), NULL);
-		stash = ft_strjoin1(stash, buffer);
+		ret = read(fd, save, BUFFER_SIZE);
+		if (ret == -1)
+			return (free(buff), NULL);
+		save[ret] = '\0';
+		if (!ret && !buff[0])
+			return (free(buff), NULL);
+		buff = ft_strjoin_spec(buff, save);
 	}
-	line_to_return = clear_line_from_stash (stash, buffer);
-	return (free (stash), line_to_return);
+	line = fill_line_prep_save(buff, save);
+	return (free(buff), line);
 }
 
-// #include <stdio.h>
-// #include <sys/types.h>
-// #include <sys/stat.h>
-// #include <fcntl.h>
+/* #include <stdio.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
-// int    main(void)
-// {
-//     int    fd1;
-//     int    fd2;
-//     int    fd3;
-//     char    *result1 = NULL;
-//     char    *result2 = NULL;
-//     char    *result3 = NULL;
-//     int    i;
+int    main(void)
+{
+    int    fd;
+    char    *result;
+    int    i;
 
-//     i = 0;
-//     fd1 = open("41", O_RDONLY);
-//     fd2 = open("42", O_RDONLY);
-//     fd3 = open("43", O_RDONLY);
-//     if (fd1 == -1 || fd2 == -1 || fd3 == -1)
-//         return (0);
-//     while (i < 5)
-//     {
-//         result1 = get_next_line(fd1);
-//         printf("%sLEN%ld\n", result1, ft_strlen(result1));
-//         free (result1);
-//         result2 = get_next_line(fd2);
-//         printf("%sLEN%ld\n", result2, ft_strlen(result2));
-//         free (result2);
-//         result3 = get_next_line(fd3);
-//         printf("%sLEN%ld\n", result3, ft_strlen(result3));
-//         free (result3);
-//         i++;
-//     }
-//     close(fd1);
-//     close(fd2);
-//     close(fd3);
-//     return (0);
-// }
+    i = 0;
+    fd = open("41", O_RDONLY);
+    if (fd == -1)
+        return (0);
+	result = get_next_line(fd);
+    printf("RESULT : %s\n", result);
+	free(result);
+	result = get_next_line(fd);
+    printf("RESULT : %s\n", result);
+	free(result);
+	result = get_next_line(fd);
+    printf("RESULT : %s\n", result);
+	free(result);
+	result = get_next_line(fd);
+    printf("RESULT : %s\n", result);
+	free(result);
+	result = get_next_line(fd);
+    printf("RESULT : %s\n", result);
+	free(result);
+	result = get_next_line(fd);
+    printf("RESULT : %s\n", result);
+	free(result);
+	result = get_next_line(fd);
+    printf("RESULT : %s\n", result);
+	free(result);
+    close(fd);
+    return (0);
+} */

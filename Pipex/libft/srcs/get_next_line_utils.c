@@ -5,52 +5,36 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/20 15:38:54 by mpignet           #+#    #+#             */
-/*   Updated: 2022/10/11 16:09:29 by mpignet          ###   ########.fr       */
+/*   Created: 2022/10/12 13:03:16 by mpignet           #+#    #+#             */
+/*   Updated: 2022/10/15 18:26:17 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/libft.h"
 
-size_t	ft_strlen1(const char *s)
+char	*ft_strchr_spec(char *s, int c)
 {
 	size_t	i;
 
 	i = 0;
-	if (s)
+	if (!s)
+		return (NULL);
+	while (s[i])
 	{
-		while (s[i])
-			i++;
-		return (i);
+		if (s[i] == (char)c)
+			return ((char *)s + i);
+		i++;
 	}
-	return (0);
+	return (NULL);
 }
 
-int	ft_new_line(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (str)
-	{
-		while (str[i])
-		{
-			if (str[i] == '\n')
-				return (1);
-			i++;
-		}
-	}
-	return (0);
-}
-
-char	*ft_strjoin1(char *s1, char *s2)
+char	*ft_strjoin_spec(char *s1, char *s2)
 {
 	char	*dest;
+	int		len;
 	int		i;
 	int		j;
 
-	i = -1;
-	j = 0;
 	if (!s1)
 	{
 		s1 = ft_calloc(sizeof(char), 1);
@@ -59,11 +43,14 @@ char	*ft_strjoin1(char *s1, char *s2)
 	}
 	if (!s2)
 		return (free(s1), NULL);
-	dest = malloc(sizeof(char) * (ft_strlen1(s1) + ft_strlen1(s2)) + 1);
+	len = ft_strlen(s1) + ft_strlen(s2);
+	dest = malloc(sizeof(char) * (len + 1));
 	if (!dest)
 		return (free(s1), NULL);
+	i = -1;
 	while (s1[++i])
 		dest[i] = s1[i];
+	j = 0;
 	while (s2[j])
 		dest[i++] = s2[j++];
 	dest[i] = '\0';
