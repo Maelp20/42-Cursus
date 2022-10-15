@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 12:20:24 by mpignet           #+#    #+#             */
-/*   Updated: 2022/09/07 14:35:26 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/10/15 18:26:39 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,6 @@ int		ft_lstsize(t_list *lst);
 char	*ft_strchr_spec(char *s, int c);
 char	*ft_strjoin_spec(char *s1, char *s2);
 char	*get_next_line(int fd);
-char	*ft_readnfill(int fd, char *save);
-char	*ft_new_save(char *save);
-char	*ft_get_line(char *save);
-void	*ft_calloc_spec(size_t count, size_t size);
 
 int		ft_printf(const char *entree, ...);
 void	ft_putchar(char c);
