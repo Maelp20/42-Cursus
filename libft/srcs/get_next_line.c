@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 12:59:03 by mpignet           #+#    #+#             */
-/*   Updated: 2022/10/15 18:24:54 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/10/15 18:29:41 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ char	*get_next_line(int fd)
 	if (BUFFER_SIZE < 1 || fd < 0 || fd > 1024)
 		return (NULL);
 	buff = NULL;
-	buff = ft_strjoin(buff, save);
-	while (ret && !ft_strchr(buff, '\n'))
+	buff = ft_strjoin_spec(buff, save);
+	while (ret && !ft_strchr_spec(buff, '\n'))
 	{
 		if (!buff)
 			return (NULL);
@@ -61,7 +61,7 @@ char	*get_next_line(int fd)
 		save[ret] = '\0';
 		if (!ret && !buff[0])
 			return (free(buff), NULL);
-		buff = ft_strjoin(buff, save);
+		buff = ft_strjoin_spec(buff, save);
 	}
 	line = fill_line_prep_save(buff, save);
 	return (free(buff), line);
