@@ -6,12 +6,14 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 14:54:57 by mpignet           #+#    #+#             */
-/*   Updated: 2022/05/20 16:19:59 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/10/11 14:57:04 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
+
+# define BUFFER_SIZE 5
 
 # include <stdlib.h>
 # include <sys/types.h>
