@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:19:08 by mpignet           #+#    #+#             */
-/*   Updated: 2022/10/11 16:41:17 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/10/17 16:08:43 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	init_data(t_data *data, int ac, char **av)
 	data->cmd_path = NULL;
 	data->fd_file1 = open(av[1], O_RDONLY);
 	if (data->fd_file1 < 0)
-		perror("file1");
+		perror(av[1]);
 	data->fd_file2 = open(av[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (data->fd_file2 < 0)
 		perror("file2");
