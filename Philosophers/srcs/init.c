@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:10:33 by mpignet           #+#    #+#             */
-/*   Updated: 2022/11/30 18:00:01 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/12/13 16:18:43 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void    init_forks(t_rul *rules)
     while (++i < rules->nb_philo)
     {
         pthread_mutex_init(&rules->fork_tab[i].fork_mt, NULL);
-        rules->fork_tab[i].taken_by = 0;
+        rules->fork_tab[i].taken = 0;
     }
 }
 
@@ -46,7 +46,7 @@ void    init_philo(t_philo *philo, t_rul *rules, int i)
         philo->left_fork = &rules->fork_tab[i];
         philo->right_fork = &rules->fork_tab[i + 1];
     }
-   // printf("philo %d : left fork : %d // right fork : %d\n", philo->id, philo->left_fork->taken_by, philo->right_fork->taken_by);
+   // printf("philo %d : left fork : %d // right fork : %d\n", philo->id, philo->left_fork->taken, philo->right_fork->taken);
     philo->nb_meals = 0;
     philo->last_meal = 0;
 }

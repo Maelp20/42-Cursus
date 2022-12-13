@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 14:28:15 by mpignet           #+#    #+#             */
-/*   Updated: 2022/11/30 16:42:42 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/12/13 15:29:18 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 
 typedef struct s_fork {
 	pthread_mutex_t	fork_mt;
-	int		        taken_by;
+	int		        taken;
 }			t_fork;
 
 typedef struct s_rul {
