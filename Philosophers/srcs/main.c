@@ -6,64 +6,66 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 14:28:03 by mpignet           #+#    #+#             */
-/*   Updated: 2022/12/13 17:53:20 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/12/14 17:29:05 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void    parse(t_rul *rules, char **av)
+int philo_death(t_philo *philo)
 {
-    rules->nb_philo = ft_atoi(av[1]);
-    rules->lifespan = ft_atoi(av[2]);
-    rules->mealtime = ft_atoi(av[3]);
-    rules->sleeptime = ft_atoi(av[4]);
-    if (av[5])
-        rules->loop_limit = ft_atoi(av[5]);
-    else
-        rules->loop_limit = -1;
-    init_forks(rules);
+    int time_since_last_meal;
+
+    time_since_last_meal = get_time() - philo->last_meal;
+    if (time_since_last_meal >= philo->rules->lifespan)
+    {
+        printf("%ld philo %d has died\n", get_time(), philo->id);
+        return(1);
+    }
+    return (0);
 }
 
-void    philo_eat(t_philo *philo)
+int end_conditions(t_group *philos)
 {
-    printf("%ld philo %d is eating\n", get_time(), philo->id);
-    usleep(philo->rules->mealtime);
-    philo->last_meal = get_time();
-    philo->nb_meals++;
-    pthread_mutex_lock(&philo->left_fork->fork_mt);
-    philo->left_fork->taken = 0;
-    pthread_mutex_unlock(&philo->left_fork->fork_mt);
-    pthread_mutex_lock(&philo->right_fork->fork_mt);
-    philo->right_fork->taken = 0;
-    pthread_mutex_unlock(&philo->right_fork->fork_mt);
+    int     i;
+    int     max_meals;
+
+    i = -1;
+    max_meals = 0;
+    while (++i < philos->rules->nb_philo)
+    {
+        if (philo_death(&philos->philo[i]))
+            return(1);
+        pthread_mutex_lock(&philos->philo[i].meals_mt);
+        if (philos->philo[i].nb_meals == philos->rules->meals_limit)
+            max_meals++;
+        pthread_mutex_lock(&philos->philo[i].meals_mt);
+    }
+    if (max_meals == philos->rules->nb_philo)
+        return (1);
+    return (0);
 }
 
-void    take_forks(t_philo *philo)
+void    *program_check(void *ptr)
 {
-    int equipment;
+    t_group *philos;
 
-    equipment = 0;
-   // printf("left fork : %d\n", philo->left_fork->taken);
-    pthread_mutex_lock(&philo->left_fork->fork_mt);
-    if (!philo->left_fork->taken)
+    philos = (t_group *)ptr;
+    if (philos->rules->meals_limit == 0)
     {
-        printf("%ld philo %d has taken a fork\n", get_time(), philo->id);
-        philo->left_fork->taken = 1;
-        equipment++;
+        philos->rules->stop_program = 1;
+        return (NULL);
     }
-    pthread_mutex_unlock(&philo->left_fork->fork_mt);
-   // printf("right fork : %d\n", philo->right_fork->taken);
-    pthread_mutex_lock(&philo->right_fork->fork_mt);
-    if (!philo->right_fork->taken)
+    while (1)
     {
-        printf("%ld philo %d has taken a fork\n", get_time(), philo->id);
-        philo->right_fork->taken = 1;
-        equipment++;
+        if(end_conditions(philos))
+        {
+            philos->rules->stop_program = 1;
+            return (NULL);
+        }
+        usleep(100);
     }
-    pthread_mutex_unlock(&philo->right_fork->fork_mt);
-    if (equipment == 2)
-        philo_eat(philo);
+    return (NULL);
 }
 
 void    philo_sleep(t_philo *philo)
@@ -73,7 +75,10 @@ void    philo_sleep(t_philo *philo)
     wake_up_time = get_time() + philo->rules->sleeptime;
     printf("%ld philo %d is sleeping\n", get_time(), philo->id);
     while (get_time() < wake_up_time)
+    {
+        // check if sim finished
         usleep(100);
+    }
 }
 
 void    *philo_routine(void *ptr)
@@ -83,11 +88,11 @@ void    *philo_routine(void *ptr)
     philo = (t_philo *)ptr;
     if (philo->id % 2)
         usleep(10);
-    int i = -1;
-    while (++i < 10)
+    while (!philo->rules->stop_program)
     {
         take_forks(philo);
         philo_sleep(philo);
+        printf("%ld philo %d is thinking\n", get_time(), philo->id);
     }
     return (ptr);
 }
@@ -95,23 +100,26 @@ void    *philo_routine(void *ptr)
 int philosophers(t_rul *rules)
 {
     int         i;
-    t_group     group;
+    t_group     philos;
 
-    group.philo = malloc (sizeof(t_philo) * rules->nb_philo);
-    if (!group.philo)
+    philos.rules = rules;
+    philos.philo = malloc (sizeof(t_philo) * rules->nb_philo);
+    if (!philos.philo)
         return (1);
-    group.thread_nbrs = malloc (sizeof(pthread_t) * rules->nb_philo);
-    if (!group.thread_nbrs)
+    philos.thread_nbrs = malloc (sizeof(pthread_t) * rules->nb_philo);
+    if (!philos.thread_nbrs)
         return (1);
     i = -1;
     while (++i < rules->nb_philo)
     {
-        init_philo(&group.philo[i], rules, i);
-        pthread_create(&group.thread_nbrs[i], NULL, philo_routine, &group.philo[i]);
+        init_philo(&philos.philo[i], rules, i);
+        pthread_create(&philos.thread_nbrs[i], NULL, philo_routine, &philos.philo[i]);
     }
+    pthread_create(&philos.superviser, NULL, program_check, &philos);
     i = -1;
     while (++i < rules->nb_philo)
-        pthread_join(group.thread_nbrs[i], NULL);
+        pthread_join(philos.thread_nbrs[i], NULL);
+    pthread_join(philos.superviser, NULL);
     return (0);
 }
 
@@ -119,6 +127,7 @@ int main(int ac, char **av)
 {
     t_rul   rules;
     
+    printf("begin : %ld\n", get_time());
     if (ac < 5 || ac > 6)
         return (printf("Philo: Wrong number of arguments\n"), 1);
     parse(&rules, av);

@@ -6,7 +6,7 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/06 15:45:58 by mpignet           #+#    #+#              #
-#    Updated: 2022/11/30 16:39:50 by mpignet          ###   ########.fr        #
+#    Updated: 2022/12/14 13:40:41 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@
 SRCS	= \
 			main.c\
 			init.c\
+			eat_routine.c\
 			utils.c\
 
 SRCDIR		= srcs/

@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 14:28:15 by mpignet           #+#    #+#             */
-/*   Updated: 2022/12/13 15:29:18 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/12/14 17:27:02 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,32 +41,40 @@ typedef struct s_rul {
     int     lifespan;
     int     mealtime;
     int     sleeptime;
-    int     loop_limit;
+    int     meals_limit;
+    int     stop_program;
     t_fork  *fork_tab;
 }       t_rul;
 
 typedef struct s_philo {
-    int         id;
-    t_fork      *left_fork;
-    t_fork      *right_fork;
-    t_rul       *rules;
-    int         nb_meals;
-    long int    last_meal;
+    int             id;
+    t_fork          *left_fork;
+    t_fork          *right_fork;
+    t_rul           *rules;
+    pthread_mutex_t meals_mt;
+    int             nb_meals;
+    long int        last_meal;
 }       t_philo;
 
 typedef struct s_group {
     t_philo     *philo;
     pthread_t   *thread_nbrs;
+    pthread_t   superviser;
+    t_rul       *rules;
 }       t_group;
 
 /*			INIT			*/
 
+void    parse(t_rul *rules, char **av);
 void    init_philo(t_philo *philo, t_rul *rules, int i);
-void    init_forks(t_rul *rules);
 
 /*			UTILS			*/
 
 int     ft_atoi(const char *str);
 time_t  get_time(void);
+
+/*			ROUTINES		*/
+
+void    take_forks(t_philo *philo);
 
 #endif
