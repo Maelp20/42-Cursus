@@ -20,6 +20,7 @@
 # include <pthread.h>
 # include <sys/time.h>
 # include <stdlib.h>
+# include <stdbool.h>
 
 # define TIMES_TO_COUNT 21000
 
@@ -33,7 +34,7 @@
 
 typedef struct s_fork {
 	pthread_mutex_t	fork_mt;
-	int		        taken;
+	bool		    taken;
 }			t_fork;
 
 typedef struct s_rul {
@@ -43,7 +44,7 @@ typedef struct s_rul {
     int             sleeptime;
     int             meals_limit;
     pthread_mutex_t stop_prog_mt;
-    int             stop_program;
+    bool            stop_program;
     t_fork          *fork_tab;
     time_t          start_time;
 }       t_rul;
@@ -61,7 +62,7 @@ typedef struct s_philo {
 typedef struct s_group {
     t_philo     *philo;
     pthread_t   *thread_nbrs;
-    pthread_t   superviser;
+    pthread_t   supervisor;
     t_rul       *rules;
 }       t_group;
 
@@ -72,11 +73,14 @@ void    init_philo(t_philo *philo, t_rul *rules, int i);
 
 /*			UTILS			*/
 
-int     ft_atoi(const char *str);
 time_t  get_time(void);
 
-/*			ROUTINES		*/
+/*		    ROUTINES		*/
 
-void    take_forks(t_philo *philo);
+int     take_forks(t_philo *philo);
+
+/*		  SUPERVISOR     	*/
+
+void    *program_check(void *ptr);
 
 #endif

@@ -15,6 +15,7 @@ SRCS	= \
 			main.c\
 			init.c\
 			eat_routine.c\
+			supervisor.c\
 			utils.c\
 
 SRCDIR		= srcs/

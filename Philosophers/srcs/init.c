@@ -12,6 +12,30 @@
 
 #include "philo.h"
 
+int	ft_atoi(const char *str)
+{
+	int	nbr;
+	int	sign;
+
+	nbr = 0;
+	sign = 1;
+	while (*str == 32 || (*str >= 9 && *str <= 13))
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			sign = sign * -1;
+		str++;
+	}
+	while (*str != '\0' && *str >= '0' && *str <= '9')
+	{
+		nbr = nbr * 10 + *str - 48;
+		str++;
+	}
+	nbr = nbr * sign;
+	return (nbr);
+}
+
 void    init_forks(t_rul *rules)
 {
     int i;
@@ -23,7 +47,7 @@ void    init_forks(t_rul *rules)
     while (++i < rules->nb_philo)
     {
         pthread_mutex_init(&rules->fork_tab[i].fork_mt, NULL);
-        rules->fork_tab[i].taken = 0;
+        rules->fork_tab[i].taken = false;
     }
 }
 
@@ -52,7 +76,8 @@ void    init_philo(t_philo *philo, t_rul *rules, int i)
 
 void    parse(t_rul *rules, char **av)
 {
-    rules->stop_program = 0;
+    pthread_mutex_init(&rules->stop_prog_mt, NULL);
+    rules->stop_program = false;
     rules->nb_philo = ft_atoi(av[1]);
     rules->lifespan = ft_atoi(av[2]);
     rules->mealtime = ft_atoi(av[3]);
