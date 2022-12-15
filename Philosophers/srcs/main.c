@@ -17,6 +17,8 @@ int philo_death(t_philo *philo)
     int time_since_last_meal;
 
     time_since_last_meal = get_time() - philo->last_meal;
+    // printf("PHILO %d : time since last meal : %d\n", philo->id, time_since_last_meal);
+    // printf("LIFESPAN : %d\n", philo->rules->lifespan);
     if (time_since_last_meal >= philo->rules->lifespan)
     {
         printf("%ld philo %d has died\n", get_time(), philo->id);
@@ -127,7 +129,7 @@ int main(int ac, char **av)
 {
     t_rul   rules;
     
-    printf("begin : %ld\n", get_time());
+    printf("begin2 : %ld\n", get_time());
     if (ac < 5 || ac > 6)
         return (printf("Philo: Wrong number of arguments\n"), 1);
     parse(&rules, av);

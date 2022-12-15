@@ -37,13 +37,15 @@ typedef struct s_fork {
 }			t_fork;
 
 typedef struct s_rul {
-    int     nb_philo;
-    int     lifespan;
-    int     mealtime;
-    int     sleeptime;
-    int     meals_limit;
-    int     stop_program;
-    t_fork  *fork_tab;
+    int             nb_philo;
+    int             lifespan;
+    int             mealtime;
+    int             sleeptime;
+    int             meals_limit;
+    pthread_mutex_t stop_prog_mt;
+    int             stop_program;
+    t_fork          *fork_tab;
+    time_t          start_time;
 }       t_rul;
 
 typedef struct s_philo {
@@ -53,7 +55,7 @@ typedef struct s_philo {
     t_rul           *rules;
     pthread_mutex_t meals_mt;
     int             nb_meals;
-    long int        last_meal;
+    time_t          last_meal;
 }       t_philo;
 
 typedef struct s_group {

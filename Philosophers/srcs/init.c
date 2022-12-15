@@ -32,7 +32,7 @@ void    init_philo(t_philo *philo, t_rul *rules, int i)
     philo->id = i + 1;
     philo->rules = rules;
     philo->nb_meals = 0;
-    philo->last_meal = 0;
+    philo->last_meal = philo->rules->start_time;
     if (philo->id == 1)
     {
         philo->left_fork = &rules->fork_tab[rules->nb_philo -1];
@@ -57,6 +57,7 @@ void    parse(t_rul *rules, char **av)
     rules->lifespan = ft_atoi(av[2]);
     rules->mealtime = ft_atoi(av[3]);
     rules->sleeptime = ft_atoi(av[4]);
+    rules->start_time = get_time();
     if (av[5])
         rules->meals_limit = ft_atoi(av[5]);
     else
