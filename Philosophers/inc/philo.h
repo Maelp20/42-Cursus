@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 14:28:15 by mpignet           #+#    #+#             */
-/*   Updated: 2022/12/14 17:27:02 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/12/16 18:18:34 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_rul {
     int             mealtime;
     int             sleeptime;
     int             meals_limit;
+    pthread_mutex_t  print_mt;
     pthread_mutex_t stop_prog_mt;
     bool            stop_program;
     t_fork          *fork_tab;
@@ -73,14 +74,16 @@ void    init_philo(t_philo *philo, t_rul *rules, int i);
 
 /*			UTILS			*/
 
+int     print_action(t_philo *philo, char *msg);
 time_t  get_time(void);
 
 /*		    ROUTINES		*/
 
-int     take_forks(t_philo *philo);
+int     try_eating(t_philo *philo);
 
 /*		  SUPERVISOR     	*/
 
 void    *program_check(void *ptr);
+int     need_to_stop_program(t_rul *rules);
 
 #endif

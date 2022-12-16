@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 14:28:03 by mpignet           #+#    #+#             */
-/*   Updated: 2022/12/14 17:29:05 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/12/16 19:09:01 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,23 @@ int philo_sleep(t_philo *philo)
 {
     time_t  wake_up_time;
 
+    if(need_to_stop_program(philo->rules))
+        return (1);
     wake_up_time = get_time() + philo->rules->sleeptime;
-    printf("%ld philo %d is sleeping\n", get_time(), philo->id);
-    while (get_time() < wake_up_time)
-    {
-        pthread_mutex_lock(&philo->rules->stop_prog_mt);
-        if (philo->rules->stop_program == true)
-            return (pthread_mutex_unlock(&philo->rules->stop_prog_mt), 1);
-        pthread_mutex_unlock(&philo->rules->stop_prog_mt);
+    print_action(philo, "is sleeping");
+    if (philo->rules->sleeptime > 0)
+    {        
+        while (get_time() < wake_up_time)
+        {
+            if(need_to_stop_program(philo->rules))
+                return (1);
+            usleep(100);
+        }
+    }
+    else
+    {     
+        if(need_to_stop_program(philo->rules))
+                return (usleep(100), 1);
         usleep(100);
     }
     return (0);
@@ -36,19 +45,16 @@ void    *philo_routine(void *ptr)
     philo = (t_philo *)ptr;
     if (philo->id % 2)
         usleep(10);
-    while (1)
+    while (!need_to_stop_program(philo->rules))
     {
-        pthread_mutex_lock(&philo->rules->stop_prog_mt);
-        if (philo->rules->stop_program == true)
-            return (NULL);
-        pthread_mutex_unlock(&philo->rules->stop_prog_mt);
-        if(take_forks(philo))
-            return(NULL);
+        if(try_eating(philo))
+            return(printf("Philo %d leave\n", philo->id), NULL);
         if(philo_sleep(philo))
-            return(NULL);
-        printf("%ld philo %d is thinking\n", get_time(), philo->id);
+            return(printf("Philo %d leave\n", philo->id), NULL);
+        if(print_action(philo, "is thinking"))
+            return (printf("Philo %d leave\n", philo->id), NULL);
     }
-    return (ptr);
+    return (printf("Philo %d leave\n", philo->id), ptr);
 }
 
 int philosophers(t_rul *rules)

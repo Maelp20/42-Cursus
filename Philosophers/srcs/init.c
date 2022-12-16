@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:10:33 by mpignet           #+#    #+#             */
-/*   Updated: 2022/12/14 17:27:26 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/12/16 18:02:45 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,7 @@ void    init_philo(t_philo *philo, t_rul *rules, int i)
     philo->rules = rules;
     philo->nb_meals = 0;
     philo->last_meal = philo->rules->start_time;
-    if (philo->id == 1)
-    {
-        philo->left_fork = &rules->fork_tab[rules->nb_philo -1];
-        philo->right_fork = &rules->fork_tab[i + 1];
-    }
-    else if (philo->id == rules->nb_philo)
+    if (philo->id == rules->nb_philo)
     {
         philo->left_fork = &rules->fork_tab[i];
         philo->right_fork = &rules->fork_tab[0];
