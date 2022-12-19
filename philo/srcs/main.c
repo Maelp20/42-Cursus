@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 14:28:03 by mpignet           #+#    #+#             */
-/*   Updated: 2022/12/19 17:16:17 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/12/19 17:26:36 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,10 @@ int philosophers(t_rul *rules)
     philos.thread_nbrs = malloc (sizeof(pthread_t) * rules->nb_philo);
     if (!philos.thread_nbrs)
         return (1);
-    // memset(&philos, 0, sizeof(t_group));
+
     i = -1;
     while (++i < rules->nb_philo)
     {
-        // printf("creating philo %d\n", (i + 1));
         init_philo(&philos.philo[i], rules, i);
         pthread_create(&philos.thread_nbrs[i], NULL, philo_routine, &philos.philo[i]);
     }

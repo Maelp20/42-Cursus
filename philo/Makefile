@@ -6,7 +6,7 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/06 15:45:58 by mpignet           #+#    #+#              #
-#    Updated: 2022/12/19 12:49:26 by mpignet          ###   ########.fr        #
+#    Updated: 2022/12/19 17:23:35 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ CINC		= -I ./inc/
 # /* ~~~~~~~ COMPILING INFO ~~~~~~~ */
 
 CC		= gcc
-CFLAGS	= -g3 -Wall -Wextra -Werror -fsanitize=thread
+CFLAGS	= -g -Wall -Wextra -Werror
 NAME	= philo
 RM		= rm -fd
 

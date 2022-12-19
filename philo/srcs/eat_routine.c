@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 13:34:25 by mpignet           #+#    #+#             */
-/*   Updated: 2022/12/19 15:01:41 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/12/19 17:31:48 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ int philo_eat(t_philo *philo)
     time_t finish_eating;
 
     finish_eating = get_time() + philo->rules->mealtime;
-    if (print_action(philo, "is eating"))
-        return (1);
+    print_action(philo, "is eating");
     pthread_mutex_lock(&philo->meals_mt);
     philo->last_meal = get_time();
     pthread_mutex_unlock(&philo->meals_mt);
@@ -50,11 +49,9 @@ int philo_eat(t_philo *philo)
 
 int take_forks(t_philo *philo, bool *has_eaten)
 {
-    if (print_action(philo, "has taken a fork"))
-        return (1);
+    print_action(philo, "has taken a fork");
     philo->left_fork->taken = true;
-    if(print_action(philo, "has taken a fork"))
-        return (1);
+    print_action(philo, "has taken a fork");
     philo->right_fork->taken = true;
     if(philo_eat(philo))
     {
@@ -70,6 +67,8 @@ int try_first_fork(t_philo *philo, bool *has_eaten, t_fork *f1, t_fork *f2)
     if(need_to_stop_program(philo->rules))
         return (1);
     pthread_mutex_lock(&f1->fork_mt);
+    if (f1 == f2)
+        return (pthread_mutex_unlock(&f1->fork_mt), 1);
     if (f1->taken == false)
     {
         pthread_mutex_lock(&f2->fork_mt);
