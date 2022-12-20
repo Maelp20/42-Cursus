@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 14:28:15 by mpignet           #+#    #+#             */
-/*   Updated: 2022/12/19 16:29:00 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/12/20 14:20:31 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,11 @@ typedef struct s_group {
 /*			INIT			*/
 
 int     parse(t_rul *rules, char **av);
-void    init_philo(t_philo *philo, t_rul *rules, int i);
+int     init_philo(t_philo *philo, t_rul *rules, int i);
 
 /*			UTILS			*/
 
+int     clean_all(t_rul *rules, t_group *philos);
 int     print_action(t_philo *philo, char *msg);
 time_t  get_time(void);
 int     ft_usleep(t_rul *rules, time_t time);

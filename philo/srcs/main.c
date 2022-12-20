@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 14:28:03 by mpignet           #+#    #+#             */
-/*   Updated: 2022/12/19 17:26:36 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/12/20 14:20:54 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ time_t  get_thinktime(t_philo *philo)
     return (thinktime);
 }
 
-void    *philo_routine(void *ptr)
+void    *routine(void *ptr)
 {
     t_philo *philo;
     time_t  thinktime;
@@ -73,18 +73,17 @@ int philosophers(t_rul *rules)
     philos.thread_nbrs = malloc (sizeof(pthread_t) * rules->nb_philo);
     if (!philos.thread_nbrs)
         return (1);
-
     i = -1;
     while (++i < rules->nb_philo)
     {
-        init_philo(&philos.philo[i], rules, i);
-        pthread_create(&philos.thread_nbrs[i], NULL, philo_routine, &philos.philo[i]);
+        if (init_philo(&philos.philo[i], rules, i))
+            return (perror("philo"), 1);
+        if (pthread_create(&philos.thread_nbrs[i], NULL, routine, &philos.philo[i]))
+            return (perror("philo"), 1);
     }
-    pthread_create(&philos.supervisor, NULL, program_check, &philos);
-    i = -1;
-    while (++i < rules->nb_philo)
-        pthread_join(philos.thread_nbrs[i], NULL);
-    pthread_join(philos.supervisor, NULL);
+    if (pthread_create(&philos.supervisor, NULL, program_check, &philos))
+        return (perror("philo"), 1);
+    clean_all(rules, &philos);
     return (0);
 }
 

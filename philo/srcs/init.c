@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:10:33 by mpignet           #+#    #+#             */
-/*   Updated: 2022/12/19 17:02:35 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/12/20 13:56:08 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int init_forks(t_rul *rules)
     
     rules->fork_tab = malloc(sizeof(t_fork) * rules->nb_philo);
     if (!rules->fork_tab)
-        exit (EXIT_FAILURE);
+        return (ft_put_error("philo: malloc failed\n"), 1);
     i = -1;
     while (++i < rules->nb_philo)
     {
@@ -60,12 +60,14 @@ int init_forks(t_rul *rules)
     return (0);
 }
 
-void    init_philo(t_philo *philo, t_rul *rules, int i)
+int init_philo(t_philo *philo, t_rul *rules, int i)
 {
     philo->id = i + 1;
     philo->rules = rules;
     philo->nb_meals = 0;
     philo->last_meal = philo->rules->start_time;
+    if (pthread_mutex_init(&philo->meals_mt, NULL))
+            return (perror("philo"), 1);
     if (philo->id == rules->nb_philo)
     {
         philo->left_fork = &rules->fork_tab[i];
@@ -76,6 +78,7 @@ void    init_philo(t_philo *philo, t_rul *rules, int i)
         philo->left_fork = &rules->fork_tab[i];
         philo->right_fork = &rules->fork_tab[i + 1];
     }
+    return (0);
 }
 
 int parse(t_rul *rules, char **av)
