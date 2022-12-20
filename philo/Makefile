@@ -6,7 +6,7 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/06 15:45:58 by mpignet           #+#    #+#              #
-#    Updated: 2022/12/20 15:11:25 by mpignet          ###   ########.fr        #
+#    Updated: 2022/12/20 15:20:28 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,5 +52,3 @@ re:			fclean
 			make all
 
 .PHONY: 	all clean fclean re
-
-.SILENT:
