@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:00:58 by mpignet           #+#    #+#             */
-/*   Updated: 2022/12/20 15:09:20 by mpignet          ###   ########.fr       */
+/*   Updated: 2022/12/21 15:37:35 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ int	end_conditions(t_group *philos)
 			max_meals++;
 		pthread_mutex_unlock(&philos->philo[i].meals_mt);
 	}
+	if (need_to_stop_program(philos->rules))
+		return (1);
 	if (max_meals == philos->rules->nb_philo)
 	{
 		set_stop_program_to_true(philos->rules);
