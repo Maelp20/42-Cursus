@@ -6,7 +6,7 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/23 17:06:41 by mpignet           #+#    #+#              #
-#    Updated: 2023/02/25 15:04:38 by mpignet          ###   ########.fr        #
+#    Updated: 2023/02/25 16:27:54 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,14 +22,14 @@ RM			= rm -rf
 #              EXEC NAME             #
 # ################################## #
 
-NAME		= megaphone
+NAME		= phonebook
 
 # ################################## #
 #               SOURCES              #
 # ################################## #
 
 C_DIR		= src
-C_FILES		= megaphone.cpp
+C_FILES		= main.cpp
 
 SRCS		= $(patsubst %, $(C_DIR)/%, $(C_FILES))
 
