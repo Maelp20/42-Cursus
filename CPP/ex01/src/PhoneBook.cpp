@@ -6,12 +6,11 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:41:51 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/27 17:12:52 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/27 19:43:34 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
-#include <string>
 
 PhoneBook::PhoneBook(void){
 
@@ -30,8 +29,8 @@ void	PhoneBook::add_contact(void){
 	std::string	buff;
 	
 	if (this->nbr_contacts == 8)
-		this->nbr_contacts = 1;
-	std::cout << "Please enter infos for new contact." << std::endl;
+		this->nbr_contacts = 0;
+	std::cout << "Please enter infos for new contact :" << std::endl;
 	std::cout << "First name : ";
 	std::cin >> buff;
 	contacts[nbr_contacts].set_contact(buff, 1);
@@ -51,12 +50,12 @@ void	PhoneBook::add_contact(void){
 	return;
 }
 
-std::string	prep_buff(std::string str){
+std::string	prep_string(std::string str){
 
 	std::string	buff;
 
 	buff = str;
-	if (str.size() <= 10)
+	if (str.size() < 10)
 		buff.resize(10, ' ');
 	else
 	{
@@ -68,31 +67,44 @@ std::string	prep_buff(std::string str){
 
 void	PhoneBook::search(void){
 
-	std::string	buff;
-
+	if (this->nbr_contacts == 0)
+		return ;
 	for (int i = 0; i != 8; i++)
 	{
 		if (this->contacts[i].get_first_name().empty())
-			return;
+			break ;
 		if (i == 0)
 		{
-			std::cout << "Index     |";
-			std::cout << "First Name|";
-			std::cout << "Last Name |";
-			std::cout << "Nickname  |";
-			std::cout << std::endl;
+			std::cout << "Index     |" << "First Name|";
+			std::cout << "Last Name |" << "Nickname  |" << std::endl;
 		}
-		std::cout << ""<< (i + 1) <<"         |";
-		buff = prep_buff(this->contacts[i].get_first_name());
-		std::cout << buff;
-		std::cout << "|";
-		buff = prep_buff(this->contacts[i].get_last_name());
-		std::cout << buff;
-		std::cout << "|";
-		buff = prep_buff(this->contacts[i].get_nickname());
-		std::cout << buff;
-		std::cout << "|";
-		std::cout << std::endl;
+		std::cout << i <<"         |";
+		std::cout << prep_string(this->contacts[i].get_first_name()) << "|";
+		std::cout << prep_string(this->contacts[i].get_last_name()) << "|";
+		std::cout << prep_string(this->contacts[i].get_nickname()) << "|" << std::endl;
 	}
-	return;
+	std::cout << "Please enter a contact's index you want to check :" << std::endl;
+	int	index;
+	std::cin >> index;
+	if (std::cin.fail())
+	{
+		if (std::cin.eof())
+			return ;
+		std::cout << "Wrong index" << std::endl;
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		return ;
+	}
+	if (index < 0 || index > (this->nbr_contacts - 1))
+	{
+		std::cout << "Wrong index" << std::endl;
+		return ;
+	}
+	std::cout << "Here's the requested contact's infos :" << std::endl;
+	std::cout << "First name : " << this->contacts[index].get_first_name() << std::endl;
+	std::cout << "Last name : " << this->contacts[index].get_last_name() << std::endl;
+	std::cout << "Nickname : " << this->contacts[index].get_nickname() << std::endl;
+	std::cout << "Phone number : " << this->contacts[index].get_phone_nbr() << std::endl;
+	std::cout << "Darkest secret : " << this->contacts[index].get_secret() << std::endl;
+	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 15:12:01 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/27 15:27:25 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/27 19:08:31 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define PHONEBOOK_HPP
 
 # include "Contact.hpp"
+# include <string>
+# include <limits>
 
 class PhoneBook {
 public:
