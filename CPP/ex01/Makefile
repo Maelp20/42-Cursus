@@ -6,7 +6,7 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/23 17:06:41 by mpignet           #+#    #+#              #
-#    Updated: 2023/02/25 16:27:54 by mpignet          ###   ########.fr        #
+#    Updated: 2023/02/27 15:25:15 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ NAME		= phonebook
 # ################################## #
 
 C_DIR		= src
-C_FILES		= main.cpp
+C_FILES		= main.cpp PhoneBook.cpp Contact.cpp
 
 SRCS		= $(patsubst %, $(C_DIR)/%, $(C_FILES))
 
