@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 16:25:56 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/27 19:58:42 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/28 14:43:37 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 
 int	main(void)
 {
-	PhoneBook my_rolodex;
+	PhoneBook	my_rolodex;
+	std::string	buff;
 
 	while (1)
-	{	
-		std::string buff;	
+	{
 		std::cout << "Entry: ";
-		std::cin >> buff;
+		std::getline(std::cin, buff);
+		if (std::cin.fail())
+			return (1);
 		if (buff == "ADD")
 			my_rolodex.add_contact();
 		else if (buff == "SEARCH")
