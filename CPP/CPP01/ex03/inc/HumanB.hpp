@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 15:09:41 by mpignet           #+#    #+#             */
-/*   Updated: 2023/03/02 16:12:16 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/03/06 18:17:23 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,15 @@
 # include "Weapon.hpp"
 
 class HumanB {
-
 public:
-
 	HumanB(std::string name);
 	~HumanB(void);
 
 	void	attack(void);
 	void	setWeapon(Weapon& weapon);
 private:
-
 	std::string	name;
 	Weapon*		weapon;
-
 } ;
 
 #endif

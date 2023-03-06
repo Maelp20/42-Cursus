@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 18:06:37 by mpignet           #+#    #+#             */
-/*   Updated: 2023/03/06 18:04:25 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/03/06 18:16:26 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@
 # include <iostream>
 
 class Zombie {
-
 public:
-
 	Zombie(void);
 	Zombie(std::string name);
 	~Zombie(void);

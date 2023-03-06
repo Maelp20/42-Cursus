@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 15:09:44 by mpignet           #+#    #+#             */
-/*   Updated: 2023/03/02 16:12:05 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/03/06 18:27:58 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,15 @@
 # include <iostream>
 
 class	Weapon {
-
 public:
-
-	Weapon(std::string type);
 	Weapon(void);
+	Weapon(std::string type);
 	~Weapon(void);
 
 	const std::string&	getType(void);
 	void				setType(std::string type);
-
 private:
-
 	std::string	type;
-
 } ;
 
 #endif
