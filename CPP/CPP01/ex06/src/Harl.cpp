@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 11:49:55 by mpignet           #+#    #+#             */
-/*   Updated: 2023/03/06 13:37:55 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/03/06 13:53:46 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ void	Harl::error(void)
 		
 void	Harl::complain(std::string level)
 {
-	const std::string options[] = {"DEBUG", "INFO", "WARNING", "ERROR", ""};
+	const std::string options[] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 	int	i = 0;
 
-	while (!options[i].empty() && level.compare(options[i]) != 0)
+	while (i < 4 && level.compare(options[i]) != 0)
 		i++;
 	switch (i)
 	{
