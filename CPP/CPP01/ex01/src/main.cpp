@@ -14,7 +14,7 @@
 
 int	main(void)
 {
-	int	nb = 5;
+	int	nb = 500000;
 	Zombie*	horde = zombieHorde(nb, "John");
 	if (horde == NULL)
 		return (1);

@@ -28,5 +28,5 @@ private:
 	void	info(void);
 	void	warning(void);
 	void	error(void);
-	t_arr	array[4];
+	t_arr	_array[4];
 } ;

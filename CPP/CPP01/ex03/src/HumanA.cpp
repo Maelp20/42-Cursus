@@ -12,23 +12,19 @@
 
 # include "HumanA.hpp"
 
-HumanA::HumanA(std::string name, Weapon& weapon) {
-
-	if (name.empty() || weapon.getType().empty())
-	{
-		std::cout << "HumanA needs a name and a weapon !" << std::endl;
-		return ;
-	}
-	this->name = name;
-	this->weapon = &weapon;
+HumanA::HumanA(std::string name, Weapon& weapon) : _name(name), _weapon(weapon)
+{
 	return ;
 }
 
-HumanA::~HumanA(void) { return; }
+HumanA::~HumanA(void)
+{
+	return;
+}
 
 void	HumanA::attack(void)
 {
-	std::cout << this->name << " attacks with their ";
-	std::cout << this->weapon->getType() << std::endl;
+	std::cout << this->_name << " attacks with their ";
+	std::cout << this->_weapon.getType() << std::endl;
 	return ;
 }

@@ -15,10 +15,10 @@
 Zombie* zombieHorde(int N, std::string name ) {
 	Zombie*	horde = NULL;
 
-	if (N < 0)
-		return (std::cout << "Need a positive int" << std::endl, horde);
+	if (N <= 0)
+		return (std::cout << "Need at list 1 zombie !" << std::endl, horde);
 	if (N > 500000)
-		return (std::cout << "Too many zombies !" << std::endl, horde);
+		return (std::cout << "Wow calm down, too many zombies !" << std::endl, horde);
 	horde = new Zombie[N];
 	for (int i = 0; i < N; i++)
 		horde[i].give_name(name);

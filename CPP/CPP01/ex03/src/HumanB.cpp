@@ -12,24 +12,31 @@
 
 # include "HumanB.hpp"
 
-HumanB::HumanB(std::string name)
+HumanB::HumanB(std::string name) : _name(name)
 {
-	if (name.empty())
-	{
-		std::cout << "HumanA needs a name !" << std::endl;
-		return ;
-	}
-	this->name = name;
+	this->_weapon = NULL;	
 	return ;
 }
 
-HumanB::~HumanB(void) { return; }
+HumanB::~HumanB(void)
+{
+	return;
+}
 
-void	HumanB::setWeapon(Weapon& weapon) { this->weapon = &weapon; }
+void	HumanB::setWeapon(Weapon& weapon)
+{
+	this->_weapon = &weapon;
+	return ;
+}
 
 void	HumanB::attack(void)
 { 
-	std::cout << this->name << " attacks with their ";
-	std::cout << this->weapon->getType() << std::endl;
+	if (this->_weapon != NULL)
+	{
+		std::cout << this->_name << " attacks with their ";
+		std::cout << this->_weapon->getType() << std::endl;
+	}
+	else
+		std::cout << this->_name << " has no weapon !" << std::endl;
 	return ;
 }
