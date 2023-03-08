@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 14:21:07 by mpignet           #+#    #+#             */
-/*   Updated: 2023/03/06 16:37:40 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/03/08 16:06:07 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ public:
 	Fixed(const int);
 	Fixed(const float);
 	Fixed(const Fixed&);
+	Fixed&	operator=(const Fixed&);
 	~Fixed(void);
 
 	int		getRawBits(void) const;
 	void	setRawBits(int const raw);
-	Fixed&	operator=(const Fixed&);
 	float	toFloat(void) const;
 	int		toInt(void) const;
 private:
-	int	value;
-	const static int	size = 8;
+	int	_value;
+	const static int	_fract_bits;
 } ;
 
 #endif
