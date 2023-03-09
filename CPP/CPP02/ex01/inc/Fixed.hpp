@@ -35,4 +35,5 @@ private:
 	const static int	_fract_bits;
 } ;
 
+std::ostream&	operator<<(std::ostream& stream, const Fixed& entry);
 #endif
