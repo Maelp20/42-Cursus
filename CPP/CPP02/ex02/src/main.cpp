@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 14:20:51 by mpignet           #+#    #+#             */
-/*   Updated: 2023/03/10 15:30:39 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/03/10 15:54:18 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int main(void)
 {
 	float	nbr = 0.4516;
 	Fixed a;
-	Fixed const b( Fixed( 5.05f ) * Fixed( 200 ) );
+	Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
 	Fixed c;
 	Fixed d( Fixed( 15.05f ) / Fixed( 3 ) );
 	Fixed e( Fixed( 15.05f ) + Fixed( 3 ) );
