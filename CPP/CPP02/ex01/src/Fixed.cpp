@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 14:20:55 by mpignet           #+#    #+#             */
-/*   Updated: 2023/03/08 17:58:51 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/03/10 12:17:31 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ float	Fixed::toFloat(void) const
 {
 	float result;
 
-	result = (float)(this->_value / (float)(1 << this->_fract_bits));
+	result = (float)(this->_value) / (1 << this->_fract_bits);
 	return (result);
 }
 

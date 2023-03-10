@@ -74,7 +74,11 @@
         "*.tcc": "cpp",
         "memory_resource": "cpp",
         "stop_token": "cpp",
-        "thread": "cpp"
+        "thread": "cpp",
+        "ranges": "cpp",
+        "span": "cpp",
+        "list": "cpp",
+        "future": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
