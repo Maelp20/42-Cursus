@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 14:20:55 by mpignet           #+#    #+#             */
-/*   Updated: 2023/03/08 17:48:45 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/03/10 15:50:18 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,3 @@ void	Fixed::setRawBits(int const raw)
 	std::cout << "setRawBits member function called" << std::endl;
 	return ;
 }
-
-const int	_fract_bits = 8;
