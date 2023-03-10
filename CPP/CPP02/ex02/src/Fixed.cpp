@@ -6,13 +6,15 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 14:20:55 by mpignet           #+#    #+#             */
-/*   Updated: 2023/03/08 17:58:51 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/03/10 13:55:56 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 
 const int	Fixed::_fract_bits = 8;
+
+/*-------------------------------CONSTRUCTORS---------------------------------*/
 
 Fixed::Fixed(void) : _value(0)
 {
@@ -41,11 +43,127 @@ Fixed::Fixed(const float n)
 	return ;
 }
 
+/*---------------------------------DESTRUCTOR---------------------------------*/
+
+Fixed::~Fixed(void)
+{
+	std::cout << "Destructor called" << std::endl;
+	return ;
+}
+
+/*--------------------------------OPERATORS-----------------------------------*/
+
 Fixed&	Fixed::operator=(const Fixed& entry)
 {
+	if (this == &entry)
+		return *this;
 	std::cout << "Copy assignment operator called" << std::endl;
+	std::cout << " ref ptr = " << &entry << std::endl;
+	std::cout << entry._value << std::endl;
 	this->_value = entry._value;
 	return (*this);
+}
+
+Fixed&	Fixed::operator+(const Fixed& entry)
+{
+	this->_value = this->_value + entry._value;
+	return (*this);
+}
+
+Fixed&	Fixed::operator-(const Fixed& entry)
+{
+	this->_value = this->_value - entry._value;
+	return (*this);
+}
+
+Fixed&	Fixed::operator*(const Fixed& entry)
+{
+	this->_value = this->_value * entry._value;
+	return (*this);
+}
+
+Fixed&	Fixed::operator/(const Fixed& entry)
+{
+	this->_value = this->_value / entry._value;
+	return (*this);
+}
+
+Fixed&	Fixed::operator++(void)
+{
+	this->_value++;
+	return (*this);
+}
+
+Fixed	Fixed::operator++(int)
+{
+	Fixed temp;
+	std::cout << &temp << std::endl;
+	
+	temp = *this;
+	this->_value++;
+	return (temp);
+}
+
+Fixed&	Fixed::operator--(void)
+{
+	this->_value--;
+	return (*this);
+}
+
+Fixed	Fixed::operator--(int)
+{
+	Fixed temp;
+	
+	temp = *this;
+	this->_value--;
+	return (temp);
+}
+bool	Fixed::operator<(const Fixed& entry)
+{
+	if (this->_value < entry._value)
+		return (true);
+	else
+		return (false);
+}
+
+bool	Fixed::operator>(const Fixed& entry)
+{
+	if (this->_value > entry._value)
+		return (true);
+	else
+		return (false);
+}
+
+bool	Fixed::operator<=(const Fixed& entry)
+{
+	if (this->_value <= entry._value)
+		return (true);
+	else
+		return (false);
+}
+
+bool	Fixed::operator>=(const Fixed& entry)
+{
+	if (this->_value >= entry._value)
+		return (true);
+	else
+		return (false);
+}
+
+bool	Fixed::operator==(const Fixed& entry)
+{
+	if (this->_value == entry._value)
+		return (true);
+	else
+		return (false);
+}
+
+bool	Fixed::operator!=(const Fixed& entry)
+{
+	if (this->_value != entry._value)
+		return (true);
+	else
+		return (false);
 }
 
 std::ostream&	operator<<(std::ostream& stream, const Fixed& entry)
@@ -54,11 +172,7 @@ std::ostream&	operator<<(std::ostream& stream, const Fixed& entry)
 	return (stream);
 }
 
-Fixed::~Fixed(void)
-{
-	std::cout << "Destructor called" << std::endl;
-	return ;
-}
+/*------------------------------MEMBER FUNCTIONS------------------------------*/
 
 int		Fixed::toInt(void) const
 {
@@ -87,4 +201,42 @@ void	Fixed::setRawBits(int const raw)
 	this->_value = raw;
 	std::cout << "setRawBits member function called" << std::endl;
 	return ;
+}
+
+Fixed& Fixed::min(Fixed& a, Fixed& b)
+{
+	if (a < b)
+		return (a);
+	else
+		return (b);
+}
+
+Fixed& Fixed::min(const Fixed& a, const Fixed& b)
+{
+	if (a.toFloat() < b.toFloat())
+	{
+		Fixed& temp = (Fixed&)a;
+		return (temp);
+	}
+	Fixed& temp = (Fixed&)b;
+	return (temp);
+}
+
+Fixed& Fixed::max(Fixed& a, Fixed& b)
+{
+	if (a > b)
+		return (a);
+	else
+		return (b);
+}
+
+Fixed& Fixed::max(const Fixed& a, const Fixed& b)
+{
+	if (a.toFloat() > b.toFloat())
+	{
+		Fixed& temp = (Fixed&)a;
+		return (temp);
+	}
+	Fixed& temp = (Fixed&)b;
+	return (temp);
 }
