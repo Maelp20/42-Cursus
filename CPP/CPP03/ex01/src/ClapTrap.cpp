@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 16:27:49 by mpignet           #+#    #+#             */
-/*   Updated: 2023/03/11 14:39:44 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/03/11 17:58:11 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,20 @@
 
 ClapTrap::ClapTrap(void) : _HitPts(10), _EnergyPts(10), _AttackDmg(0)
 {
-	std::cout << "Default Constructor called" << std::endl;
+	std::cout << "ClapTrap Default Constructor called" << std::endl;
 	return ;
 }
 
 ClapTrap::ClapTrap(const ClapTrap& origin)
 {
-	std::cout << "Copy Constructor called" << std::endl;
 	*this = origin;
+	std::cout << "ClapTrap " << this->_Name << " created by copy" << std::endl;
 	return ;
 }
 
 ClapTrap::ClapTrap(std::string name) : _Name(name), _HitPts(10), _EnergyPts(10), _AttackDmg(0)
 {
-	std::cout << "Constructor by string called" << std::endl;
+	std::cout << "ClapTrap " << this->_Name << " created by string" << std::endl;
 	return ;
 }
 
@@ -37,7 +37,7 @@ ClapTrap::ClapTrap(std::string name) : _Name(name), _HitPts(10), _EnergyPts(10),
 
 ClapTrap::~ClapTrap(void)
 {
-	std::cout << "Destructor called" << std::endl;
+	std::cout << "ClapTrap " << this->_Name << " destructor called" << std::endl;
 	return ;
 }
 
