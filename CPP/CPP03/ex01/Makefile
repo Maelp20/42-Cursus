@@ -6,7 +6,7 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/23 17:06:41 by mpignet           #+#    #+#              #
-#    Updated: 2023/03/11 16:41:54 by mpignet          ###   ########.fr        #
+#    Updated: 2023/03/13 12:29:02 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ OBJS		= $(patsubst %, $(O_DIR)/%, $(O_FILES))
 #                FLAGS               #
 # ################################## #
 
-CFLAGS		= -Wall -Wextra -Werror -g -std=c++98
+CFLAGS		= -Wall -Wextra -Werror -MMD -g -std=c++98
 
 # ################################## #
 #                INCLUDES            #
@@ -82,5 +82,7 @@ fclean:		clean
 re:			fclean all
 
 .PHONY: all clean fclean re
+
+-include ./objs/*.d
 
 .NOTPARALLEL:fclean

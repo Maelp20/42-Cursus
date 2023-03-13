@@ -1,58 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.cpp                                       :+:      :+:    :+:   */
+/*   ClapTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 16:27:49 by mpignet           #+#    #+#             */
-/*   Updated: 2023/03/13 12:38:56 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/03/11 17:58:11 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScavTrap.hpp"
+#include "ClapTrap.hpp"
 
 /*-------------------------------CONSTRUCTORS---------------------------------*/
 
-ScavTrap::ScavTrap(void) : ClapTrap()
+ClapTrap::ClapTrap(void) : _HitPts(10), _EnergyPts(10), _AttackDmg(0)
 {
-	this->_HitPts = 100;
-	this->_EnergyPts = 50;
-	this->_AttackDmg = 20;
-	this->_KeeperMode = false;
-	std::cout << "ScavTrap Default Constructor called" << std::endl;
+	std::cout << "ClapTrap Default Constructor called" << std::endl;
 	return ;
 }
 
-ScavTrap::ScavTrap(const ScavTrap& origin) : ClapTrap(origin)
+ClapTrap::ClapTrap(const ClapTrap& origin)
 {
 	*this = origin;
-	std::cout << "ScavTrap " << this->_Name << " created by copy" << std::endl;
+	std::cout << "ClapTrap " << this->_Name << " created by copy" << std::endl;
 	return ;
 }
 
-ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
+ClapTrap::ClapTrap(std::string name) : _Name(name), _HitPts(10), _EnergyPts(10), _AttackDmg(0)
 {
-	this->_Name = name;
-	this->_HitPts = 100;
-	this->_EnergyPts = 50;
-	this->_AttackDmg = 20;
-	this->_KeeperMode = false;
-	std::cout << "ScavTrap " << this->_Name << " created by string" << std::endl;
+	std::cout << "ClapTrap " << this->_Name << " created by string" << std::endl;
 	return ;
 }
 
 /*---------------------------------DESTRUCTOR---------------------------------*/
 
-ScavTrap::~ScavTrap(void)
+ClapTrap::~ClapTrap(void)
 {
-	std::cout << "ScavTrap " << this->_Name << " destructor called" << std::endl;
+	std::cout << "ClapTrap " << this->_Name << " destructor called" << std::endl;
 	return ;
 }
 
 /*--------------------------------OPERATORS-----------------------------------*/
 
-ScavTrap& ScavTrap::operator=(const ScavTrap& entry)
+ClapTrap& ClapTrap::operator=(const ClapTrap& entry)
 {
 	if (this == &entry)
 		return *this;
@@ -60,13 +51,24 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& entry)
 	this->_HitPts = entry._HitPts;
 	this->_EnergyPts = entry._EnergyPts;
 	this->_AttackDmg = entry._AttackDmg;
-	this->_KeeperMode = entry._KeeperMode;
 	return (*this);
 }
 
 /*------------------------------MEMBER FUNCTIONS------------------------------*/
 
-void	ScavTrap::attack(const std::string& target)
+unsigned int	ClapTrap::getDamage(void)
+{
+	return (this->_AttackDmg);
+}
+
+void	ClapTrap::setDamage(unsigned int amount)
+{
+	this->_AttackDmg = amount;
+	std::cout << this->_Name << " now has " << this->_AttackDmg << " attack damage"<< std::endl;
+	return ;
+}
+
+void	ClapTrap::attack(const std::string& target)
 {
 	if (this->_HitPts <= 0)
 	{
@@ -78,31 +80,40 @@ void	ScavTrap::attack(const std::string& target)
 		std::cout << this->_Name << " has no energy points left !" << std::endl;
 		return ;
 	}
-	std::cout << "ScavTrap " << this->_Name << " attacks " << target << ", causing ";
+	std::cout << "ClapTrap " << this->_Name << " attacks " << target << ", causing ";
 	std::cout << this->_AttackDmg << " points of damage !" << std::endl;
 	this->_EnergyPts--;
 	return ;
 }
 
-void	ScavTrap::guardGate()
+void	ClapTrap::takeDamage(unsigned int amount)
 {
-	if (this->_KeeperMode == true)
-	{
-		std::cout << "ScavTrap " << this->_Name << " already used his guardGate ability." << std::endl;
-		return ;
-	}
 	if (this->_HitPts <= 0)
 	{
-		std::cout << "ScavTrap " << this->_Name << " has no hit points left !" << std::endl;
+		std::cout << this->_Name << " has no hit points left !" << std::endl;
+		return ;
+	}
+	std::cout << "ClapTrap " << this->_Name << " takes " << amount;
+	std::cout << " points of damage !" << std::endl;
+	this->_HitPts -= amount;
+	return ;
+}
+
+void	ClapTrap::beRepaired(unsigned int amount)
+{
+	if (this->_HitPts <= 0)
+	{
+		std::cout << this->_Name << " has no hit points left !" << std::endl;
 		return ;
 	}
 	if (this->_EnergyPts <= 0)
 	{
-		std::cout << "ScavTrap " << this->_Name << " has no energy points left !" << std::endl;
+		std::cout << this->_Name << " has no energy points left !" << std::endl;
 		return ;
 	}
-	std::cout << "ScavTrap " << this->_Name << " entered Gate Keeper mode !" << std::endl;
-	this->_KeeperMode = true;
+	std::cout << "ClapTrap " << this->_Name << " repairs for " << amount;
+	std::cout << " hitpoints !" << std::endl;
 	this->_EnergyPts--;
+	this->_HitPts += amount;
 	return ;
 }

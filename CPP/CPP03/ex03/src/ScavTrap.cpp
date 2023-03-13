@@ -1,56 +1,58 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FragTrap.cpp                                       :+:      :+:    :+:   */
+/*   ScavTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 16:27:49 by mpignet           #+#    #+#             */
-/*   Updated: 2023/03/13 12:38:32 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/03/13 12:41:28 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "FragTrap.hpp"
+#include "ScavTrap.hpp"
 
 /*-------------------------------CONSTRUCTORS---------------------------------*/
 
-FragTrap::FragTrap(void) : ClapTrap()
+ScavTrap::ScavTrap(void) : ClapTrap()
 {
 	this->_HitPts = 100;
 	this->_EnergyPts = 50;
-	this->_AttackDmg = 30;
-	std::cout << "FragTrap Default Constructor called" << std::endl;
+	this->_AttackDmg = 20;
+	this->_KeeperMode = false;
+	std::cout << "ScavTrap Default Constructor called" << std::endl;
 	return ;
 }
 
-FragTrap::FragTrap(const FragTrap& origin) : ClapTrap(origin)
+ScavTrap::ScavTrap(const ScavTrap& origin)
 {
 	*this = origin;
-	std::cout << "FragTrap " << this->_Name << " created by copy" << std::endl;
+	std::cout << "ScavTrap " << this->_Name << " created by copy" << std::endl;
 	return ;
 }
 
-FragTrap::FragTrap(std::string name) : ClapTrap(name)
+ScavTrap::ScavTrap(std::string name)
 {
 	this->_Name = name;
 	this->_HitPts = 100;
-	this->_EnergyPts = 100;
-	this->_AttackDmg = 30;
-	std::cout << "FragTrap " << this->_Name << " created by string" << std::endl;
+	this->_EnergyPts = 50;
+	this->_AttackDmg = 20;
+	this->_KeeperMode = false;
+	std::cout << "ScavTrap " << this->_Name << " created by string" << std::endl;
 	return ;
 }
 
 /*---------------------------------DESTRUCTOR---------------------------------*/
 
-FragTrap::~FragTrap(void)
+ScavTrap::~ScavTrap(void)
 {
-	std::cout << "FragTrap " << this->_Name << " destructor called" << std::endl;
+	std::cout << "ScavTrap " << this->_Name << " destructor called" << std::endl;
 	return ;
 }
 
 /*--------------------------------OPERATORS-----------------------------------*/
 
-FragTrap& FragTrap::operator=(const FragTrap& entry)
+ScavTrap& ScavTrap::operator=(const ScavTrap& entry)
 {
 	if (this == &entry)
 		return *this;
@@ -58,12 +60,13 @@ FragTrap& FragTrap::operator=(const FragTrap& entry)
 	this->_HitPts = entry._HitPts;
 	this->_EnergyPts = entry._EnergyPts;
 	this->_AttackDmg = entry._AttackDmg;
+	this->_KeeperMode = entry._KeeperMode;
 	return (*this);
 }
 
 /*------------------------------MEMBER FUNCTIONS------------------------------*/
 
-void	FragTrap::attack(const std::string& target)
+void	ScavTrap::attack(const std::string& target)
 {
 	if (this->_HitPts <= 0)
 	{
@@ -75,25 +78,31 @@ void	FragTrap::attack(const std::string& target)
 		std::cout << this->_Name << " has no energy points left !" << std::endl;
 		return ;
 	}
-	std::cout << "FragTrap " << this->_Name << " attacks " << target << ", causing ";
+	std::cout << "ScavTrap " << this->_Name << " attacks " << target << ", causing ";
 	std::cout << this->_AttackDmg << " points of damage !" << std::endl;
 	this->_EnergyPts--;
 	return ;
 }
 
-void	FragTrap::highFivesGuys()
+void	ScavTrap::guardGate()
 {
+	if (this->_KeeperMode == true)
+	{
+		std::cout << "ScavTrap " << this->_Name << " already used his guardGate ability." << std::endl;
+		return ;
+	}
 	if (this->_HitPts <= 0)
 	{
-		std::cout << "FragTrap " << this->_Name << " has no hit points left !" << std::endl;
+		std::cout << "ScavTrap " << this->_Name << " has no hit points left !" << std::endl;
 		return ;
 	}
 	if (this->_EnergyPts <= 0)
 	{
-		std::cout << "FragTrap " << this->_Name << " has no energy points left !" << std::endl;
+		std::cout << "ScavTrap " << this->_Name << " has no energy points left !" << std::endl;
 		return ;
 	}
-	std::cout << "FragTrap " << this->_Name << " : High Five anyone ?" << std::endl;
+	std::cout << "ScavTrap " << this->_Name << " entered Gate Keeper mode !" << std::endl;
+	this->_KeeperMode = true;
 	this->_EnergyPts--;
 	return ;
 }

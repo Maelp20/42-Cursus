@@ -6,7 +6,7 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/23 17:06:41 by mpignet           #+#    #+#              #
-#    Updated: 2023/03/13 12:29:11 by mpignet          ###   ########.fr        #
+#    Updated: 2023/03/13 12:26:34 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,14 +22,14 @@ RM			= rm -rf
 #              EXEC NAME             #
 # ################################## #
 
-NAME		= ClapTrap
+NAME		= DiamondTrap
 
 # ################################## #
 #               SOURCES              #
 # ################################## #
 
 C_DIR		= src
-C_FILES		= main.cpp ClapTrap.cpp
+C_FILES		= main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
 
 SRCS		= $(patsubst %, $(C_DIR)/%, $(C_FILES))
 
@@ -45,7 +45,7 @@ OBJS		= $(patsubst %, $(O_DIR)/%, $(O_FILES))
 #                FLAGS               #
 # ################################## #
 
-CFLAGS		= -Wall -Wextra -Werror -MMD -g -std=c++98
+CFLAGS		= -Wall -Wextra -Werror -MMD -Wshadow -Wno-shadow -g -std=c++98
 
 # ################################## #
 #                INCLUDES            #
@@ -84,5 +84,4 @@ re:			fclean all
 .PHONY: all clean fclean re
 
 -include ./objs/*.d
-
 .NOTPARALLEL:fclean

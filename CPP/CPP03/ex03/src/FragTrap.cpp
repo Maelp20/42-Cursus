@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 16:27:49 by mpignet           #+#    #+#             */
-/*   Updated: 2023/03/13 12:38:32 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/03/13 12:41:21 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ FragTrap::FragTrap(void) : ClapTrap()
 	return ;
 }
 
-FragTrap::FragTrap(const FragTrap& origin) : ClapTrap(origin)
+FragTrap::FragTrap(const FragTrap& origin)
 {
 	*this = origin;
 	std::cout << "FragTrap " << this->_Name << " created by copy" << std::endl;
 	return ;
 }
 
-FragTrap::FragTrap(std::string name) : ClapTrap(name)
+FragTrap::FragTrap(std::string name)
 {
 	this->_Name = name;
 	this->_HitPts = 100;

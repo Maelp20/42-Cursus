@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 16:27:49 by mpignet           #+#    #+#             */
-/*   Updated: 2023/03/11 19:22:07 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/03/13 12:38:39 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ ScavTrap::ScavTrap(void) : ClapTrap()
 
 ScavTrap::ScavTrap(const ScavTrap& origin) : ClapTrap(origin)
 {
-	std::cout << "ScavTrap " << this->_Name << " created by copy" << std::endl;
 	*this = origin;
+	std::cout << "ScavTrap " << this->_Name << " created by copy" << std::endl;
 	return ;
 }
 

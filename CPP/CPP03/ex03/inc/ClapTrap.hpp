@@ -1,32 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FragTrap.hpp                                       :+:      :+:    :+:   */
+/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 16:07:36 by mpignet           #+#    #+#             */
-/*   Updated: 2023/03/13 12:00:42 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/03/11 16:37:57 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRAGTRAP_HPP
-# define FRAGTRAP_HPP
+#ifndef CLAPTRAP_HPP
+# define CLAPTRAP_HPP
 
 # include <iostream>
-# include "ClapTrap.hpp"
 
-class FragTrap : public ClapTrap
-{
+class ClapTrap {
+
 public:
-	FragTrap(void);
-	FragTrap(const FragTrap&);
-	FragTrap& operator=(const FragTrap&);
-	FragTrap(std::string name);
-	~FragTrap(void);
+	ClapTrap(void);
+	ClapTrap(const ClapTrap&);
+	ClapTrap(std::string name);
+	ClapTrap& operator=(const ClapTrap&);
+	~ClapTrap(void);
 
-	void	attack(const std::string& target);
-	void	highFivesGuys(void);
+	void			attack(const std::string& target);
+	void			takeDamage(unsigned int amount);
+	void			beRepaired(unsigned int amount);
+	void			setDamage(unsigned int amount);
+	unsigned int	getDamage(void);
+protected:
+	std::string _Name;
+	int			_HitPts;
+	int			_EnergyPts;
+	int			_AttackDmg;	
 } ;
 
 #endif
