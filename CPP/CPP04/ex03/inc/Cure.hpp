@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   WrongAnimal.hpp                                         :+:      :+:    :+:   */
+/*   AMateria.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 13:17:12 by mpignet           #+#    #+#             */
-/*   Updated: 2023/03/13 15:14:33 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/03/14 14:26:19 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WRONGANIMAL_HPP
-# define WRONGANIMAL_HPP
+#pragma once
+#ifndef CURE_HPP
+# define CURE_HPP
 
-# include <iostream>
+# include "AMateria.hpp"
+# include "ICharacter.hpp"
 
-class WrongAnimal {
+class Cure : public AMateria
+{
 public:
-	WrongAnimal(void);
-	WrongAnimal(const WrongAnimal&);
-	WrongAnimal& operator=(const WrongAnimal&);
-	virtual ~WrongAnimal(void);
+	Cure(void);
+	Cure(const Cure&);
+	Cure& operator=(const Cure&);
+	virtual ~Cure(void);
 
-	void makeSound() const;
-	std::string	getType() const;
-protected:
-	std::string _type;
+	Cure*	clone() const;
+	void	use(ICharacter& target);
 } ;
+
 #endif

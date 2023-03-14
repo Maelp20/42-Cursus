@@ -6,7 +6,7 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/23 17:06:41 by mpignet           #+#    #+#              #
-#    Updated: 2023/03/14 14:23:33 by mpignet          ###   ########.fr        #
+#    Updated: 2023/03/14 16:50:51 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ NAME		= Animals
 # ################################## #
 
 C_DIR		= src
-C_FILES		= main.cpp Animal.cpp Cat.cpp Dog.cpp Brain.cpp
+C_FILES		= main.cpp AMateria.cpp Character.cpp Cure.cpp Ice.cpp
 
 SRCS		= $(patsubst %, $(C_DIR)/%, $(C_FILES))
 

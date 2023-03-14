@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 13:17:29 by mpignet           #+#    #+#             */
-/*   Updated: 2023/03/13 15:26:24 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/03/14 14:19:39 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,11 @@ int main()
 	std::cout << i->getType() << " : " << std::endl;
 	i->makeSound();
 
-	std::cout << std::endl << "Now testing WrongAnimal and WrongCat" << std::endl << std::endl;
+	delete meta;
+	delete j;
+	delete i;
+
+	std::cout << std::endl << "Now testing WrongAnimal and WrongCat :" << std::endl << std::endl;
 
 	const WrongAnimal* meta2 = new WrongAnimal();
 	const WrongAnimal* i2 = new WrongCat();
@@ -54,9 +58,6 @@ int main()
 	meta2->makeSound();
 	std::cout << i2->getType() << " : " << std::endl;
 	i2->makeSound();
-	delete meta;
-	delete j;
-	delete i;
 	delete meta2;
 	delete i2;
 	return 0;

@@ -1,55 +1,60 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   WrongCat.cpp                                            :+:      :+:    :+:   */
+/*   Ice.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/13 13:17:23 by mpignet           #+#    #+#             */
-/*   Updated: 2023/03/13 15:12:52 by mpignet          ###   ########.fr       */
+/*   Created: 2023/03/13 13:17:20 by mpignet           #+#    #+#             */
+/*   Updated: 2023/03/14 14:08:07 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "WrongCat.hpp"
+#include "Ice.hpp"
 
 /*-------------------------------CONSTRUCTORS---------------------------------*/
 
-WrongCat::WrongCat(void)
+Ice::Ice(void)
 {
-	this->_type = "WrongCat";
-	std::cout << "WrongCat default constructor called" << std::endl;
+	this->_type = "ice";
+	std::cout << "Ice default constructor called" << std::endl;
 	return ;
 }
 
-WrongCat::WrongCat(const WrongCat& origin)
+Ice::Ice(const Ice& origin)
 {
 	*this = origin;
-	std::cout << "WrongCat constructor by copy called" << std::endl;
+	std::cout << "Ice constructor by copy called" << std::endl;
 	return ;
 }
 
 /*---------------------------------DESTRUCTOR---------------------------------*/
 
-WrongCat::~WrongCat(void)
+Ice::~Ice(void)
 {
-	std::cout << "WrongCat destructor called" << std::endl;
+	std::cout << "Ice destructor called" << std::endl;
 	return ;
 }
 
 /*--------------------------------OPERATORS-----------------------------------*/
 
-WrongCat& WrongCat::operator=(const WrongCat& origin)
+Ice& Ice::operator=(const Ice& origin)
 {
-	this->_type = origin._type;
-	this->_brain = origin._brain;
-	std::cout << "WrongCat constructror by assignation called" << std::endl;
+	(void)origin;
+	std::cout << "Ice assignation operator called" << std::endl;
 	return (*this);
 }
 
 /*------------------------------MEMBER FUNCTIONS------------------------------*/
 
-void WrongCat::makeSound() const
+Ice* Ice::clone() const
 {
-	std::cout << "Miewwww Miewwww !" << std::endl;
+	Ice*	newIce = new Ice();
+	return (newIce);
+}
+
+void	Ice::use(ICharacter& target)
+{
+	std::cout << "* shoots an ice bolt at " << target->_name << " *" << std::endl;
 	return ;
 }

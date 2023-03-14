@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   WrongCat.hpp                                            :+:      :+:    :+:   */
+/*   AMateria.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/13 13:17:15 by mpignet           #+#    #+#             */
-/*   Updated: 2023/03/13 15:13:02 by mpignet          ###   ########.fr       */
+/*   Created: 2023/03/13 13:17:12 by mpignet           #+#    #+#             */
+/*   Updated: 2023/03/14 14:26:19 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WRONGCAT_HPP
-# define WRONGCAT_HPP
+#pragma once
+#ifndef ICE_HPP
+# define ICE_HPP
 
-#include "WrongAnimal.hpp"
-#include "Brain.hpp"
+# include "AMateria.hpp"
+# include "ICharacter.hpp"
 
-class WrongCat : public WrongAnimal
+class Ice : public AMateria
 {
 public:
-	WrongCat(void);
-	WrongCat(const WrongCat&);
-	WrongCat& operator=(const WrongCat&);
-	~WrongCat(void);
+	Ice(void);
+	Ice(const Ice&);
+	Ice& operator=(const Ice&);
+	virtual ~Ice(void);
 
-	void makeSound() const;
-	void		setIdeas(const std::string&);
-	std::string	getIdeas();
-private:
-	Brain*	_brain;
+	Ice*	clone() const;
+	void	use(ICharacter& target);
 } ;
 
 #endif
