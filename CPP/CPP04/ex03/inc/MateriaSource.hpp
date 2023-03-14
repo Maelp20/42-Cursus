@@ -21,7 +21,7 @@
 class MateriaSource : public IMateriaSource
 {
 private:
-
+	AMateria*	_materias[4];
 public:
 	MateriaSource(void);
 	MateriaSource(const std::string& name);
@@ -29,10 +29,8 @@ public:
 	MateriaSource&	operator=(const MateriaSource&);
 	~MateriaSource();
 
-	const std::string& getName() const;
-	void equip(AMateria* m);
-	void unequip(int idx);
-	void use(int idx, IMateriaSource& target);
+	void learnMateria(AMateria*);
+	AMateria* createMateria(std::string const & type);
 } ;
 
 #endif

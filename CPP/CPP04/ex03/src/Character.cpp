@@ -14,7 +14,7 @@
 
 /*-------------------------------CONSTRUCTORS---------------------------------*/
 
-Character::Character(void) : _name("Anonymous") _trash_size(0)
+Character::Character(void) : _name("Anonymous"), _trash_size(0)
 {
 	for (int i = 0; i < 4; i++)
 		this->_inventory[i] = NULL;
@@ -22,7 +22,7 @@ Character::Character(void) : _name("Anonymous") _trash_size(0)
 	return ;
 }
 
-Character::Character(std::string& const name) : _name(name) _trash_size(0)
+Character::Character(const std::string& name) : _name(name), _trash_size(0)
 {
 	for (int i = 0; i < 4; i++)
 		this->_inventory[i] = NULL;
@@ -51,7 +51,11 @@ Character& Character::operator=(const Character& origin)
 {
 	this->_name = origin._name;
 	for (int i = 0; i < 4; i++)
+	{
+		if (this->_inventory[i] != NULL)
+			delete this->_inventory[i];
 		this->_inventory[i] = origin._inventory[i];
+	}
 	// for (int i = 0; !origin._trash[i].empty(); i++)
 	// 	this->_trash[i] = origin._trash[i];
 	this->_trash_size = 0;
@@ -61,10 +65,14 @@ Character& Character::operator=(const Character& origin)
 
 /*------------------------------MEMBER FUNCTIONS------------------------------*/
 
-std::string& const	Character::getName() const
+const std::string&	Character::getName() const
 {
-	delete [] this->_inventory;
-	delete [] this->_trash;
+	for (int i = 0; i < 4; i++)
+		if (this->_inventory[i] != NULL)
+			delete this->_inventory[i];
+	for (int i = 0; i < 4; i++)
+		if (this->_trash[i] != NULL)
+			delete this->_trash[i];
 	return (this->_name);
 }
 
@@ -78,27 +86,25 @@ void	Character::equip(AMateria* m)
 	return ;
 }
 
-void	Character::unequip(int idx);
+void	Character::unequip(int idx)
 {
-	AMateria*	newSlot;
-
 	if (idx < 0 || idx > 3)
 		return ;
-	if (this->_iventory[idx] == NULL)
+	if (this->_inventory[idx] == NULL)
 		return ;
 	for (int i = 0; i < this->_trash_size; i++)
-		this->_trash[i] = this->_iventory[idx];
-	this->_iventory[idx] = NULL;
+		this->_trash[i] = this->_inventory[idx];
+	this->_inventory[idx] = NULL;
 	this->_trash_size++;
 	return ;
 }
 
-void	Character::use(int idx, Character& target)
+void	Character::use(int idx, ICharacter& target)
 {
 	if (idx < 0 || idx > 3)
 		return ;
-	if (this->_iventory[idx] == NULL)
+	if (this->_inventory[idx] == NULL)
 		return ;
-	this->_iventory[idx]->use(target);
+	this->_inventory[idx]->use(target);
 	return ;
 }

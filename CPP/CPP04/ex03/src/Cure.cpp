@@ -47,7 +47,7 @@ Cure& Cure::operator=(const Cure& origin)
 
 /*------------------------------MEMBER FUNCTIONS------------------------------*/
 
-Cure* clone() const
+Cure* Cure::clone() const
 {
 	Cure*	newCure = new Cure();
 	return (newCure);
@@ -55,6 +55,6 @@ Cure* clone() const
 
 void	Cure::use(ICharacter& target)
 {
-	std::cout << "* heals " << target->_name << "'s wounds *" << std::endl;
+	std::cout << "* heals " << target._name << "'s wounds *" << std::endl;
 	return ;
 }

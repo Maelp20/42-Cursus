@@ -20,10 +20,8 @@ class IMateriaSource
 {
 public:
 	virtual ~IMateriaSource() {}
-	virtual std::string const & getName() const = 0;
-	virtual void equip(AMateria* m) = 0;
-	virtual void unequip(int idx) = 0;
-	virtual void use(int idx, IMateriaSource& target) = 0;
-} ;
+	virtual void learnMateria(AMateria*) = 0;
+	virtual AMateria* createMateria(std::string const & type) = 0;
+};
 
 #endif

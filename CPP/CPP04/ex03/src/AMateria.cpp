@@ -52,7 +52,7 @@ AMateria& AMateria::operator=(const AMateria& origin)
 
 /*------------------------------MEMBER FUNCTIONS------------------------------*/
 
-std::string	AMateria::getType() const
+const std::string&	AMateria::getType() const
 {
 	return (this->_type);
 }
