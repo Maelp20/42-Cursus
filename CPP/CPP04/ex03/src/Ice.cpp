@@ -37,7 +37,7 @@ Ice::~Ice(void)
 
 Ice& Ice::operator=(const Ice& origin)
 {
-	(void)origin;
+	this->_type = origin.getType();
 	return (*this);
 }
 
@@ -45,8 +45,7 @@ Ice& Ice::operator=(const Ice& origin)
 
 Ice* Ice::clone() const
 {
-	Ice*	newIce = new Ice();
-	return (newIce);
+	return (new Ice(*this));
 }
 
 void	Ice::use(ICharacter& target)

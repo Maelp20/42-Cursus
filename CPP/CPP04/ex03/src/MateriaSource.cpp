@@ -54,11 +54,15 @@ MateriaSource& MateriaSource::operator=(const MateriaSource& origin)
 
 void	MateriaSource::learnMateria(AMateria* m)
 {
-	int	i = 0;
-	while (i < 4 && this->_materias[i] != NULL)
-		i++;
-	if (i < 4)
-		this->_materias[i] = m;
+	for (int i = 0; i < 4; i++)
+	{
+		if (this->_materias[i] == NULL)
+		{
+			this->_materias[i] = m;
+			return ;
+		}
+	}
+	delete m;
 	return ;	
 }
 
@@ -67,7 +71,7 @@ AMateria*	MateriaSource::createMateria(std::string const & type)
 	int	i = -1;
 
 	while (++i < 4)
-		if (type == this->_materias[i]->getType())
+		if (this->_materias[i] && type == this->_materias[i]->getType())
 			return (this->_materias[i]->clone());
 	return (NULL);
 }

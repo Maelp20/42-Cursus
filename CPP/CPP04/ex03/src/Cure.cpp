@@ -37,7 +37,7 @@ Cure::~Cure(void)
 
 Cure& Cure::operator=(const Cure& origin)
 {
-	(void)origin;
+	this->_type = origin.getType();
 	return (*this);
 }
 

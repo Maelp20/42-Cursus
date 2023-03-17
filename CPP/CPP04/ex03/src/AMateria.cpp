@@ -41,7 +41,7 @@ AMateria::~AMateria(void)
 
 AMateria& AMateria::operator=(const AMateria& origin)
 {
-	(void)origin;
+	this->_type = origin.getType();
 	return (*this);
 }
 
