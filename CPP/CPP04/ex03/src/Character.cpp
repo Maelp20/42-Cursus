@@ -18,7 +18,8 @@ Character::Character(void) : _name("Anonymous"), _trash_size(0)
 {
 	for (int i = 0; i < 4; i++)
 		this->_inventory[i] = NULL;
-	std::cout << "Character default constructor called" << std::endl;
+	this->_trash = NULL;
+	this->_trash_size = 0;
 	return ;
 }
 
@@ -26,14 +27,14 @@ Character::Character(const std::string& name) : _name(name), _trash_size(0)
 {
 	for (int i = 0; i < 4; i++)
 		this->_inventory[i] = NULL;
-	std::cout << "Character constructor by string called" << std::endl;
+	this->_trash = NULL;
+	this->_trash_size = 0;
 	return ;
 }
 
 Character::Character(const Character& origin)
 {
 	*this = origin;
-	std::cout << "Character constructor by copy called" << std::endl;
 	return ;
 }
 
@@ -41,7 +42,12 @@ Character::Character(const Character& origin)
 
 Character::~Character(void)
 {
-	std::cout << "Character destructor called" << std::endl;
+	for (int i = 0; i < 4; i++)
+		if (this->_inventory[i] != NULL)
+			delete this->_inventory[i];
+	for (int i = 0; i < this->_trash_size; i++)
+		if (this->_trash[i] != NULL)
+			delete this->_trash[i];
 	return ;
 }
 
@@ -56,10 +62,7 @@ Character& Character::operator=(const Character& origin)
 			delete this->_inventory[i];
 		this->_inventory[i] = origin._inventory[i];
 	}
-	// for (int i = 0; !origin._trash[i].empty(); i++)
-	// 	this->_trash[i] = origin._trash[i];
 	this->_trash_size = 0;
-	std::cout << "Character assignation operator called" << std::endl;
 	return (*this);
 }
 
@@ -67,12 +70,6 @@ Character& Character::operator=(const Character& origin)
 
 const std::string&	Character::getName() const
 {
-	for (int i = 0; i < 4; i++)
-		if (this->_inventory[i] != NULL)
-			delete this->_inventory[i];
-	for (int i = 0; i < 4; i++)
-		if (this->_trash[i] != NULL)
-			delete this->_trash[i];
 	return (this->_name);
 }
 
@@ -88,12 +85,14 @@ void	Character::equip(AMateria* m)
 
 void	Character::unequip(int idx)
 {
+	int	i = 0;
 	if (idx < 0 || idx > 3)
 		return ;
 	if (this->_inventory[idx] == NULL)
 		return ;
-	for (int i = 0; i < this->_trash_size; i++)
-		this->_trash[i] = this->_inventory[idx];
+	while(i < this->_trash_size)
+		i++;
+	this->_trash[i] = this->_inventory[idx];
 	this->_inventory[idx] = NULL;
 	this->_trash_size++;
 	return ;

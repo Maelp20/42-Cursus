@@ -17,14 +17,12 @@
 Cure::Cure(void)
 {
 	this->_type = "cure";
-	std::cout << "Cure default constructor called" << std::endl;
 	return ;
 }
 
 Cure::Cure(const Cure& origin)
 {
 	*this = origin;
-	std::cout << "Cure constructor by copy called" << std::endl;
 	return ;
 }
 
@@ -32,7 +30,6 @@ Cure::Cure(const Cure& origin)
 
 Cure::~Cure(void)
 {
-	std::cout << "Cure destructor called" << std::endl;
 	return ;
 }
 
@@ -41,7 +38,6 @@ Cure::~Cure(void)
 Cure& Cure::operator=(const Cure& origin)
 {
 	(void)origin;
-	std::cout << "Cure assignation operator called" << std::endl;
 	return (*this);
 }
 
@@ -55,6 +51,6 @@ Cure* Cure::clone() const
 
 void	Cure::use(ICharacter& target)
 {
-	std::cout << "* heals " << target._name << "'s wounds *" << std::endl;
+	std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl;
 	return ;
 }

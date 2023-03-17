@@ -14,26 +14,16 @@
 
 /*-------------------------------CONSTRUCTORS---------------------------------*/
 
-MateriaSource::MateriaSource(void) : _name("Anonymous") _trash_size(0)
+MateriaSource::MateriaSource(void)
 {
 	for (int i = 0; i < 4; i++)
 		this->_materias[i] = NULL;
-	std::cout << "MateriaSource default constructor called" << std::endl;
-	return ;
-}
-
-MateriaSource::MateriaSource(std::string& const name) : _name(name) _trash_size(0)
-{
-	for (int i = 0; i < 4; i++)
-		this->_materias[i] = NULL;
-	std::cout << "MateriaSource constructor by string called" << std::endl;
 	return ;
 }
 
 MateriaSource::MateriaSource(const MateriaSource& origin)
 {
 	*this = origin;
-	std::cout << "MateriaSource constructor by copy called" << std::endl;
 	return ;
 }
 
@@ -41,7 +31,9 @@ MateriaSource::MateriaSource(const MateriaSource& origin)
 
 MateriaSource::~MateriaSource(void)
 {
-	std::cout << "MateriaSource destructor called" << std::endl;
+	for (int i = 0; i < 4; i++)
+		if (this->_materias[i] != NULL)
+			delete this->_materias[i];
 	return ;
 }
 
@@ -49,14 +41,12 @@ MateriaSource::~MateriaSource(void)
 
 MateriaSource& MateriaSource::operator=(const MateriaSource& origin)
 {
-	this->_name = origin._name;
 	for (int i = 0; i < 4; i++)
 	{
 		if (this->_materias[i] != NULL)
 			delete this->_materias[i];
 		this->_materias[i] = origin._materias[i];
 	}
-	std::cout << "MateriaSource assignation operator called" << std::endl;
 	return (*this);
 }
 
@@ -74,12 +64,10 @@ void	MateriaSource::learnMateria(AMateria* m)
 
 AMateria*	MateriaSource::createMateria(std::string const & type)
 {
-	AMateria*	newMateria;
-	if (type == "ice")
-		newMateria = new Ice();
-	if (type == "cure")
-		newMateria = new Cure();
-	else
-		return (0);
-	return (newMateria);
+	int	i = -1;
+
+	while (++i < 4)
+		if (type == this->_materias[i]->getType())
+			return (this->_materias[i]->clone());
+	return (NULL);
 }

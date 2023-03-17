@@ -16,20 +16,17 @@
 
 AMateria::AMateria(void) : _type("AMateria")
 {
-	std::cout << "AMateria default constructor called" << std::endl;
 	return ;
 }
 
 AMateria::AMateria(std::string const & type) : _type(type)
 {
-	std::cout << "AMateria constructor by string called" << std::endl;
 	return ;
 }
 
 AMateria::AMateria(const AMateria& origin)
 {
 	*this = origin;
-	std::cout << "AMateria constructor by copy called" << std::endl;
 	return ;
 }
 
@@ -37,7 +34,6 @@ AMateria::AMateria(const AMateria& origin)
 
 AMateria::~AMateria(void)
 {
-	std::cout << "AMateria destructor called" << std::endl;
 	return ;
 }
 
@@ -46,7 +42,6 @@ AMateria::~AMateria(void)
 AMateria& AMateria::operator=(const AMateria& origin)
 {
 	(void)origin;
-	std::cout << "AMateria assignation operator called" << std::endl;
 	return (*this);
 }
 
