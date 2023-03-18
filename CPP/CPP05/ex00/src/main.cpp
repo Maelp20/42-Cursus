@@ -21,11 +21,7 @@ int	main(void)
 		std::cout << *test1;
 		delete test1;
 	}
-	catch (Bureaucrat::GradeTooHighException& ex)
-	{
-		std::cout << ex.what() << std::endl;
-	}
-	catch (Bureaucrat::GradeTooLowException& ex)
+	catch (std::exception const & ex)
 	{
 		std::cout << ex.what() << std::endl;
 	}
@@ -35,11 +31,7 @@ int	main(void)
 		std::cout << *test1;
 		delete test1;
 	}
-	catch (Bureaucrat::GradeTooHighException& ex)
-	{
-		std::cout << ex.what() << std::endl;
-	}
-	catch (Bureaucrat::GradeTooLowException& ex)
+	catch (std::exception const & ex)
 	{
 		std::cout << ex.what() << std::endl;
 	}
@@ -57,11 +49,7 @@ int	main(void)
 		test2->decrementGrade();
 		std::cout << *test2;
 	}
-	catch (Bureaucrat::GradeTooHighException& ex)
-	{
-		std::cout << ex.what() << std::endl;
-	}
-	catch (Bureaucrat::GradeTooLowException& ex)
+	catch (std::exception const & ex)
 	{
 		std::cout << ex.what() << std::endl;
 	}
@@ -80,11 +68,7 @@ int	main(void)
 		test3->incrementGrade();
 		std::cout << *test3;
 	}
-	catch (Bureaucrat::GradeTooHighException& ex)
-	{
-		std::cout << ex.what() << std::endl;
-	}
-	catch (Bureaucrat::GradeTooLowException& ex)
+	catch (std::exception const & ex)
 	{
 		std::cout << ex.what() << std::endl;
 	}
