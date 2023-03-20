@@ -17,7 +17,7 @@
 
 AForm::AForm(void) : _name("AForm 42"), _signGrade(150), _execGrade(150), _signed(false)
 {
-	std::cout << "AForm 42 created" << std::endl;
+	std::cout << "AForm created" << std::endl;
 	return;
 }
 
@@ -56,8 +56,8 @@ AForm&	AForm::operator=(const AForm& src)
 
 std::ostream&	operator<<(std::ostream& o, const AForm& AForm)
 {
-	o << AForm.getName() << ", AForm with sign grade " << AForm.getSignGrade();
-	o << " and exec grade " << AForm.getExecGrade() << "." << std::endl;
+	o << AForm.getName() << ", form with sign grade " << AForm.getSignGrade();
+	o << " and exec grade " << AForm.getExecGrade() << ".";
 	return(o);
 }
 
@@ -122,12 +122,12 @@ const char*	AForm::GradeTooLowException::what(void) const throw()
 
 const char*	AForm::AlreadySignedException::what(void) const throw()
 {
-	return ("AForm is already signed !");
+	return ("Form is already signed !");
 }
 
 const char*	AForm::FormNotSignedException::what(void) const throw()
 {
-	return ("AForm can't be executed because it's not signed !");
+	return ("Form can't be executed because it's not signed !");
 }
 
 const char*	AForm::TooLowToExecException::what(void) const throw()

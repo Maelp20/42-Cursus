@@ -57,9 +57,9 @@ RobotomyRequestForm&	RobotomyRequestForm::operator=(const RobotomyRequestForm& s
 void	RobotomyRequestForm::execute(Bureaucrat const & executor) const
 {
 	this->check_exec(executor);
+	std::srand((unsigned)time(NULL));
 	int	random = std::rand();
 
-	std::cout << "random = " << random << std::endl;
 	std::cout << "***Drilling noises***" << std::endl;
 	if (random % 2 == 0)
 		std::cout << "Robotomy failed !" << std::endl;

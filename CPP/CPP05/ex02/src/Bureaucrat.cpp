@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:47:32 by mpignet           #+#    #+#             */
-/*   Updated: 2023/03/20 15:10:54 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/03/20 16:27:12 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ Bureaucrat&	Bureaucrat::operator=(const Bureaucrat& src)
 
 std::ostream&	operator<<(std::ostream& o, const Bureaucrat& b)
 {
-	o << b.getName() << ", bureaucrat grade " << b.getGrade() << "." << std::endl;
+	o << b.getName() << ", bureaucrat grade " << b.getGrade() << ".";
 	return(o);
 }
 

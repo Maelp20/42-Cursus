@@ -57,7 +57,7 @@ Form&	Form::operator=(const Form& src)
 std::ostream&	operator<<(std::ostream& o, const Form& form)
 {
 	o << form.getName() << ", Form with sign grade " << form.getSignGrade();
-	o << " and exec grade " << form.getExecGrade() << "." << std::endl;
+	o << " and exec grade " << form.getExecGrade() << ".";
 	return(o);
 }
 
