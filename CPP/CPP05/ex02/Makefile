@@ -6,7 +6,7 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/23 17:06:41 by mpignet           #+#    #+#              #
-#    Updated: 2023/03/20 14:57:43 by mpignet          ###   ########.fr        #
+#    Updated: 2023/03/20 14:57:45 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ NAME		= Bureaucrats
 # ################################## #
 
 C_DIR		= src
-C_FILES		= main.cpp Bureaucrat.cpp Form.cpp
+C_FILES		= main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp \
+			RobotomyRequestForm.cpp PresidentialPardonForm.cpp
 
 SRCS		= $(patsubst %, $(C_DIR)/%, $(C_FILES))
 
