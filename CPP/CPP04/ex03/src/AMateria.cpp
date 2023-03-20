@@ -14,12 +14,12 @@
 
 /*-------------------------------CONSTRUCTORS---------------------------------*/
 
-AMateria::AMateria(void) : _type("AMateria")
+AMateria::AMateria(void) : _type("AMateria"), _equiped(false)
 {
 	return ;
 }
 
-AMateria::AMateria(std::string const & type) : _type(type)
+AMateria::AMateria(std::string const & type) : _type(type), _equiped(false)
 {
 	return ;
 }
@@ -42,6 +42,7 @@ AMateria::~AMateria(void)
 AMateria& AMateria::operator=(const AMateria& origin)
 {
 	this->_type = origin.getType();
+	this->_equiped = false;
 	return (*this);
 }
 
@@ -50,6 +51,17 @@ AMateria& AMateria::operator=(const AMateria& origin)
 const std::string&	AMateria::getType() const
 {
 	return (this->_type);
+}
+
+bool AMateria::alreadyEquiped() const
+{
+	return (this->_equiped);
+}
+
+void	AMateria::isEquiped()
+{
+	this->_equiped = true;
+	return;
 }
 
 void	AMateria::use(ICharacter& target)

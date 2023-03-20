@@ -83,11 +83,14 @@ const std::string&	Character::getName() const
 
 void	Character::equip(AMateria* m)
 {
+	if (m->alreadyEquiped() == true)
+		return ;
 	for (int i = 0; i < 4; i++)
 	{
 		if (this->_inventory[i] == NULL)
 		{
 			this->_inventory[i] = m;
+			m->isEquiped();
 			return ;
 		}
 	}

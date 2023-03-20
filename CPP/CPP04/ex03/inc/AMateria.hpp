@@ -23,6 +23,7 @@ class AMateria
 {
 protected:
 	std::string	_type;
+	bool		_equiped;
 public:
 	AMateria(void);
 	AMateria(const AMateria&);
@@ -30,6 +31,8 @@ public:
 	AMateria&	operator=(const AMateria&);
 	virtual ~AMateria();
 
+	bool	alreadyEquiped() const;
+	void	isEquiped();
 	std::string const & getType() const;
 	virtual AMateria* clone() const = 0;
 	virtual void use(ICharacter& target);

@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 13:17:29 by mpignet           #+#    #+#             */
-/*   Updated: 2023/03/17 15:13:19 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/03/20 16:04:25 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,13 @@ int main()
 	Character	target = Character("target");
 	
 	fred.use(0, target);
-	//fred.unequip(0);
+	fred.unequip(0);
 	std::cout << "We unequip fred's Ice : copy should still be able to use it's own Ice" << std::endl;
 	fred.use(0, target);
 	copy.use(0, fred);
 
 	std::cout << "Now if we unequip copy, nothing should happen :" << std::endl;
-	//copy.unequip(0);
+	copy.unequip(0);
 	copy.use(0, fred);
 
 	std::cout << "----------equip, unequip & use tests----------" << std::endl;
