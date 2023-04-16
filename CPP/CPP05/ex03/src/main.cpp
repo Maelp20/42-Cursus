@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:51:27 by mpignet           #+#    #+#             */
-/*   Updated: 2023/03/20 19:13:35 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/04/16 18:34:13 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	main(void)
 	{
 		std::cout << e.what() << std::endl;
 	}
+	delete rrf;
 	rrf = someRandomIntern.makeForm("robotomy request", "Bender");
 	try
 	{
@@ -37,6 +38,7 @@ int	main(void)
 	{
 		std::cout << e.what() << std::endl;
 	}
+	delete rrf;
 	rrf = someRandomIntern.makeForm("presidential pardon", "Bender");
 	try
 	{
@@ -46,7 +48,6 @@ int	main(void)
 	{
 		std::cout << e.what() << std::endl;
 	}
-
 	delete rrf;
 	return (0);
 }
