@@ -14,19 +14,9 @@
 
 /*-------------------------------CONSTRUCTORS---------------------------------*/
 
-ScalarConverter::ScalarConverter(void) : _name("Anonymous"), _grade(150)
+ScalarConverter::ScalarConverter(void)
 {
-	std::cout << "Anonymous ScalarConverter created" << std::endl;
-	return;
-}
-
-ScalarConverter::ScalarConverter(const std::string& name, const int grade) : _name(name), _grade(grade)
-{
-	if (grade < 1)
-		throw GradeTooHighException();
-	if (grade > 150)
-		throw GradeTooLowException();
-	std::cout << "ScalarConverter " << this->getName() << " created" << std::endl;
+	std::cout << "ScalarConverter created" << std::endl;
 	return;
 }
 
@@ -41,7 +31,7 @@ ScalarConverter::ScalarConverter(const ScalarConverter& src)
 
 ScalarConverter::~ScalarConverter(void)
 {
-	std::cout << "ScalarConverter " << this->_name << " destroyed" << std::endl;
+	std::cout << "ScalarConverter destroyed" << std::endl;
 	return;
 }
 
@@ -49,58 +39,147 @@ ScalarConverter::~ScalarConverter(void)
 
 ScalarConverter&	ScalarConverter::operator=(const ScalarConverter& src)
 {
-	this->_grade = src._grade;
+	(void)src;
 	std::cout << "ScalarConverter assignment operator called" << std::endl;
 	return(*this);
 }
 
-std::ostream&	operator<<(std::ostream& o, const ScalarConverter& b)
-{
-	o << b.getName() << ", ScalarConverter grade " << b.getGrade() << ".";
-	return(o);
-}
 
 /*--------------------------------ACCESSORS-----------------------------------*/
 
-const std::string&	ScalarConverter::getName() const
-{
-	return(this->_name);
-}
-
-const int&	ScalarConverter::getGrade() const
-{
-	return(this->_grade);
-}
 
 /*------------------------------MEMBER FUNCTIONS------------------------------*/
 
 
-void	ScalarConverter::incrementGrade()
+int	is_char(std::string& str)
 {
-	if (this->_grade == 1)
-		throw GradeTooHighException();
-	else
-		this->_grade--;
-	return;
+	if (str.length() == 1 && !isdigit(str[0]))
+		return (1);
+	return (0);
 }
 
-void	ScalarConverter::decrementGrade()
+int	is_int(std::string& str)
 {
-	if (this->_grade == 150)
-		throw GradeTooLowException();
-	else
-		this->_grade++;
-	return;
+	if (str.size() > 10)
+		return (0);
+	if ((str[0] == '-' || str[0] == '+') && str != "-inff" && str != "+inff" && str != "-inf" && str != "+inf")
+		str = str.substr(1, str.length() - 1);
+	for (size_t i = 0; i < str.length(); i++) {
+		if (!isdigit(str[i]))
+			return (0);
+	}
+	return (1);
 }
+
+int	is_float(std::string& str)
+{
+	if (str.size() > 10)
+		return (0);
+	if ((str[0] == '-' || str[0] == '+') && str != "-inff" && str != "+inff" && str != "-inf" && str != "+inf")
+		str = str.substr(1, str.length() - 1);
+	for (size_t i = 0; i < str.length(); i++) {
+		if (!isdigit(str[i]) && str[i] != '.' && str[i] != 'f')
+			return (0);
+	}
+	return (1);
+}
+
+int	is_double(std::string& str)
+{
+	if (str.size() > 10)
+		return (0);
+	if ((str[0] == '-' || str[0] == '+') && str != "-inff" && str != "+inff" && str != "-inf" && str != "+inf")
+		str = str.substr(1, str.length() - 1);
+	for (size_t i = 0; i < str.length(); i++) {
+		if (!isdigit(str[i]) && str[i] != '.' && str[i] != 'f' && str[i] != 'l'
+			&& str[i] != 'L' && str[i] != 'd' && str[i] != 'D')
+			return (0);
+	}
+	return (1);
+}
+
+char	convert_char(std::string& str)
+{
+	return (str[0]);
+}
+
+int	convert_int(std::string& str)
+{
+	return (atoi(str.c_str()));
+}
+
+float	convert_float(std::string& str)
+{
+	return (atof(str.c_str()));
+}
+
+double	convert_double(std::string& str)
+{
+	return (atof(str.c_str()));
+}
+
+void	ScalarConverter::convert(std::string& str)
+{
+	char c;
+	int	i;
+	float f;
+	double d;
+
+	if (is_char(str)) {
+		c = convert_char(str);
+		i = static_cast<int>(c);
+		f = static_cast<float>(c);
+		d = static_cast<double>(c);
+	}
+	else if (is_int(str)) {
+		i = convert_int(str);
+		c = static_cast<char>(i);
+		f = static_cast<float>(i);
+		d = static_cast<double>(i);
+	}
+	else if (is_float(str)) {
+		f = convert_float(str);
+		c = static_cast<char>(f);
+		i = static_cast<int>(f);
+		d = static_cast<double>(f);
+	}
+	else if (is_double(str)) {
+		d = convert_double(str);
+		c = static_cast<char>(d);
+		i = static_cast<int>(d);
+		f = static_cast<float>(d);
+	}
+	else {
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		if (str == "nanf" || str == "nan" || str == "-inf" || str == "-inff" || str == "+inf" || str == "+inff") {
+		std::cout << "float: " << str << std::endl;
+		std::cout << "double: " << str << std::endl;
+		}
+		else {
+			std::cout << "float: impossible" << std::endl;
+			std::cout << "double: impossible" << std::endl;
+		}
+		return;
+	}
+	try {
+		if (c < 32 || c > 126)
+			throw ScalarConverter::NonDisplayableException();
+		std::cout << "char: " << c << std::endl;
+	}
+	catch (std::exception& e) {
+		std::cout << "char: " << e.what() << std::endl;
+	}
+	std::cout << "int: " << i << std::endl;
+	std::cout << "float: " << std::setprecision(1) << std::fixed << f << "f" << std::endl;
+	std::cout << "double: " << std::setprecision(1) << std::fixed << d << std::endl;
+	return ;
+}
+
 
 /*--------------------------------EXCEPTIONS-----------------------------------*/
 
-const char*	ScalarConverter::GradeTooHighException::what(void) const throw()
+const char*	ScalarConverter::NonDisplayableException::what(void) const throw()
 {
-	return ("Grade too high !");
-}
-
-const char*	ScalarConverter::GradeTooLowException::what(void) const throw()
-{
-	return ("Grade too low !");
+	return ("Non displayable");
 }

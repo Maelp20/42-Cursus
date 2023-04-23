@@ -14,18 +14,26 @@
 # define  SCALARCONVERTER_HPP
 
 # include <iostream>
+# include <iomanip>
+# include <cstdlib>
 
-static class	ScalarConverter
+class	ScalarConverter
 {
 	private:
 	public:
 		 ScalarConverter(void);
 		 ScalarConverter(const  ScalarConverter&);
-		~ ScalarConverter(void);
+		virtual ~ ScalarConverter(void);
 
 		 ScalarConverter&			operator=(const  ScalarConverter&);
 		
+		static void	convert(std::string& str);
 
+		class	NonDisplayableException : public std::exception
+		{
+			public:
+				virtual const char* what() const throw();
+		};
 };
 
 #endif

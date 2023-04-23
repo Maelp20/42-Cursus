@@ -6,7 +6,7 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/23 17:06:41 by mpignet           #+#    #+#              #
-#    Updated: 2023/03/17 16:23:24 by mpignet          ###   ########.fr        #
+#    Updated: 2023/04/23 16:38:47 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,14 +22,14 @@ RM			= rm -rf
 #              EXEC NAME             #
 # ################################## #
 
-NAME		= Bureaucrats
+NAME		= convert
 
 # ################################## #
 #               SOURCES              #
 # ################################## #
 
 C_DIR		= src
-C_FILES		= main.cpp Bureaucrat.cpp
+C_FILES		= main.cpp ScalarConverter.cpp
 
 SRCS		= $(patsubst %, $(C_DIR)/%, $(C_FILES))
 
