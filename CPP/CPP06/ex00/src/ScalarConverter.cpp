@@ -60,12 +60,13 @@ int	is_char(std::string& str)
 
 int	is_int(std::string& str)
 {
-	if (str.size() > 10)
+	std::string tmp = str;
+	if (tmp.size() > 10)
 		return (0);
-	if ((str[0] == '-' || str[0] == '+') && str != "-inff" && str != "+inff" && str != "-inf" && str != "+inf")
-		str = str.substr(1, str.length() - 1);
-	for (size_t i = 0; i < str.length(); i++) {
-		if (!isdigit(str[i]))
+	if (tmp[0] == '-' || tmp[0] == '+')
+		tmp = tmp.substr(1, tmp.length() - 1);
+	for (size_t i = 0; i < tmp.length(); i++) {
+		if (!isdigit(tmp[i]))
 			return (0);
 	}
 	return (1);
@@ -73,12 +74,13 @@ int	is_int(std::string& str)
 
 int	is_float(std::string& str)
 {
-	if (str.size() > 10)
+	std::string tmp = str;
+	if (tmp.size() > 10)
 		return (0);
-	if ((str[0] == '-' || str[0] == '+') && str != "-inff" && str != "+inff" && str != "-inf" && str != "+inf")
-		str = str.substr(1, str.length() - 1);
-	for (size_t i = 0; i < str.length(); i++) {
-		if (!isdigit(str[i]) && str[i] != '.' && str[i] != 'f')
+	if (tmp[0] == '-' || tmp[0] == '+')
+		tmp = tmp.substr(1, tmp.length() - 1);
+	for (size_t i = 0; i < tmp.length(); i++) {
+		if (!isdigit(tmp[i]) && tmp[i] != '.' && tmp[i] != 'f')
 			return (0);
 	}
 	return (1);
@@ -86,13 +88,14 @@ int	is_float(std::string& str)
 
 int	is_double(std::string& str)
 {
-	if (str.size() > 10)
+	std::string tmp = str;
+	if (tmp.size() > 10)
 		return (0);
-	if ((str[0] == '-' || str[0] == '+') && str != "-inff" && str != "+inff" && str != "-inf" && str != "+inf")
-		str = str.substr(1, str.length() - 1);
-	for (size_t i = 0; i < str.length(); i++) {
-		if (!isdigit(str[i]) && str[i] != '.' && str[i] != 'f' && str[i] != 'l'
-			&& str[i] != 'L' && str[i] != 'd' && str[i] != 'D')
+	if (tmp[0] == '-' || tmp[0] == '+')
+		tmp = tmp.substr(1, tmp.length() - 1);
+	for (size_t i = 0; i < tmp.length(); i++) {
+		if (!isdigit(tmp[i]) && tmp[i] != '.' && tmp[i] != 'f' && tmp[i] != 'l'
+			&& tmp[i] != 'L' && tmp[i] != 'd' && tmp[i] != 'D')
 			return (0);
 	}
 	return (1);
@@ -163,9 +166,10 @@ void	ScalarConverter::convert(std::string& str)
 		return;
 	}
 	try {
-		if (c < 32 || c > 126)
+
+		if (atoi(str.c_str()) < 32 || atoi(str.c_str()) > 126)
 			throw ScalarConverter::NonDisplayableException();
-		std::cout << "char: " << c << std::endl;
+		std::cout << "char: '" << c << "'" << std::endl;
 	}
 	catch (std::exception& e) {
 		std::cout << "char: " << e.what() << std::endl;
