@@ -16,14 +16,17 @@
 # include <iostream>
 # include <iomanip>
 # include <cstdlib>
+# include <string>
+# include <limits>
+# include <cerrno>
 
 class	ScalarConverter
 {
 	private:
 	public:
-		 ScalarConverter(void);
-		 ScalarConverter(const  ScalarConverter&);
-		virtual ~ ScalarConverter(void);
+		ScalarConverter(void);
+		ScalarConverter(const  ScalarConverter&);
+		~ ScalarConverter(void);
 
 		 ScalarConverter&			operator=(const  ScalarConverter&);
 		
