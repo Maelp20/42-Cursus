@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   whatever.hpp                                       :+:      :+:    :+:   */
+/*   Array.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,27 +10,31 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WHATEVER_HPP
-# define WHATEVER_HPP
+#ifndef ARRAY_HPP
+# define ARRAY_HPP
 
 # include <iostream>
 
 template<typename T>
-void    swap(T & a, T & b) {
-    T   tmp = a;
-    a = b;
-    b = tmp;
-    return ;
-}
+class Array {
+    public:
+        Array();
+        Array(unsigned int) ;
+        Array(Array const &);
+        ~Array();
 
-template<typename T>
-T const &   min(T const & a, T const & b) {
-    return (a < b ? a : b);
-}
+        Array & operator=(Array const &);
+        T &     operator[](unsigned int);
+        unsigned int size() ;
+    private:
+        T               *_array_ptr;
+        unsigned int    _size;
 
-template<typename T>
-T const &   max(T const & a, T const & b) {
-    return (a > b ? a : b);
-}
+    class OutOfRangeException : public std::exception
+    {
+        public:
+            virtual const char * what() const throw();
+    };
+} ;
 
 # endif

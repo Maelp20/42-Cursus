@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   whatever.hpp                                       :+:      :+:    :+:   */
+/*   iter.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,27 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WHATEVER_HPP
-# define WHATEVER_HPP
+#ifndef ITER_HPP
+# define ITER_HPP
 
 # include <iostream>
 
 template<typename T>
-void    swap(T & a, T & b) {
-    T   tmp = a;
-    a = b;
-    b = tmp;
+void    iter(T * array, int size, void (*f)(T const &)) {
+    for (int i = 0; i < size; i++) {
+        (*f)(array[i]);
+    }
     return ;
 }
 
 template<typename T>
-T const &   min(T const & a, T const & b) {
-    return (a < b ? a : b);
-}
-
-template<typename T>
-T const &   max(T const & a, T const & b) {
-    return (a > b ? a : b);
+void    display(T const & elem) {
+    std::cout << elem << std::endl;
 }
 
 # endif

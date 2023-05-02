@@ -22,7 +22,7 @@ RM			= rm -rf
 #              EXEC NAME             #
 # ################################## #
 
-NAME		= whatever
+NAME		= array
 
 # ################################## #
 #               SOURCES              #
