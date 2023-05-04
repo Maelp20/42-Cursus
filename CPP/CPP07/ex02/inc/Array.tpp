@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Array.tpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maelpignet <maelpignet@student.42.fr>      +#+  +:+       +#+        */
+/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 17:17:07 by maelpignet        #+#    #+#             */
-/*   Updated: 2023/05/02 17:51:33 by maelpignet       ###   ########.fr       */
+/*   Updated: 2023/05/04 14:26:43 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ Array<T>::Array(Array const & src)
 template<typename T>
 Array<T>::~Array()
 {
-    delete[] this->_array_ptr;
+    delete[] _array_ptr;
     return ;
 }
 
@@ -45,11 +45,11 @@ Array<T>::~Array()
 template<typename T>
 Array<T> &  Array<T>::operator=(Array const & rhs)
 {
-    this->_size = rhs._size;
-    delete[] this->_array_ptr;
-    this->_array_ptr = new T(_size);
-    for (unsigned int i = 0; i < _size; i++) {
-        this->_array_ptr[i] = rhs._array_ptr[i];
+   _size = rhs._size;
+    delete[]_array_ptr;
+   _array_ptr = new T[_size];
+    for (unsigned int i = 0; i <_size; i++) {
+       _array_ptr[i] = rhs._array_ptr[i];
     }
     return (*this);
 }
@@ -59,7 +59,7 @@ T &  Array<T>::operator[](unsigned int i)
 {
     if (i >= _size)
         throw OutOfRangeException();
-    return (this->_array_ptr[i]);
+    return (_array_ptr[i]);
 }
 
 /*                                 MEMBER FUNCTIONS                            */
