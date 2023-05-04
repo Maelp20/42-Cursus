@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 16:58:19 by mpignet           #+#    #+#             */
-/*   Updated: 2023/05/04 17:45:52 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/05/04 19:03:37 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,20 @@
 # define EASYFIND_HPP
 
 # include <iostream>
-
-class NotFoundException : public std::exception {
-	public:
-		virtual const char * what() const throw();
-} ;
-
-const char *NotFoundException::what(void) const throw() {
-	return ("element not found.");
-}
+# include <vector>
+# include <list>
+# include <deque>
+# include <algorithm>
 
 template <typename T>
-void	easyfind(T cont, int n)
+int	easyfind(T & cont, int n)
 {
-	int i = -1;
-	while (cont[++i])
-	{
-		if (cont[i] == n)
-		{
-			std::cout << "element found !" << std::endl;
-			return ;
-		}
-	}
-	throw NotFoundException();
+	if (cont.empty())
+		throw std::invalid_argument("container is empty");
+	typename T::iterator it = std::find(cont.begin(), cont.end(), n);
+	if (it == cont.end())
+		throw std::invalid_argument("Value not found in container");
+	return (*it);
 }
-
 
 # endif
