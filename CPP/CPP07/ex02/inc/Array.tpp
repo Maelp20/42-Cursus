@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 17:17:07 by maelpignet        #+#    #+#             */
-/*   Updated: 2023/05/04 14:26:43 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/05/04 15:50:26 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /*                                 CONSTRUCTORS                               */
 
 template<typename T>
-Array<T>::Array(void) : _array_ptr(0), _size(0) { return ; }
+Array<T>::Array(void) : _array_ptr(new T[0]), _size(0) { return ; }
 
 template<typename T>
 Array<T>::Array(unsigned int n) : _array_ptr(new T[n]), _size(n)
@@ -27,7 +27,11 @@ Array<T>::Array(unsigned int n) : _array_ptr(new T[n]), _size(n)
 template<typename T>
 Array<T>::Array(Array const & src)
 {
-    *this = src;
+   _size = src._size;
+   _array_ptr = new T[_size];
+    for (unsigned int i = 0; i <_size; i++) {
+       _array_ptr[i] = src._array_ptr[i];
+    }
     return ;
 }
 
