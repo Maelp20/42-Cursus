@@ -25,6 +25,7 @@ class Array {
 
         Array & operator=(Array const &);
         T &     operator[](unsigned int);
+        T     operator[](unsigned int) const;
         unsigned int size() ;
     private:
         T               *_array_ptr;

@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 17:17:07 by maelpignet        #+#    #+#             */
-/*   Updated: 2023/05/04 15:50:26 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/05/04 18:25:36 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ template<typename T>
 Array<T>::Array(void) : _array_ptr(new T[0]), _size(0) { return ; }
 
 template<typename T>
-Array<T>::Array(unsigned int n) : _array_ptr(new T[n]), _size(n)
+Array<T>::Array(unsigned int n) : _array_ptr(new T[n]()), _size(n)
 {
+    
     return ;
 }
 
@@ -28,7 +29,7 @@ template<typename T>
 Array<T>::Array(Array const & src)
 {
    _size = src._size;
-   _array_ptr = new T[_size];
+   _array_ptr = new T[_size]();
     for (unsigned int i = 0; i <_size; i++) {
        _array_ptr[i] = src._array_ptr[i];
     }
@@ -51,7 +52,7 @@ Array<T> &  Array<T>::operator=(Array const & rhs)
 {
    _size = rhs._size;
     delete[]_array_ptr;
-   _array_ptr = new T[_size];
+   _array_ptr = new T[_size]();
     for (unsigned int i = 0; i <_size; i++) {
        _array_ptr[i] = rhs._array_ptr[i];
     }
@@ -60,6 +61,14 @@ Array<T> &  Array<T>::operator=(Array const & rhs)
 
 template<typename T>
 T &  Array<T>::operator[](unsigned int i)
+{
+    if (i >= _size)
+        throw OutOfRangeException();
+    return (_array_ptr[i]);
+}
+
+template<typename T>
+T  Array<T>::operator[](unsigned int i) const
 {
     if (i >= _size)
         throw OutOfRangeException();
