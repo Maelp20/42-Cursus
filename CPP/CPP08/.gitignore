@@ -51,5 +51,6 @@ Module.symvers
 Mkfile.old
 dkms.conf
 easyfind
+Span
 .vscode/
 .idea
