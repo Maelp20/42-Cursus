@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:33:05 by mpignet           #+#    #+#             */
-/*   Updated: 2023/05/05 19:29:56 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/05/08 15:42:26 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ class Span
 		int						shortestSpan();
 		int						longestSpan();
 		void					addNumber(int const &);
+		void					addNumber(std::vector<int> &);
 
 } ;
 

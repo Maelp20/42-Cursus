@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:33:10 by mpignet           #+#    #+#             */
-/*   Updated: 2023/05/05 19:29:47 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/05/08 15:42:19 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,16 @@ void	Span::addNumber(int const & n)
 	if (_nbrs.size() == _max_size)
 		throw std::range_error("Vector is already at max size");
 	_nbrs.push_back(n);
+	return;
+}
+
+void	Span::addNumber(std::vector<int> & vec)
+{
+	if ((_nbrs.size() + vec.size()) >= _max_size)
+		throw std::range_error("Too many numbers to add, will cap max size");
+	for (std::vector<int>::iterator it = vec.begin(); it != vec.end(); it++) {
+		_nbrs.push_back(*it);
+	}
 	return;
 }
 

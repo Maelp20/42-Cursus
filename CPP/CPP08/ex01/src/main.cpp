@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:33:08 by mpignet           #+#    #+#             */
-/*   Updated: 2023/05/05 19:54:00 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/05/08 15:43:44 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,17 @@ int main()
 	catch (std::exception const &e) {
 		std::cout << e.what() << std::endl;
 	}
-	std::cout << std::endl << "\x1B[33m" << "Sixth test: big vector :" << "\033[0m\t\t" << std::endl << std::endl;
+	std::cout << std::endl << "\x1B[33m" << "Sixth test: adding lots of numbers via another vector:" << "\033[0m\t\t" << std::endl << std::endl;
 	try {		
-		Span sp(15000);
-		for (unsigned int i = 0; i < 15000; i++) {
-			sp.addNumber(42);
+		Span sp(25000);
+		std::vector<int> tmp;
+		int random;
+		std::srand((unsigned) time(NULL));
+		for (int i = 1; i != 25000; i++) {
+			random = rand();
+			tmp.push_back(random);
 		}
+		sp.addNumber(tmp);
 		std::cout << "Shortest span : " << sp.shortestSpan() << std::endl;
 		std::cout << "Longest span : " << sp.longestSpan() << std::endl;
 	}
