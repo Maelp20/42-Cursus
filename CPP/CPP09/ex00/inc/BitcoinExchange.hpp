@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 17:34:27 by mpignet           #+#    #+#             */
-/*   Updated: 2023/05/08 19:34:06 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/05/10 17:02:50 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,24 @@
 # define BITCOINEXCHANGE_HPP
 
 # include <iostream>
+# include <fstream>
+# include <sstream>
 # include <map>
+# include <limits>
 
 class BitcoinExchange
 {
 	private:
 		std::map<std::string, float> _data;
-		std::map<std::string, float> _input;
 	public:
 		BitcoinExchange();
 		BitcoinExchange(BitcoinExchange const & copy);
 		~BitcoinExchange();
 
 		BitcoinExchange & operator=(BitcoinExchange const & copy);
-}
+
+		void	readInput(std::string filename);
+		void	readData(void);
+} ;
 
 #endif
