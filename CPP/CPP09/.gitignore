@@ -51,5 +51,7 @@ Module.symvers
 Mkfile.old
 dkms.conf
 btc
+RPN
+PmergeMe
 .vscode/
 .idea

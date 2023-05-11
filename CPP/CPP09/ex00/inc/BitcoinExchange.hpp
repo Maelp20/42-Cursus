@@ -6,14 +6,12 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 17:34:27 by mpignet           #+#    #+#             */
-/*   Updated: 2023/05/11 16:51:11 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/05/11 17:42:45 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 //ex00 : map
-//ex01 : stack
-//ex02 : vector and deque
 
 #ifndef BITCOINEXCHANGE_HPP
 # define BITCOINEXCHANGE_HPP
