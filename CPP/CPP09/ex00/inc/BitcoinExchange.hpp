@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 17:34:27 by mpignet           #+#    #+#             */
-/*   Updated: 2023/05/10 17:02:50 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/05/11 16:51:11 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # include <sstream>
 # include <map>
 # include <limits>
+# include <cstdlib>
+# include <algorithm>
+# include <iterator>
 
 class BitcoinExchange
 {
