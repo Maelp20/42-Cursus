@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 17:41:47 by mpignet           #+#    #+#             */
-/*   Updated: 2023/05/11 18:00:43 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/05/18 15:04:41 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@ RPN & RPN::operator=(RPN const & copy)
 	return (*this);
 }
 
+
+int RPN::size(void)
+{
+	return (_stack.size());
+}
+
 void RPN::push(float value)
 {
 	_stack.push(value);
@@ -41,8 +47,6 @@ void RPN::push(float value)
 
 void RPN::add(void)
 {
-	if (_stack.size() < 2)
-		throw std::exception();
 	float a = _stack.top();
 	_stack.pop();
 	float b = _stack.top();
@@ -52,8 +56,6 @@ void RPN::add(void)
 
 void RPN::sub(void)
 {
-	if (_stack.size() < 2)
-		throw std::exception();
 	float a = _stack.top();
 	_stack.pop();
 	float b = _stack.top();
@@ -63,8 +65,6 @@ void RPN::sub(void)
 
 void RPN::mul(void)
 {
-	if (_stack.size() < 2)
-		throw std::exception();
 	float a = _stack.top();
 	_stack.pop();
 	float b = _stack.top();
@@ -74,8 +74,6 @@ void RPN::mul(void)
 
 void RPN::div(void)
 {
-	if (_stack.size() < 2)
-		throw std::exception();
 	float a = _stack.top();
 	_stack.pop();
 	float b = _stack.top();
@@ -85,14 +83,7 @@ void RPN::div(void)
 	_stack.push(b / a);
 }
 
-int RPN::size(void)
-{
-	return (_stack.size());
-}
-
 void RPN::print(void)
 {
-	if (_stack.size() != 1)
-		throw std::exception();
 	std::cout << _stack.top() << std::endl;
 }

@@ -6,12 +6,9 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 17:41:42 by mpignet           #+#    #+#             */
-/*   Updated: 2023/05/11 18:02:57 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/05/18 15:08:17 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//ex01 : stack
-//ex02 : vector and deque
 
 #ifndef RPN_HPP
 # define RPN_HPP

@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 17:41:44 by mpignet           #+#    #+#             */
-/*   Updated: 2023/05/11 18:01:16 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/05/18 15:41:21 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int main(int ac, char **av)
 {
+	int	counter	= 0;
 	RPN rpn;
 
 	if (ac != 2)
@@ -36,10 +37,18 @@ int main(int ac, char **av)
 		else if (token == "/" && rpn.size() >= 2)
 			rpn.div();
 		else if (token.find_first_not_of("0123456789.") == std::string::npos)
+		{
+			counter++;
+			if (counter > 10)
+			{
+				std::cout << "Error: wrong expression" << std::endl;
+				return (1);
+			}
 			rpn.push(std::atof(token.c_str()));
+		}
 		else
 		{
-			std::cout << "Error" << std::endl;
+			std::cout << "Error: wrong expression" << std::endl;
 			return (1);
 		}
 	}
