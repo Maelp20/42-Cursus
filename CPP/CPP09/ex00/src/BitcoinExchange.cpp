@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 17:34:30 by mpignet           #+#    #+#             */
-/*   Updated: 2023/05/11 17:24:58 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/05/22 16:08:01 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,16 @@ BitcoinExchange & BitcoinExchange::operator=(BitcoinExchange const & copy)
 {
 	(void)copy;
 	return (*this);
+}
+
+std::fstream & BitcoinExchange::get_input(void)
+{
+	return (_input);
+}
+
+std::fstream & BitcoinExchange::get_data_ref(void)
+{
+	return (_data_ref);
 }
 
 int	check_date(std::string date)
@@ -82,22 +92,26 @@ void	BitcoinExchange::readInput(std::string filename)
 {
 	std::string		line;
 	std::string		date;
-	std::fstream	file;
 	float			nbr;
 	int				pos = 0;
 
-	file.open(filename.c_str());
-	if (!file.is_open())
+	_input.open(filename.c_str());
+	if (!_input.is_open())
 	{
 		std::cout << "Error: Could not open file " << filename << std::endl;
+		_data_ref.close();
+		_data.clear();
 		exit(1);
 	}
-	if (file.peek() == std::ifstream::traits_type::eof())
+	if (_input.peek() == std::ifstream::traits_type::eof())
 	{
 		std::cout << "Error: Empty file " << filename << std::endl;
+		_data_ref.close();
+		_input.close();
+		_data.clear();
 		exit(1);
 	}
-	while (std::getline(file, line))
+	while (std::getline(_input, line))
 	{
 		if (line == "date | value")
 			continue;
@@ -123,7 +137,6 @@ void	BitcoinExchange::readInput(std::string filename)
 			continue;
 		}
 		nbr = std::atof(line.substr(pos + 3).c_str());
-		//std::cout << "\x1B[33m" << "date: " << date << " nbr: " << nbr << "\033[0m\t\t" << std::endl;
 		if (nbr < 0)
 			std::cout << "Error: not a positive number." << std::endl;
 		else if (nbr > 1000)
@@ -148,16 +161,15 @@ void	BitcoinExchange::readData(void)
 {
 	std::string line;
 	std::string date;
-	std::fstream file;
 	float value;
 
-	file.open("./data.csv");
-	if (!file.is_open())
+	_data_ref.open("./data.csv");
+	if (!_data_ref.is_open())
 	{
 		std::cout << "Error: Could not open file data.csv" << std::endl;
 		exit(1);
 	}
-	while (std::getline(file, line))
+	while (std::getline(_data_ref, line))
 	{
 		std::stringstream ss(line);
 		std::getline(ss, date, ',');
@@ -168,6 +180,8 @@ void	BitcoinExchange::readData(void)
 	if (_data.empty())
 	{
 		std::cout << "Error: No data available." << std::endl;
+		_data_ref.close();
+		_data.clear();
 		exit(1);
 	}
 }

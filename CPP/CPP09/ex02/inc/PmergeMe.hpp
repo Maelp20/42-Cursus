@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:07:33 by mpignet           #+#    #+#             */
-/*   Updated: 2023/05/18 18:49:40 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/05/22 15:22:55 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ class PmergeMe
 	void	merge_deq(int start, int mid, int end);
 	void	display_vec();
 	void	display_deq();
+	int		size_vec();
+	int		size_deq();
 } ;
 
 

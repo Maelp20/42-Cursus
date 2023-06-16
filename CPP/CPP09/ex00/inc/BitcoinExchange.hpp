@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 17:34:27 by mpignet           #+#    #+#             */
-/*   Updated: 2023/05/11 17:42:45 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/05/22 16:00:51 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ class BitcoinExchange
 {
 	private:
 		std::map<std::string, float> _data;
+		std::fstream	_input;
+		std::fstream	_data_ref;
 	public:
 		BitcoinExchange();
 		BitcoinExchange(BitcoinExchange const & copy);
@@ -38,6 +40,8 @@ class BitcoinExchange
 
 		void	readInput(std::string filename);
 		void	readData(void);
+		std::fstream & get_input(void);
+		std::fstream & get_data_ref(void);
 } ;
 
 #endif

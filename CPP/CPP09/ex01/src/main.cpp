@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 17:41:44 by mpignet           #+#    #+#             */
-/*   Updated: 2023/05/18 15:41:21 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/05/22 16:27:52 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,11 @@ int main(int ac, char **av)
 			std::cout << "Error: wrong expression" << std::endl;
 			return (1);
 		}
+	}
+	if (rpn.size() != 1)
+	{
+		std::cout << "Error: wrong expression" << std::endl;
+		return (1);
 	}
 	rpn.print();
 	return (0);
