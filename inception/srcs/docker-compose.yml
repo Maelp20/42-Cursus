@@ -60,6 +60,6 @@ volume:
             type: none
             o: bind
             device: /home/mpignet/data/mariadb
-    networks:
-        inception:
-            driver: bridge
+networks:
+    inception:
+        driver: bridge
