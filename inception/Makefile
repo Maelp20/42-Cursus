@@ -6,20 +6,20 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/16 17:11:06 by mpignet           #+#    #+#              #
-#    Updated: 2023/06/16 18:54:18 by mpignet          ###   ########.fr        #
+#    Updated: 2023/06/19 16:59:26 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 YML_PATH = ./srcs/docker-compose.yml
 
 all:
-	@docker compose -f $(YML_PATH) up
+	@docker compose -f $(YML_PATH) up -d
 
 down: 
 	@docker compose -f $(YML_PATH) down
 
 re:
-	@docker compose -f $(YML_PATH) up --build --force-recreate
+	@docker compose -f $(YML_PATH) up --build --force-recreate -d
 
 clean:
 	@docker stop $$(docker ps -qa);\
