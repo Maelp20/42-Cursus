@@ -6,7 +6,7 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/16 17:11:06 by mpignet           #+#    #+#              #
-#    Updated: 2023/06/19 16:59:26 by mpignet          ###   ########.fr        #
+#    Updated: 2023/06/19 18:27:14 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,6 @@ clean:
     docker volume rm $$(docker volume ls -q);\
 	rm -rf /home/mpignet/data/mariadb/*;\
 	rm -rf /home/mpignet/data/wordpress/*;\
-    docker network rm srcs_docker_network;\
+    docker network rm srcs_inception;\
 
 .PHONY: all down re clean

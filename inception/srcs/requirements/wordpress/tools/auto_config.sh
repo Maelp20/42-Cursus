@@ -5,7 +5,7 @@ sleep 10
 
 if [ ! -e /var/www/wordpress/wp-config.php ]; then
 	echo "Configuring wordpress..."
-	echo "${MYSQL_DATABASE}<->${MYSQL_USER}<->${MYSQL_PASSWORD}"
+	echo "${SQL_DATABASE}<->${SQL_USER}<->${SQL_PASSWORD}"
 	wp config create	--allow-root \
 						--dbname=$SQL_DATABASE \
 						--dbuser=$SQL_USER \
