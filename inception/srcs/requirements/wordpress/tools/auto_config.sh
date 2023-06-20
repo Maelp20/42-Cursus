@@ -6,6 +6,8 @@ sleep 10
 if [ ! -e /var/www/wordpress/wp-config.php ]; then
 	echo "Configuring wordpress..."
 	echo "${SQL_DATABASE}<->${SQL_USER}<->${SQL_PASSWORD}"
+	wp core download --allow-root
+	rm -f /var/www/html/wp-config.php
 	wp config create	--allow-root \
 						--url=mpignet.42.fr \
 						--dbname=$SQL_DATABASE \

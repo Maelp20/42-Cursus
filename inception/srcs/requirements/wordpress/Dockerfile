@@ -16,6 +16,7 @@ RUN chmod +x wp-cli.phar
 RUN mv wp-cli.phar /usr/local/bin/wp
 
 COPY /tools/auto_config.sh /tmp/auto_config.sh
+RUN chmod +x /tmp/auto_config.sh
 
-RUN mkdir /run/php
+RUN mkdir -p /run/php /var/log/php7 /var/www/html/wordpress
 ENTRYPOINT [ "sh", "/tmp/auto_config.sh" ]
