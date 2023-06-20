@@ -2,7 +2,7 @@ FROM debian:buster
 RUN apt-get update -y
 RUn apt-get upgrade -y
 RUN apt-get install -y wget
-RUN apt-get install -y php7 \
+RUN apt-get install -y php7.3 \
 php7.3-cli \
 php7.3-common \
 php7.3-curl \
