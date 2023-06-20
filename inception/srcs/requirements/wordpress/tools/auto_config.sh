@@ -14,7 +14,7 @@ if [ ! -e /var/www/wordpress/wp-config.php ]; then
 						--dbhost=mariadb \
 						--path='/var/www/wordpress'
 sleep 4
-wp core install     --allow-root --url='mpignet.42.fr' --title='inception' --admin_user=$ADM_U --admin_password=$ADM_P --admin_email='mpignet' --path='/var/www/wordpress'
+wp core install     --allow-root --url='mpignet.42.fr' --title='inception' --admin_user='mpignet' --admin_password='1234' --admin_email='mpignet20@gmail.com' --path='/var/www/wordpress'
 wp user create      --allow-root --role=author mpignet mpignet20@gmail.com --user_pass='1234' --path='/var/www/wordpress' >> /log.txt
 fi
 
