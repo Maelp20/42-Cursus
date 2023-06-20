@@ -18,4 +18,4 @@ wp core install     --allow-root --url='mpignet.42.fr' --title='inception' --adm
 wp user create      --allow-root --role=author mpignet mpignet20@gmail.com --user_pass='1234' --path='/var/www/wordpress' >> /log.txt
 fi
 
-/usr/sbin/php-fpm7.3 -F >> /log.txt 2>&1
+/usr/sbin/php-fpm7.3 -F
