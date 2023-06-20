@@ -12,7 +12,7 @@ mysql -e "GRANT ALL PRIVILEGES ON ${SQL_DATABASE}.* TO ${SQL_USER}@'%' IDENTIFIE
 echo "4"
 mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${SQL_ROOT_PASSWORD}';"
 echo "5"
-mysql -e "FLUSH PRIVILEGES;"
+# mysql -e "FLUSH PRIVILEGES;"
 echo $SQL_ROOT_PASSWORD
 mysqladmin -u root -p$SQL_ROOT_PASSWORD shutdown
 echo "6"
