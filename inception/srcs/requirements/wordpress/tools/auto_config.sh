@@ -14,8 +14,8 @@ if [ ! -e /var/www/wordpress/wp-config.php ]; then
 						--dbhost=mariadb \
 						--path='/var/www/wordpress'
 sleep 4
-wp-cli.phar core install     --allow-root --url='mpignet.42.fr' --title='inception' --admin_user='mpignet' --admin_password='1234' --admin_email='mpignet20@gmail.com' --path='/var/www/wordpress'
-wp-cli.phar user create      --allow-root --role=author mpignet mpignet20@gmail.com --user_pass='1234' --path='/var/www/wordpress' >> /log.txt
+wp-cli.phar core install     --allow-root --url=$SITE_URL --title=$SITE_TITLE --admin_user=$ADM_USER --admin_password=$ADM_PASSWORD --admin_email=$ADM_USER_EMAIL --path='/var/www/wordpress'
+wp-cli.phar user create      --allow-root --role=author $WP_USER $WP_USER_EMAIL --user_pass=$WP_PASSWORD --path='/var/www/wordpress' >> /log.txt
 fi
 
 /usr/sbin/php-fpm7.3 -F
