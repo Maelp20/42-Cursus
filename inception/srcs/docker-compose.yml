@@ -33,7 +33,6 @@ services:
         env_file: .env
         volumes:
             - wordpress:/var/www/wordpress
-            - ./logs:/tmp
         networks:
             - inception
         build: 
