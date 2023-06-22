@@ -19,4 +19,4 @@ COPY /tools/auto_config.sh /tmp/auto_config.sh
 RUN chmod +x /tmp/auto_config.sh
 
 RUN mkdir -p /run/php /var/log/php7 /var/www/html/wordpress
-ENTRYPOINT [ "sh", "/tmp/auto_config.sh" ]
+# ENTRYPOINT [ "sh", "/tmp/auto_config.sh" ]
