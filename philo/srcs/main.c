@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: maelpignet <maelpignet@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 14:28:03 by mpignet           #+#    #+#             */
-/*   Updated: 2022/12/21 17:21:36 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/10/28 09:10:02 by maelpignet       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,9 @@ int	philosophers(t_rul *rules)
 	clean_all(rules, &philos);
 	return (0);
 }
+
+
+// args : nb_philo, time_to_die, time_to_eat, time_to_sleep, [nb_time_to_eat]
 
 int	main(int ac, char **av)
 {
